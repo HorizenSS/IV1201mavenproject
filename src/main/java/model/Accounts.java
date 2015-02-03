@@ -22,16 +22,22 @@ public class Accounts implements Serializable {
     private String id;
     private String account;
     private String password;
-    private int balance;
+    private String email;
+    private String firstname;
+    private String lastname;
+
+
     
     public Accounts(){
         
     }
     
-    public Accounts(String account, String password, int balance){
+    public Accounts(String account, String password, String email, String firstname, String lastname){
         this.account = account;
         this.password = password;
-        this.balance = balance;
+        this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.id = account;
     }
  
@@ -43,15 +49,15 @@ public class Accounts implements Serializable {
     public String getpassword(){
         return password;
     }
-    
-    public int getbalance(){
-    return balance;
+     public String getemail(){
+        return email;
     }
-    public int setbalance(int amount){
-    this.balance = amount;
-    return balance;
+ public String getfirstname(){
+        return firstname;
     }
-   
+    public String getlastname(){
+        return lastname;
+    }
 
     @Override
     public boolean equals(Object object) {

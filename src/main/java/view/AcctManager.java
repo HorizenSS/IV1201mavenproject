@@ -34,6 +34,9 @@ public class AcctManager implements Serializable {
     //register and login
     private String account;
     private String password;
+    private String email;
+    private String firstname;
+    private String lastname;
     private String balance;
     private String item;
     private String additem;
@@ -112,7 +115,7 @@ public class AcctManager implements Serializable {
         try {
             startConversation();
              transactionFailure = null;
-            success = cashierFacade.register(account, password); 
+            success = cashierFacade.register(account, password, email, firstname, lastname); 
             
         } catch (Exception e) {
             handleException(e);
@@ -120,17 +123,6 @@ public class AcctManager implements Serializable {
         return jsf22Bugfix();
     }
 
-
-    public String balance() {
-        try {
-
-            result = cashierFacade.balance();
-        } catch (Exception e) {
-            handleException(e);
-
-        }
-        return jsf22Bugfix();
-    }
 
     public String addToCart() {
         try {
@@ -249,15 +241,29 @@ public class AcctManager implements Serializable {
     public String getpassword() { //Must have
         return null;
     }
-
-    
-    public void setbalance(String balance) {
-        this.balance = balance;
+    public void setemail(String email) {
+        this.email = email;
     }
 
-    public String getbalance() { //Must have
+    public String getemail() { //Must have
         return null;
     }
+   public void setfirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getfirstname() { //Must have
+        return null;
+    }
+    public void setlastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getlastname() { //Must have
+        return null;
+    }   
+    
+
 
     public void setstatus(String status) {
         this.status = status;

@@ -6,7 +6,35 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <p> Hello from Facelets AERMIN ARYA</p>
+        
+         <h:form>
+
+            <h4>Add to cart</h4>
+            <p>
+                <h:outputLabel for="item" value="Item: "/>
+                <h:inputText id="item" value="#{acctManager.item}"/>
+
+            </p>
+            <p>
+                <h:commandButton value="Add" action="#{acctManager.addToCart()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            </p>
+            <hr/>
+        </h:form> 
+
+           <h:form>
+
+            <h4>Add to stock</h4>
+            <p>
+                <h:outputLabel for="additem" value="Item: "/>
+                <h:inputText id="additem" value="#{acctManager.additem}"/>
+
+            </p>
+            <p>
+                <h:commandButton value="Add" action="#{acctManager.add()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            </p>
+            <hr/>
+        </h:form> 
     </h:body>
 </html>
 

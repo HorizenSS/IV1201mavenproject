@@ -58,26 +58,18 @@ public class CashierFacade {
         return "Login failed!";
     }
 
-    public boolean register(String account, String password) {
+    public boolean register(String account, String password, String email, String firstname, String lastname) {
 
         if (em.find(Accounts.class, account) != null) {
             System.err.println(" Account exists!!");
             return false;
         }
 
-        em.persist(new Accounts(account, password, 0));
+        em.persist(new Accounts(account, password,email,firstname,lastname));
         System.out.println("Account created");
         return true;
     }
 
-    public String balance() {
-        if (login == true && adminlogin == false && logout == false) {
-            if (currentAccount != null) {
-                return "Balance: " + currentAccount.getbalance();
-            }
-        }
-        return "Must be logged in as user";
-    }
 
     public String addToCart(String item) {
 
@@ -94,7 +86,7 @@ public class CashierFacade {
         }
         if (item.equals("Little")) {
 
-            if (login == true && currentAccount.getbalance() > 99) {
+            if (login == true) {
                 Cart cart = em.find(Cart.class ,"Little Gnome");
                 int cartamount = cart.getamount();
                 cart.setamount(cartamount + 1);
@@ -105,7 +97,7 @@ public class CashierFacade {
         }
         if (item.equals("Large")) {
 
-            if (login == true && currentAccount.getbalance() > 99) {
+            if (login == true) {
                 Cart cart = em.find(Cart.class ,"Large Gnome");
                 int cartamount = cart.getamount();
                 cart.setamount(cartamount + 1);
@@ -141,13 +133,13 @@ public class CashierFacade {
         int totalAmount = tallAmount+largeAmount+littleAmount;
         
         // If user is logged in and account balance is satisfactory.
-        if (login == true && currentAccount.getbalance() >= totalAmount*100) {
+        if (login == true) {
             
             // Remove amount from total balance.
-            int current = currentAccount.getbalance();
+           /* int current = currentAccount.getbalance();
             int bought = current - totalAmount*100;
             currentAccount.setbalance(bought);
-            
+            */
             // Acquire stock.
             Stock stockTall = em.find(Stock.class, "Tall Gnome");
             Stock stockLarge = em.find(Stock.class, "Large Gnome");
@@ -165,7 +157,7 @@ public class CashierFacade {
 
             // Confirm purchase and print balance.
             clearCart();
-            return "Gnome(s) bought. Current balance: " + currentAccount.getbalance();
+            return "Gnome(s) bought. Current balance: ";
         }
         return "Failed";
     }
@@ -258,7 +250,7 @@ public class CashierFacade {
         em.persist(new Cart("Large Gnome", 0)); //ändra sen
         em.persist(new Cart("Little Gnome", 0)); //ändra sen
 
-        em.persist(new Accounts("admin", "admin", 0));
+        em.persist(new Accounts("admin", "admin", "admin@admin.se","sven","svensson"));
         
         return "";
     }
