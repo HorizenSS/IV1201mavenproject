@@ -166,42 +166,15 @@ public class CashierFacade {
     }
 
     //----------------------------------------------------------------------------------------
-    public String add(String item) { //Only adds to 1 type of gnome
+    public String add(String item, int wage) { //Only adds to 1 type of gnome
 
-        if (item.equals("Tall")) {
+           //Jobs job = em.find(Jobs.class, item);
+       
             if (adminlogin == true) {
-                Stock stock1 = em.find(Stock.class, "Tall Gnome");
-                int current = stock1.getamount();
-                stock1.setamount(current + 1);
-
-                return "Tall Gnomes: : " + stock1.getamount();
+                em.persist(new Stock(item,wage));
+                return "Job is added";
 
             }
-
-        }
-        if (item.equals("Little")) {
-            if (adminlogin == true) {
-                Stock stock1 = em.find(Stock.class, "Little Gnome");
-                int current = stock1.getamount();
-                stock1.setamount(current + 1);
-
-                return "Little Gnomes: : " + stock1.getamount();
-
-            }
-
-        }
-        if (item.equals("Large")) {
-            if (adminlogin == true) {
-                Stock stock1 = em.find(Stock.class, "Large Gnome");
-                int current = stock1.getamount();
-                stock1.setamount(current + 1);
-
-                return "Large Gnomes: : " + stock1.getamount();
-
-            }
-
-        }
-
         return "Must be logged in as admin";
     }
 

@@ -38,7 +38,7 @@ public class AcctManager implements Serializable {
     private String email;
     private String firstname;
     private String lastname;
-    private String balance;
+    private String wage;
     private String item;
     private String additem;
     private String resultcart;
@@ -171,8 +171,8 @@ public class AcctManager implements Serializable {
 
     public String add() {
         try {
-
-            result = cashierFacade.add(additem);
+            int wage1 = Integer.parseInt(wage);
+            result = cashierFacade.add(additem,wage1);
 
         } catch (Exception e) {
             handleException(e);
@@ -332,5 +332,13 @@ public class AcctManager implements Serializable {
 
     public void setresultcart(String resultcart) {
         this.resultcart = resultcart;
+    }
+    
+    public void setwage(String wage){
+    this.wage = wage;
+    }
+
+    public String getwage(){
+    return wage;
     }
 }
