@@ -50,12 +50,12 @@ public class CashierFacade {
                 if ("admin".equals(acc.getaccount())) {
                     adminlogin = true;
                 }
-                return "Logged in as: " + acc.getaccount(); //Start thread that starts webshop
+                return acc.getaccount(); //Start thread that starts webshop
 
             }
 
         }     
-        return "Login failed!";
+        return null;
     }
 
     public boolean register(String account, String password, String email, String firstname, String lastname) {

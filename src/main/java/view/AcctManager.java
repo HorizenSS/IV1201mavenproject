@@ -31,6 +31,7 @@ public class AcctManager implements Serializable {
     private CashierFacade cashierFacade;
     private Exception transactionFailure;
     private boolean success = false;
+    private boolean adminsuccess = false;
     //register and login
     private String account;
     private String password;
@@ -103,7 +104,18 @@ public class AcctManager implements Serializable {
        //startConversation();
             //transactionFailure = null;
             result = cashierFacade.login(account, password);
-            online = result;
+            //online = result;
+
+            if("admin".equals(result)){
+                adminsuccess = true;
+                return jsf22Bugfix();
+
+            }
+            if(result != null){
+                success = true;
+                return jsf22Bugfix();
+
+            }
           
         } catch (Exception e) {
             handleException(e);
@@ -296,6 +308,10 @@ public class AcctManager implements Serializable {
    
     public boolean getsuccess(){
     return success;
+    }
+    
+    public boolean getadminsuccess(){
+    return adminsuccess;
     }
     
     public String getitem(){
