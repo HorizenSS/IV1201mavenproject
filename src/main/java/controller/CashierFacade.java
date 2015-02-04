@@ -13,11 +13,11 @@ import model.Stock;
 /**
  * A controller. All calls to the model that are executed because of an action
  * taken by the cashier pass through here. EJB Used for data transaction
- * 
- * @author      Kentaro Hayashida
- * @author      Johny Premanantham
- * @version     1.0
- * @since       2015-01-03
+ *
+ * @author Kentaro Hayashida
+ * @author Johny Premanantham
+ * @version 1.0
+ * @since 2015-01-03
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
@@ -33,14 +33,14 @@ public class CashierFacade {
     public String login(String account, String password) {
         Accounts acc = em.find(Accounts.class, account); //gets an entry
         Banned ban = em.find(Banned.class, account);
-              
-     if(ban != null ){
-         if(account.equals(ban.gettype())){
-         return "Banned";
-         }
-         
-     }
-        
+
+        if (ban != null) {
+            if (account.equals(ban.gettype())) {
+                return "Banned";
+            }
+
+        }
+
         if (acc != null) {
             if (account.equals(acc.getaccount()) && password.equals(acc.getpassword())) { //check if entry contains account and password
                 login = true;
@@ -54,32 +54,31 @@ public class CashierFacade {
 
             }
 
-        }     
+        }
         return null;
     }
 
-    public boolean register(String account, String password, String email, String firstname, String lastname) {
+    public String register(String account, String password, String email, String firstname, String lastname) {
 
         if (em.find(Accounts.class, account) != null) {
-            System.err.println(" Account exists!!");
-            return false;
+            return (" Account exists!!");
+
         }
 
-        em.persist(new Accounts(account, password,email,firstname,lastname));
-        System.out.println("Account created");
-        return true;
-    }
+        em.persist(new Accounts(account, password, email, firstname, lastname));
+        return ("Account created, login to apply!");
 
+    }
 
     public String addToCart(String item) {
 
         if (item.equals("Tall")) {
 
             if (login == true) {
-                Cart cart = em.find(Cart.class ,"Tall Gnome");
+                Cart cart = em.find(Cart.class, "Tall Gnome");
                 int cartamount = cart.getamount();
                 cart.setamount(cartamount + 1);
-                
+
                 return "Tall gnome added to shopping cart";
             }
 
@@ -87,10 +86,10 @@ public class CashierFacade {
         if (item.equals("Little")) {
 
             if (login == true) {
-                Cart cart = em.find(Cart.class ,"Little Gnome");
+                Cart cart = em.find(Cart.class, "Little Gnome");
                 int cartamount = cart.getamount();
                 cart.setamount(cartamount + 1);
-                
+
                 return "Little gnome added to shopping cart";
             }
 
@@ -98,7 +97,7 @@ public class CashierFacade {
         if (item.equals("Large")) {
 
             if (login == true) {
-                Cart cart = em.find(Cart.class ,"Large Gnome");
+                Cart cart = em.find(Cart.class, "Large Gnome");
                 int cartamount = cart.getamount();
                 cart.setamount(cartamount + 1);
 
@@ -109,47 +108,46 @@ public class CashierFacade {
 
         return "Failed";
     }
-    
-    public String ban(String banned){
-        if(adminlogin){
-        em.persist(new Banned(banned));
 
-    return banned + " is banned";
+    public String ban(String banned) {
+        if (adminlogin) {
+            em.persist(new Banned(banned));
+
+            return banned + " is banned";
         }
         return "Failed";
     }
-    
-    
-      public String buy() {
+
+    public String buy() {
         // Acquire cart.
         Cart cartTall = em.find(Cart.class, "Tall Gnome");
         Cart cartLarge = em.find(Cart.class, "Large Gnome");
         Cart cartLittle = em.find(Cart.class, "Little Gnome");
-        
+
         // Get current cart amount.
         int tallAmount = cartTall.getamount();
         int largeAmount = cartLarge.getamount();
         int littleAmount = cartLittle.getamount();
-        int totalAmount = tallAmount+largeAmount+littleAmount;
-        
+        int totalAmount = tallAmount + largeAmount + littleAmount;
+
         // If user is logged in and account balance is satisfactory.
         if (login == true) {
-            
+
             // Remove amount from total balance.
            /* int current = currentAccount.getbalance();
-            int bought = current - totalAmount*100;
-            currentAccount.setbalance(bought);
-            */
+             int bought = current - totalAmount*100;
+             currentAccount.setbalance(bought);
+             */
             // Acquire stock.
             Stock stockTall = em.find(Stock.class, "Tall Gnome");
             Stock stockLarge = em.find(Stock.class, "Large Gnome");
             Stock stockLittle = em.find(Stock.class, "Little Gnome");
-            
+
             // Get current stock.
             int currentTall = stockTall.getamount();
             int currentLarge = stockLarge.getamount();
             int currentLittle = stockLittle.getamount();
-            
+
             // Remove gnomes from stock.
             stockTall.setamount(currentTall - tallAmount);
             stockLarge.setamount(currentLarge - largeAmount);
@@ -161,16 +159,12 @@ public class CashierFacade {
         }
         return "Failed";
     }
-    
-    
-    
 
     public String logout() {
         logout = true;
         return "Logout";
     }
 
-    
     //----------------------------------------------------------------------------------------
     public String add(String item) { //Only adds to 1 type of gnome
 
@@ -218,8 +212,9 @@ public class CashierFacade {
         Stock stock3 = em.find(Stock.class, "Little Gnome");
 
         return "Tall Gnomes: : " + stock1.getamount() + " || Large Gnomes: " + stock2.getamount() + " || Little Gnomes: " + stock3.getamount();
- 
+
     }
+
     public String cart() {
 
         Cart cart1 = em.find(Cart.class, "Tall Gnome");
@@ -227,31 +222,31 @@ public class CashierFacade {
         Cart cart3 = em.find(Cart.class, "Little Gnome");
 
         return "Tall Gnomes: : " + cart1.getamount() + " || Large Gnomes: " + cart2.getamount() + " || Little Gnomes: " + cart3.getamount();
- 
+
     }
-    
-    public void clearCart(){
+
+    public void clearCart() {
         Cart cartTall = em.find(Cart.class, "Tall Gnome");
         Cart cartLarge = em.find(Cart.class, "Large Gnome");
         Cart cartLittle = em.find(Cart.class, "Little Gnome");
-        
+
         cartTall.setamount(0);
         cartLarge.setamount(0);
         cartLittle.setamount(0);
     }
-    
+
     public String fillDB() {
 
-        em.persist(new Stock("Tall Gnome", 10)); 
-        em.persist(new Stock("Large Gnome", 10)); 
-        em.persist(new Stock("Little Gnome", 10)); 
-        
+        em.persist(new Stock("Tall Gnome", 10));
+        em.persist(new Stock("Large Gnome", 10));
+        em.persist(new Stock("Little Gnome", 10));
+
         em.persist(new Cart("Tall Gnome", 0)); //ändra sen
         em.persist(new Cart("Large Gnome", 0)); //ändra sen
         em.persist(new Cart("Little Gnome", 0)); //ändra sen
 
-        em.persist(new Accounts("admin", "admin", "admin@admin.se","sven","svensson"));
-        
+        em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson"));
+
         return "";
     }
 }

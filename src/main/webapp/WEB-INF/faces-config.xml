@@ -11,7 +11,7 @@
         </navigation-case>
     </navigation-rule>
     
-        <navigation-rule>
+    <navigation-rule>
         <from-view-id>/account.xhtml</from-view-id>
         <navigation-case>
             <if>#{acctManager.adminsuccess}</if>

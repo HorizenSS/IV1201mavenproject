@@ -7,8 +7,8 @@
     </h:head>
     <h:body>
         <p>Welcome applicant</p>
-        
-         <h:form>
+
+        <h:form>
 
             <h4>Add to cart</h4>
             <p>
@@ -20,37 +20,34 @@
                 <h:commandButton value="Add" action="#{acctManager.addToCart()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
-        </h:form> 
+        </h:form>  
 
-           <h:form>
+        <h3>Applies</h3>
 
-            <h4>Add to stock</h4>
-            <p>
-                <h:outputLabel for="additem" value="Item: "/>
-                <h:inputText id="additem" value="#{acctManager.additem}"/>
+        <p>
 
-            </p>
-            <p>
-                <h:commandButton value="Add" action="#{acctManager.add()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-            </p>
-            <hr/>
-        </h:form> 
-        
+            <h:outputText id="resultcart" value="#{acctManager.resultcart}"/>  <!-- skriver ut resultatet -->
+            <h:form>
+                <h:commandButton value="APPLY" action="#{acctManager.buy()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            </h:form> 
+
+        </p>
+
         <nav>
-	<ul>
-	<li>Job applicant</li>
-        <ul>	
-		<li>Time</li>
-		<li>Date of registration</li>
-                <li>Competence</li> 
-                <li>Name</li>
-							
-		
-        </ul>
-        <li></li>
-    	
-		
-    </ul>
+            <ul>
+                <li>Job applicant</li>
+                <ul>	
+                    <li>Time</li>
+                    <li>Date of registration</li>
+                    <li>Competence</li> 
+                    <li>Name</li>
+
+
+                </ul>
+                <li></li>
+
+
+            </ul>
         </nav>
     </h:body>
 </html>

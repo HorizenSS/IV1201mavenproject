@@ -12,13 +12,13 @@ import javax.inject.Named;
 import model.accountInterface;
 
 /**
- * AcctManager manages many requests concerning
- * user accounts as well as handling exceptions.
- * 
- * @author      Kentaro Hayashida
- * @author      Johny Premanantham
- * @version     1.0
- * @since       2015-01-03
+ * AcctManager manages many requests concerning user accounts as well as
+ * handling exceptions.
+ *
+ * @author Kentaro Hayashida
+ * @author Johny Premanantham
+ * @version 1.0
+ * @since 2015-01-03
  */
 @Named("acctManager")
 @ConversationScoped
@@ -44,7 +44,7 @@ public class AcctManager implements Serializable {
     private String resultcart;
     private String banned;
     private accountInterface accountI;
-    
+
     private static String online = null;
     private static String status = null;
     private String result = null;
@@ -76,9 +76,7 @@ public class AcctManager implements Serializable {
     public boolean getTransactionFailure() {
         return transactionFailure == null;
     }
-    
 
-    
     /**
      * Returns the latest thrown exception.
      */
@@ -101,22 +99,22 @@ public class AcctManager implements Serializable {
 
     public String login() {
         try {
-       //startConversation();
+            //startConversation();
             //transactionFailure = null;
             result = cashierFacade.login(account, password);
             //online = result;
 
-            if("admin".equals(result)){
+            if ("admin".equals(result)) {
                 adminsuccess = true;
                 return jsf22Bugfix();
 
             }
-            if(result != null){
+            if (result != null) {
                 success = true;
                 return jsf22Bugfix();
 
             }
-          
+
         } catch (Exception e) {
             handleException(e);
         }
@@ -126,15 +124,14 @@ public class AcctManager implements Serializable {
     public String register() {
         try {
             startConversation();
-             transactionFailure = null;
-            success = cashierFacade.register(account, password, email, firstname, lastname); 
-            
+            transactionFailure = null;
+            result = cashierFacade.register(account, password, email, firstname, lastname);
+
         } catch (Exception e) {
             handleException(e);
         }
         return jsf22Bugfix();
     }
-
 
     public String addToCart() {
         try {
@@ -159,6 +156,7 @@ public class AcctManager implements Serializable {
         }
         return jsf22Bugfix();
     }
+
     public String cart() {
         try {
 
@@ -170,6 +168,7 @@ public class AcctManager implements Serializable {
         }
         return jsf22Bugfix();
     }
+
     public String add() {
         try {
 
@@ -181,23 +180,23 @@ public class AcctManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-    
-    public String logout(){
+
+    public String logout() {
         try {
-            
+
             result = cashierFacade.logout();
             online = result;
         } catch (Exception e) {
             handleException(e);
 
         }
-        return jsf22Bugfix();  
+        return jsf22Bugfix();
     }
-    
-   public String fillDB() {
+
+    public String fillDB() {
         try {
 
-        cashierFacade.fillDB();
+            cashierFacade.fillDB();
 
         } catch (Exception e) {
             handleException(e);
@@ -205,12 +204,11 @@ public class AcctManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-    
-    
-       public String buy() {
+
+    public String buy() {
         try {
 
-        result = cashierFacade.buy();
+            result = cashierFacade.buy();
 
         } catch (Exception e) {
             handleException(e);
@@ -218,11 +216,11 @@ public class AcctManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-       
-           public String ban() {
+
+    public String ban() {
         try {
 
-        result = cashierFacade.ban(banned);
+            result = cashierFacade.ban(banned);
 
         } catch (Exception e) {
             handleException(e);
@@ -230,14 +228,8 @@ public class AcctManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-    
-         
-           
-           
-           
-           
+
    //SETTERS AND GETTERS        
-           
     public void setaccount(String account) {
         this.account = account;
     }
@@ -253,6 +245,7 @@ public class AcctManager implements Serializable {
     public String getpassword() { //Must have
         return null;
     }
+
     public void setemail(String email) {
         this.email = email;
     }
@@ -260,22 +253,22 @@ public class AcctManager implements Serializable {
     public String getemail() { //Must have
         return null;
     }
-   public void setfirstname(String firstname) {
+
+    public void setfirstname(String firstname) {
         this.firstname = firstname;
     }
 
     public String getfirstname() { //Must have
         return null;
     }
+
     public void setlastname(String lastname) {
         this.lastname = lastname;
     }
 
     public String getlastname() { //Must have
         return null;
-    }   
-    
-
+    }
 
     public void setstatus(String status) {
         this.status = status;
@@ -284,20 +277,23 @@ public class AcctManager implements Serializable {
     public String getstatus() {
         return status;
     }
-    public void setonline(String online){
-    this.online = online;
+
+    public void setonline(String online) {
+        this.online = online;
     }
 
-    public String getonline(){
-    return online;
+    public String getonline() {
+        return online;
     }
-    public String getbanned(){
-    return banned;
+
+    public String getbanned() {
+        return banned;
     }
-    public void setbanned(String banned){
-    this.banned = banned;
+
+    public void setbanned(String banned) {
+        this.banned = banned;
     }
-    
+
     public String getResult() {
         return result;
     }
@@ -305,31 +301,36 @@ public class AcctManager implements Serializable {
     public void nullResult() {
         result = null;
     }
-   
-    public boolean getsuccess(){
-    return success;
+
+    public boolean getsuccess() {
+        return success;
     }
-    
-    public boolean getadminsuccess(){
-    return adminsuccess;
+
+    public boolean getadminsuccess() {
+        return adminsuccess;
     }
-    
-    public String getitem(){
-    return item;
-    }   
-    public void setitem(String item){
-    this.item = item;
+
+    public String getitem() {
+        return item;
     }
-        public String getadditem(){
-    return additem;
-    }   
-    public void setadditem(String additem){
-    this.additem = additem;
-    }  
-    public String getresultcart(){
-    return resultcart;
-    }   
-    public void setresultcart(String resultcart){
-    this.resultcart = resultcart;
-    }   
+
+    public void setitem(String item) {
+        this.item = item;
+    }
+
+    public String getadditem() {
+        return additem;
+    }
+
+    public void setadditem(String additem) {
+        this.additem = additem;
+    }
+
+    public String getresultcart() {
+        return resultcart;
+    }
+
+    public void setresultcart(String resultcart) {
+        this.resultcart = resultcart;
+    }
 }
