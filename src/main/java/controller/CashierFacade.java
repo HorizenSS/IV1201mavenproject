@@ -7,8 +7,8 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Banned;
-import model.Cart;
-import model.Stock;
+import model.Applies;
+import model.Jobs;
 
 /**
  * A controller. All calls to the model that are executed because of an action
@@ -70,12 +70,12 @@ public class CashierFacade {
 
     }
 
-    public String addToCart(String item) {
+    public String addToApplies(String item) {
 
         if (item.equals("Tall")) {
 
             if (login == true) {
-                Cart cart = em.find(Cart.class, "Tall Gnome");
+                Applies cart = em.find(Applies.class, "Tall Gnome");
                 int cartamount = cart.getamount();
                 cart.setamount(cartamount + 1);
 
@@ -86,7 +86,7 @@ public class CashierFacade {
         if (item.equals("Little")) {
 
             if (login == true) {
-                Cart cart = em.find(Cart.class, "Little Gnome");
+                Applies cart = em.find(Applies.class, "Little Gnome");
                 int cartamount = cart.getamount();
                 cart.setamount(cartamount + 1);
 
@@ -97,7 +97,7 @@ public class CashierFacade {
         if (item.equals("Large")) {
 
             if (login == true) {
-                Cart cart = em.find(Cart.class, "Large Gnome");
+                Applies cart = em.find(Applies.class, "Large Gnome");
                 int cartamount = cart.getamount();
                 cart.setamount(cartamount + 1);
 
@@ -120,9 +120,9 @@ public class CashierFacade {
 
     public String buy() {
         // Acquire cart.
-        Cart cartTall = em.find(Cart.class, "Tall Gnome");
-        Cart cartLarge = em.find(Cart.class, "Large Gnome");
-        Cart cartLittle = em.find(Cart.class, "Little Gnome");
+        Applies cartTall = em.find(Applies.class, "Tall Gnome");
+        Applies cartLarge = em.find(Applies.class, "Large Gnome");
+        Applies cartLittle = em.find(Applies.class, "Little Gnome");
 
         // Get current cart amount.
         int tallAmount = cartTall.getamount();
@@ -139,9 +139,9 @@ public class CashierFacade {
              currentAccount.setbalance(bought);
              */
             // Acquire stock.
-            Stock stockTall = em.find(Stock.class, "Tall Gnome");
-            Stock stockLarge = em.find(Stock.class, "Large Gnome");
-            Stock stockLittle = em.find(Stock.class, "Little Gnome");
+            Jobs stockTall = em.find(Jobs.class, "Tall Gnome");
+            Jobs stockLarge = em.find(Jobs.class, "Large Gnome");
+            Jobs stockLittle = em.find(Jobs.class, "Little Gnome");
 
             // Get current stock.
             int currentTall = stockTall.getamount();
@@ -154,7 +154,7 @@ public class CashierFacade {
             stockLittle.setamount(currentLittle - littleAmount);
 
             // Confirm purchase and print balance.
-            clearCart();
+            clearApplies();
             return "Gnome(s) bought. Current balance: ";
         }
         return "Failed";
@@ -171,7 +171,7 @@ public class CashierFacade {
            //Jobs job = em.find(Jobs.class, item);
        
             if (adminlogin == true) {
-                em.persist(new Stock(item,wage));
+                em.persist(new Jobs(item,wage));
                 return "Job is added";
 
             }
@@ -180,9 +180,9 @@ public class CashierFacade {
 
     public String checkStatus() {
 
-        Stock stock1 = em.find(Stock.class, "Tall Gnome");
-        Stock stock2 = em.find(Stock.class, "Large Gnome");
-        Stock stock3 = em.find(Stock.class, "Little Gnome");
+        Jobs stock1 = em.find(Jobs.class, "Tall Gnome");
+        Jobs stock2 = em.find(Jobs.class, "Large Gnome");
+        Jobs stock3 = em.find(Jobs.class, "Little Gnome");
 
         return "Tall Gnomes: : " + stock1.getamount() + " || Large Gnomes: " + stock2.getamount() + " || Little Gnomes: " + stock3.getamount();
 
@@ -190,18 +190,18 @@ public class CashierFacade {
 
     public String cart() {
 
-        Cart cart1 = em.find(Cart.class, "Tall Gnome");
-        Cart cart2 = em.find(Cart.class, "Large Gnome");
-        Cart cart3 = em.find(Cart.class, "Little Gnome");
+        Applies cart1 = em.find(Applies.class, "Tall Gnome");
+        Applies cart2 = em.find(Applies.class, "Large Gnome");
+        Applies cart3 = em.find(Applies.class, "Little Gnome");
 
         return "Tall Gnomes: : " + cart1.getamount() + " || Large Gnomes: " + cart2.getamount() + " || Little Gnomes: " + cart3.getamount();
 
     }
 
-    public void clearCart() {
-        Cart cartTall = em.find(Cart.class, "Tall Gnome");
-        Cart cartLarge = em.find(Cart.class, "Large Gnome");
-        Cart cartLittle = em.find(Cart.class, "Little Gnome");
+    public void clearApplies() {
+        Applies cartTall = em.find(Applies.class, "Tall Gnome");
+        Applies cartLarge = em.find(Applies.class, "Large Gnome");
+        Applies cartLittle = em.find(Applies.class, "Little Gnome");
 
         cartTall.setamount(0);
         cartLarge.setamount(0);
@@ -210,16 +210,16 @@ public class CashierFacade {
 
     public String fillDB() {
 
-        em.persist(new Stock("Tall Gnome", 10));
-        em.persist(new Stock("Large Gnome", 10));
-        em.persist(new Stock("Little Gnome", 10));
+        em.persist(new Jobs("Tall Gnome", 10));
+        em.persist(new Jobs("Large Gnome", 10));
+        em.persist(new Jobs("Little Gnome", 10));
 
-        em.persist(new Cart("Tall Gnome", 0)); //ändra sen
-        em.persist(new Cart("Large Gnome", 0)); //ändra sen
-        em.persist(new Cart("Little Gnome", 0)); //ändra sen
+        em.persist(new Applies("Tall Gnome", 0)); //ändra sen
+        em.persist(new Applies("Large Gnome", 0)); //ändra sen
+        em.persist(new Applies("Little Gnome", 0)); //ändra sen
 
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson"));
-
+        em.persist(new Jobs("ha",0));
         return "";
     }
 }
