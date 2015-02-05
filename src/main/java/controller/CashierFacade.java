@@ -128,7 +128,7 @@ public class CashierFacade {
     }
 
     //----------------------------------------------------------------------------------------
-    public String add(String item, int timeperiod, String dateofregistration, String competence) { //Only adds to 1 type of gnome
+    public String add(String item, String timeperiod, String dateofregistration, String competence) { //Only adds to 1 type of gnome
 
            //Jobs job = em.find(Jobs.class, item);
        
@@ -170,7 +170,7 @@ public class CashierFacade {
 
     public String fillDB() {
 
-        em.persist(new Jobs("test job", 2,"test","test"));
+        em.persist(new Jobs("test job", "test","test","test"));
 
 
         em.persist(new Applies("Tall Gnome", 0)); //ändra sen

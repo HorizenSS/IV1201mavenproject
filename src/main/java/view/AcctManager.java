@@ -173,8 +173,7 @@ public class AcctManager implements Serializable {
 
     public String add() {
         try {
-            int timeperiod1 = Integer.parseInt(timeperiod);
-            result = cashierFacade.add(additem,timeperiod1,dateofregistration,competence);
+            result = cashierFacade.add(additem,timeperiod,dateofregistration,competence);
 
         } catch (Exception e) {
             handleException(e);

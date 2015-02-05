@@ -20,7 +20,7 @@ public class Jobs implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String name;
-    private int timeperiod;
+    private String timeperiod;
     private String dateofregistration;
     private String competence;
     
@@ -28,7 +28,7 @@ public class Jobs implements Serializable {
         
     }
     
-    public Jobs(String name, int timeperiod, String dateofregistration, String competence){
+    public Jobs(String name, String timeperiod, String dateofregistration, String competence){
         this.name = name;
         this.timeperiod = timeperiod;
         this.dateofregistration = dateofregistration;
@@ -42,11 +42,11 @@ public class Jobs implements Serializable {
     }
     
     
-    public int gettimeperiod(){
+    public String gettimeperiod(){
     return timeperiod;
     }
     
-    public int settimeperiod(int timeperiod){
+    public String settimeperiod(String timeperiod){
     this.timeperiod = timeperiod;
     return timeperiod;
     }
