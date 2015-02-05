@@ -7,7 +7,15 @@
     </h:head>
     <h:body>
         <p>Welcome applicant</p>
+        <h3>Feedback</h3>
 
+        <p>
+            <h:outputLabel for="result" rendered="#{acctManager.result != null}"  value=""/>
+            
+            <h:outputText id="result" value="#{acctManager.result}"/>  <!-- skriver ut resultatet -->
+            <h1 rendered ="#{acctManager.nullResult()} "/> <!-- ERASES inputed data -->
+
+        </p>
         <h:form>
 
             <h4>Add to cart</h4>

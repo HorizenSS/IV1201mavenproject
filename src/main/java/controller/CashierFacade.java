@@ -78,7 +78,6 @@ public class CashierFacade {
                 Applies cart = em.find(Applies.class, "Tall Gnome");
                 int cartamount = cart.getamount();
                 cart.setamount(cartamount + 1);
-
                 return "Tall gnome added to shopping cart";
             }
 
@@ -119,44 +118,7 @@ public class CashierFacade {
     }
 
     public String buy() {
-        // Acquire cart.
-        Applies cartTall = em.find(Applies.class, "Tall Gnome");
-        Applies cartLarge = em.find(Applies.class, "Large Gnome");
-        Applies cartLittle = em.find(Applies.class, "Little Gnome");
-
-        // Get current cart amount.
-        int tallAmount = cartTall.getamount();
-        int largeAmount = cartLarge.getamount();
-        int littleAmount = cartLittle.getamount();
-        int totalAmount = tallAmount + largeAmount + littleAmount;
-
-        // If user is logged in and account balance is satisfactory.
-        if (login == true) {
-
-            // Remove amount from total balance.
-           /* int current = currentAccount.getbalance();
-             int bought = current - totalAmount*100;
-             currentAccount.setbalance(bought);
-             */
-            // Acquire stock.
-            Jobs stockTall = em.find(Jobs.class, "Tall Gnome");
-            Jobs stockLarge = em.find(Jobs.class, "Large Gnome");
-            Jobs stockLittle = em.find(Jobs.class, "Little Gnome");
-
-            // Get current stock.
-            int currentTall = stockTall.getamount();
-            int currentLarge = stockLarge.getamount();
-            int currentLittle = stockLittle.getamount();
-
-            // Remove gnomes from stock.
-            stockTall.setamount(currentTall - tallAmount);
-            stockLarge.setamount(currentLarge - largeAmount);
-            stockLittle.setamount(currentLittle - littleAmount);
-
-            // Confirm purchase and print balance.
-            clearApplies();
-            return "Gnome(s) bought. Current balance: ";
-        }
+    
         return "Failed";
     }
 
@@ -166,12 +128,12 @@ public class CashierFacade {
     }
 
     //----------------------------------------------------------------------------------------
-    public String add(String item, int wage) { //Only adds to 1 type of gnome
+    public String add(String item, int timeperiod, String dateofregistration, String competence) { //Only adds to 1 type of gnome
 
            //Jobs job = em.find(Jobs.class, item);
        
             if (adminlogin == true) {
-                em.persist(new Jobs(item,wage));
+                em.persist(new Jobs(item,timeperiod,dateofregistration,competence));
                 return "Job is added";
 
             }
@@ -180,11 +142,9 @@ public class CashierFacade {
 
     public String checkStatus() {
 
-        Jobs stock1 = em.find(Jobs.class, "Tall Gnome");
-        Jobs stock2 = em.find(Jobs.class, "Large Gnome");
-        Jobs stock3 = em.find(Jobs.class, "Little Gnome");
+      
 
-        return "Tall Gnomes: : " + stock1.getamount() + " || Large Gnomes: " + stock2.getamount() + " || Little Gnomes: " + stock3.getamount();
+        return "Unimplmeneted";
 
     }
 
@@ -210,16 +170,13 @@ public class CashierFacade {
 
     public String fillDB() {
 
-        em.persist(new Jobs("Tall Gnome", 10));
-        em.persist(new Jobs("Large Gnome", 10));
-        em.persist(new Jobs("Little Gnome", 10));
+        em.persist(new Jobs("test job", 2,"test","test"));
+
 
         em.persist(new Applies("Tall Gnome", 0)); //ändra sen
-        em.persist(new Applies("Large Gnome", 0)); //ändra sen
-        em.persist(new Applies("Little Gnome", 0)); //ändra sen
+
 
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson"));
-        em.persist(new Jobs("ha",0));
         return "";
     }
 }

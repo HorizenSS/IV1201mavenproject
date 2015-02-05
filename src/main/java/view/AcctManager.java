@@ -38,12 +38,14 @@ public class AcctManager implements Serializable {
     private String email;
     private String firstname;
     private String lastname;
-    private String wage;
+    private String timeperiod;
     private String item;
     private String additem;
     private String resultcart;
     private String banned;
     private accountInterface accountI;
+    private String dateofregistration;
+    private String competence;
 
     private static String online = null;
     private static String status = null;
@@ -171,8 +173,8 @@ public class AcctManager implements Serializable {
 
     public String add() {
         try {
-            int wage1 = Integer.parseInt(wage);
-            result = cashierFacade.add(additem,wage1);
+            int timeperiod1 = Integer.parseInt(timeperiod);
+            result = cashierFacade.add(additem,timeperiod1,dateofregistration,competence);
 
         } catch (Exception e) {
             handleException(e);
@@ -334,11 +336,28 @@ public class AcctManager implements Serializable {
         this.resultcart = resultcart;
     }
     
-    public void setwage(String wage){
-    this.wage = wage;
+    public void settimeperiod(String timeperiod){
+    this.timeperiod = timeperiod;
     }
 
-    public String getwage(){
-    return wage;
+    public String gettimeperiod(){
+    return timeperiod;
     }
+    
+    public void setdateofregistration(String dateofregistration){
+    this.dateofregistration = dateofregistration;
+    }
+    
+    public String getdateofregistration(){
+    return dateofregistration;
+    }
+    
+    public void setcompetence(String competence){
+    this.competence = competence;
+    }
+    
+    public String getcompetence(){
+    return competence;
+    }
+    
 }

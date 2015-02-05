@@ -19,33 +19,59 @@ public class Jobs implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
-    private String type;
-    private int amount;
+    private String name;
+    private int timeperiod;
+    private String dateofregistration;
+    private String competence;
     
     public Jobs(){
         
     }
     
-    public Jobs(String type, int amount){
-        this.type = type;
-        this.amount = amount;
-        this.id = type;
+    public Jobs(String name, int timeperiod, String dateofregistration, String competence){
+        this.name = name;
+        this.timeperiod = timeperiod;
+        this.dateofregistration = dateofregistration;
+        this.competence = competence;
+        this.id = name;
     }
  
     
-    public String gettype(){
-        return type;
+    public String getname(){
+        return name;
     }
     
     
-    public int getamount(){
-    return amount;
+    public int gettimeperiod(){
+    return timeperiod;
     }
-    public int setamount(int amount){
-    this.amount = amount;
-    return amount;
+    
+    public int settimeperiod(int timeperiod){
+    this.timeperiod = timeperiod;
+    return timeperiod;
     }
 
+    public String getdateofregistration(){
+        return dateofregistration;
+    }
+    
+    public String getdateofregistration(String dateofregistration){
+        this.dateofregistration = dateofregistration;
+        return dateofregistration;
+    
+    }
+    
+    public String getcompetence(){
+    return competence;
+    }
+    
+    public String setcompetence(String competence){
+    this.competence = competence;
+    return competence;
+    }
+    
+    
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
