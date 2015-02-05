@@ -27,52 +27,64 @@
         <p>
 
             <h:outputText id="resultcart" value="#{acctManager.resultcart}"/>  <!-- skriver ut resultatet -->
-            <h:form>
-                <h:commandButton value="APPLY" action="#{acctManager.buy()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-            </h:form> 
+            
+                
 
         </p>
 
         <br>
-            
-                <li>Job applicant 1</li>
-                <form>
-                    
-                  <br><input type="checkbox" name="Time" value="Time"> Time</input></br>
-                  <br><input type="checkbox" name="Date of registration" value="Date of registration"> Date of registration</input></br>    
-                  <br><input type="checkbox" name ="Competence" value="Competence"> Competence </input></br>
-                  <br><input type="checkbox" name ="Name" value="Name"> Name</input></br>     
+            <form>
+                <br><input type="checkbox" name="Job applicant1" value="Job applicant1"> Job Applicant 1</input></br>
+                
+            </form> 
+            <ul> 
+                <li>Time</li>
+                <li> Date of registration</li>
+                <li> Competence</li>
+                <li> Name</li>
+            </ul>
+                     
         
                 
                   
-                       </form>      
+                             
                 </br>
-               	<br>
-                    <li>Job applicant 2</li>
-                <form>
-                    
-                  <br><input type="checkbox" name="Time" value="Time"> Time</input></br>
-                  <br><input type="checkbox" name="Date of registration" value="Date of registration"> Date of registration</input></br>    
-                  <br><input type="checkbox" name ="Competence" value="Competence"> Competence </input></br>
-                  <br><input type="checkbox" name ="Name" value="Name"> Name</input></br>     
+               <br>
+            <form>
+                <br><input type="checkbox" name="Job applicant2" value="Job applicant2"> Job Applicant 2</input></br>
+                
+            </form> 
+            <ul> 
+                <li>Time</li>
+                <li> Date of registration</li>
+                <li> Competence</li>
+                <li> Name</li>
+            </ul>
+                     
         
                 
-
-                       </form>   
-               </br>
-
-                    <br>
-              <li>Job applicant 3</li>
-                <form>
-                    
-                  <br><input type="checkbox" name="Time" value="Time"> Time</input></br>
-                  <br><input type="checkbox" name="Date of registration" value="Date of registration"> Date of registration</input></br>    
-                  <br><input type="checkbox" name ="Competence" value="Competence"> Competence </input></br>
-                  <br><input type="checkbox" name ="Name" value="Name"> Name</input></br>     
+                  
+                             
+                </br>
         
-              
-                       </form>   
-       </br>
+        <br>
+            <form>
+                <br><input type="checkbox" name="Job applicant3" value="Job applicant3"> Job Applicant 3</input></br>
+                
+            </form> 
+            <ul> 
+                <li>Time</li>
+                <li> Date of registration</li>
+                <li> Competence</li>
+                <li> Name</li>
+            </ul>
+                             
+                </br>
+        <br>
+            <h:form>
+        <h:commandButton value="APPLY" action="#{acctManager.buy()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            </h:form> 
+            </br>
     </h:body>
 </html>
 
