@@ -133,10 +133,10 @@ public class AcctManager implements Serializable {
         return jsf22Bugfix();
     }
 
-    public String addToCart() {
+    public String addToApplies() {
         try {
 
-            result = cashierFacade.addToCart(item);
+            result = cashierFacade.addToApplies(item);
             resultcart = cart();
         } catch (Exception e) {
             handleException(e);
