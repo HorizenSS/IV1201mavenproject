@@ -7,13 +7,18 @@
     </h:head>
     <h:body>
         <p>Welcome applicant</p>
+        <br>
+            <h:form>
+                <h:commandButton value="Back to home page" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            </h:form> 
+        </br>
         <h3>Feedback</h3>
 
         <p>
-            <h:outputLabel for="result" rendered="#{acctManager.result != null}"  value=""/>
-            
-            <h:outputText id="result" value="#{acctManager.result}"/>  <!-- skriver ut resultatet -->
-            <h1 rendered ="#{acctManager.nullResult()} "/> <!-- ERASES inputed data -->
+            <h:outputLabel for="result" rendered="#{applyManager.result != null}"  value=""/>
+
+            <h:outputText id="result" value="#{applyManager.result}"/>  <!-- skriver ut resultatet -->
+            <h1 rendered ="#{applyManager.nullResult()} "/> <!-- ERASES inputed data -->
 
         </p>
         <h:form>
@@ -21,11 +26,11 @@
             <h4>Add to cart</h4>
             <p>
                 <h:outputLabel for="item" value="Item: "/>
-                <h:inputText id="item" value="#{acctManager.item}"/>
+                <h:inputText id="item" value="#{applyManager.item}"/>
 
             </p>
             <p>
-                <h:commandButton value="Add" action="#{acctManager.addToApplies()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="Add" action="#{applyManager.addToApplies()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>  
@@ -34,16 +39,14 @@
 
         <p>
 
-            <h:outputText id="resultcart" value="#{acctManager.resultcart}"/>  <!-- skriver ut resultatet -->
-            
-                
+
 
         </p>
 
         <br>
             <form>
                 <br><input type="checkbox" name="Job applicant1" value="Job applicant1"> Job Applicant 1</input></br>
-                
+
             </form> 
             <ul> 
                 <li>Time</li>
@@ -51,16 +54,16 @@
                 <li> Competence</li>
                 <li> Name</li>
             </ul>
-                     
-        
-                
-                  
-                             
-                </br>
-               <br>
+
+
+
+
+
+        </br>
+        <br>
             <form>
                 <br><input type="checkbox" name="Job applicant2" value="Job applicant2"> Job Applicant 2</input></br>
-                
+
             </form> 
             <ul> 
                 <li>Time</li>
@@ -68,17 +71,17 @@
                 <li> Competence</li>
                 <li> Name</li>
             </ul>
-                     
-        
-                
-                  
-                             
-                </br>
-        
+
+
+
+
+
+        </br>
+
         <br>
             <form>
                 <br><input type="checkbox" name="Job applicant3" value="Job applicant3"> Job Applicant 3</input></br>
-                
+
             </form> 
             <ul> 
                 <li>Time</li>
@@ -86,13 +89,14 @@
                 <li> Competence</li>
                 <li> Name</li>
             </ul>
-                             
-                </br>
+
+        </br>
         <br>
             <h:form>
-        <h:commandButton value="APPLY" action="#{acctManager.buy()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="APPLY" action="#{applyManager.buy()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </h:form> 
-            </br>
+        </br>
+
     </h:body>
 </html>
 

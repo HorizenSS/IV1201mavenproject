@@ -39,8 +39,7 @@ public class AcctManager implements Serializable {
     private String firstname;
     private String lastname;
     private String timeperiod;
-    private String item;
-    private String additem;
+    private String name;
     private String resultcart;
     private String banned;
     private accountInterface accountI;
@@ -135,17 +134,6 @@ public class AcctManager implements Serializable {
         return jsf22Bugfix();
     }
 
-    public String addToApplies() {
-        try {
-
-            result = cashierFacade.addToApplies(item);
-            resultcart = cart();
-        } catch (Exception e) {
-            handleException(e);
-
-        }
-        return jsf22Bugfix();
-    }
 
     public String checkStatus() {
         try {
@@ -173,7 +161,7 @@ public class AcctManager implements Serializable {
 
     public String add() {
         try {
-            result = cashierFacade.add(additem,timeperiod,dateofregistration,competence);
+            result = cashierFacade.add(name,timeperiod,dateofregistration,competence);
 
         } catch (Exception e) {
             handleException(e);
@@ -206,17 +194,7 @@ public class AcctManager implements Serializable {
         return jsf22Bugfix();
     }
 
-    public String buy() {
-        try {
 
-            result = cashierFacade.buy();
-
-        } catch (Exception e) {
-            handleException(e);
-
-        }
-        return jsf22Bugfix();
-    }
 
     public String ban() {
         try {
@@ -311,20 +289,13 @@ public class AcctManager implements Serializable {
         return adminsuccess;
     }
 
-    public String getitem() {
-        return item;
+
+    public String getname() {
+        return name;
     }
 
-    public void setitem(String item) {
-        this.item = item;
-    }
-
-    public String getadditem() {
-        return additem;
-    }
-
-    public void setadditem(String additem) {
-        this.additem = additem;
+    public void setname(String name) {
+        this.name = name;
     }
 
     public String getresultcart() {

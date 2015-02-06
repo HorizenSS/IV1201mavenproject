@@ -18,6 +18,21 @@
             <to-view-id>/recruiter.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+  
+    <navigation-rule>
+        <from-view-id>/applicant.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{applyManager.tohomepage}</if>
+            <to-view-id>/account.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
     
+    <navigation-rule>
+        <from-view-id>/recruiter.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{recruitManager.tohomepage}</if>
+            <to-view-id>/account.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>      
 
 </faces-config>

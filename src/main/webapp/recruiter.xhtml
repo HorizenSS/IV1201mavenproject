@@ -7,14 +7,18 @@
     </h:head>
     <h:body>
         <p>Welcome recruiter</p>
-
+        <br>
+            <h:form>
+                <h:commandButton value="Back to home page" action="#{recruitManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            </h:form> 
+        </br>
         <h3>Feedback</h3>
 
         <p>
-            <h:outputLabel for="result" rendered="#{acctManager.result != null}"  value=""/>
-            
-            <h:outputText id="result" value="#{acctManager.result}"/>  <!-- skriver ut resultatet -->
-            <h1 rendered ="#{acctManager.nullResult()} "/> <!-- ERASES inputed data -->
+            <h:outputLabel for="result" rendered="#{recruitManager.result != null}"  value=""/>
+
+            <h:outputText id="result" value="#{recruitManager.result}"/>  <!-- skriver ut resultatet -->
+            <h1 rendered ="#{recruitManager.nullResult()} "/> <!-- ERASES inputed data -->
 
         </p>
 
@@ -22,17 +26,17 @@
 
             <h4>Add a job</h4>
             <p>
-                <h:outputLabel for="additem" value="Name of job: "/>
-                <h:inputText id="additem" value="#{acctManager.additem}"/>
+                <h:outputLabel for="name" value="Name of job: "/>
+                <h:inputText id="name" value="#{recruitManager.name}"/>
                 <h:outputLabel for="timeperiod" value="Time period: "/>
-                <h:inputText id="timeperiod" value="#{acctManager.timeperiod}"/>
+                <h:inputText id="timeperiod" value="#{recruitManager.timeperiod}"/>
                 <h:outputLabel for="dateofregistration" value="Date of registration: "/>
-                <h:inputText id="dateofregistration" value="#{acctManager.dateofregistration}"/>
-                 <h:outputLabel for="competence" value="Competence: "/>
-                <h:inputText id="competence" value="#{acctManager.competence}"/>
+                <h:inputText id="dateofregistration" value="#{recruitManager.dateofregistration}"/>
+                <h:outputLabel for="competence" value="Competence: "/>
+                <h:inputText id="competence" value="#{recruitManager.competence}"/>
             </p>
             <p>
-                <h:commandButton value="Add" action="#{acctManager.add()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="Add" action="#{recruitManager.add()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>
