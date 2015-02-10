@@ -90,10 +90,10 @@ public class ApplyManager implements Serializable {
         return "";
     }
 
-    public String buy() {
+    public String apply() {
         try {
 
-            result = cashierFacade.buy();
+            result = cashierFacade.apply();
 
         } catch (Exception e) {
             handleException(e);

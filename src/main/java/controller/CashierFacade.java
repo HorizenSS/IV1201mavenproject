@@ -72,40 +72,8 @@ public class CashierFacade {
 
     public String addToApplies(String item) {
 
-        if (item.equals("Tall")) {
-
-            if (login == true) {
-                Applies cart = em.find(Applies.class, "Tall Gnome");
-                int cartamount = cart.getamount();
-                cart.setamount(cartamount + 1);
-                return "Tall gnome added to shopping cart";
-            }
-
-        }
-        if (item.equals("Little")) {
-
-            if (login == true) {
-                Applies cart = em.find(Applies.class, "Little Gnome");
-                int cartamount = cart.getamount();
-                cart.setamount(cartamount + 1);
-
-                return "Little gnome added to shopping cart";
-            }
-
-        }
-        if (item.equals("Large")) {
-
-            if (login == true) {
-                Applies cart = em.find(Applies.class, "Large Gnome");
-                int cartamount = cart.getamount();
-                cart.setamount(cartamount + 1);
-
-                return "Large gnome added to shopping cart";
-            }
-
-        }
-
-        return "Failed";
+       
+        return "Not implemented";
     }
 
     public String ban(String banned) {
@@ -117,9 +85,9 @@ public class CashierFacade {
         return "Failed";
     }
 
-    public String buy() {
+    public String apply() {
     
-        return "Failed";
+        return "Method apply(), not implemented";
     }
 
     public String logout() {
@@ -148,24 +116,14 @@ public class CashierFacade {
 
     }
 
-    public String cart() {
+    public String applyList() {
 
-        Applies cart1 = em.find(Applies.class, "Tall Gnome");
-        Applies cart2 = em.find(Applies.class, "Large Gnome");
-        Applies cart3 = em.find(Applies.class, "Little Gnome");
-
-        return "Tall Gnomes: : " + cart1.getamount() + " || Large Gnomes: " + cart2.getamount() + " || Little Gnomes: " + cart3.getamount();
+      return "Method applyList(), not implemented";
 
     }
 
     public void clearApplies() {
-        Applies cartTall = em.find(Applies.class, "Tall Gnome");
-        Applies cartLarge = em.find(Applies.class, "Large Gnome");
-        Applies cartLittle = em.find(Applies.class, "Little Gnome");
-
-        cartTall.setamount(0);
-        cartLarge.setamount(0);
-        cartLittle.setamount(0);
+     //not implemented
     }
 
     public String fillDB() {

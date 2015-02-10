@@ -147,10 +147,10 @@ public class AcctManager implements Serializable {
         return jsf22Bugfix();
     }
 
-    public String cart() {
+    public String applyList() {
         try {
 
-            resultcart = cashierFacade.cart();
+            resultcart = cashierFacade.applyList();
 
         } catch (Exception e) {
             handleException(e);
