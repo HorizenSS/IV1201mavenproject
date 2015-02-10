@@ -42,7 +42,6 @@ public class AcctManager implements Serializable {
     private String timeperiod;
     private String name;
     private String resultcart;
-    private String banned;
     private accountInterface accountI;
     private String dateofregistration;
     private String competence;
@@ -196,19 +195,6 @@ public class AcctManager implements Serializable {
     }
 
 
-
-    public String ban() {
-        try {
-
-            result = cashierFacade.ban(banned);
-
-        } catch (Exception e) {
-            handleException(e);
-
-        }
-        return jsf22Bugfix();
-    }
-
    //SETTERS AND GETTERS        
     public void setaccount(String account) {
         this.account = account;
@@ -266,13 +252,6 @@ public class AcctManager implements Serializable {
         return online;
     }
 
-    public String getbanned() {
-        return banned;
-    }
-
-    public void setbanned(String banned) {
-        this.banned = banned;
-    }
 
     public String getResult() {
         return result;

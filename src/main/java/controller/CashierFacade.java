@@ -77,14 +77,6 @@ public class CashierFacade {
         return "Not implemented";
     }
 
-    public String ban(String banned) {
-        if (adminlogin) {
-            em.persist(new Banned(banned));
-
-            return banned + " is banned";
-        }
-        return "Failed";
-    }
 
     public String apply() {
     
