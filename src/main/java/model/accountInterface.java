@@ -8,6 +8,8 @@ package model;
 /**
  *
  * @author johny_000
+ * @author Armin Arya
+ * @author Kentaro Hayashida
  */
 public interface accountInterface {
     public String getUsername();

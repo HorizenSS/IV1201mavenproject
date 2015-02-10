@@ -11,6 +11,7 @@ import javax.persistence.Id;
  * 
  * @author      Kentaro Hayashida
  * @author      Johny Premanantham
+ * @author      Armin Arya
  * @version     1.0
  * @since       2015-01-03
  */

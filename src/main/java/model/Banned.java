@@ -10,6 +10,8 @@ import javax.persistence.Id;
  * Makes banning a user possible.
  * 
  * @author      Kentaro Hayashida
+ * @author      Armin Arya
+ * @author      Johny Premanantham
  * @version     1.0
  * @since       2015-01-07
  */
