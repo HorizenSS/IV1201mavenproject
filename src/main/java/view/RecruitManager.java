@@ -1,6 +1,6 @@
 package view;
 
-import controller.CashierFacade;
+import controller.Facade;
 
 //backing bean
 import java.io.Serializable;
@@ -29,7 +29,7 @@ public class RecruitManager implements Serializable {
     @EJB
 
     //globals
-    private CashierFacade cashierFacade;
+    private Facade Facade;
     private Exception transactionFailure;
     private boolean success = false;
     private boolean adminsuccess = false;
@@ -95,7 +95,7 @@ public class RecruitManager implements Serializable {
 
     public String add() {
         try {
-            result = cashierFacade.add(name, timeperiod, dateofregistration, competence);
+            result = Facade.add(name, timeperiod, dateofregistration, competence);
 
         } catch (Exception e) {
             handleException(e);
@@ -107,7 +107,7 @@ public class RecruitManager implements Serializable {
     public String logout() {
         try {
 
-            result = cashierFacade.logout();
+            result = Facade.logout();
             online = result;
         } catch (Exception e) {
             handleException(e);

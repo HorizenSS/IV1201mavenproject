@@ -1,6 +1,6 @@
 package view;
 
-import controller.CashierFacade;
+import controller.Facade;
 
 //backing bean
 import java.io.Serializable;
@@ -29,7 +29,7 @@ public class ApplyManager implements Serializable {
     @EJB
 
     //globals
-    private CashierFacade cashierFacade;
+    private Facade Facade;
     private Exception transactionFailure;
     private boolean success = false;
     private boolean adminsuccess = false;
@@ -94,7 +94,7 @@ public class ApplyManager implements Serializable {
     public String apply() {
         try {
 
-            result = cashierFacade.apply();
+            result = Facade.apply();
 
         } catch (Exception e) {
             handleException(e);
@@ -106,7 +106,7 @@ public class ApplyManager implements Serializable {
     public String addToApplies() {
         try {
 
-            result = cashierFacade.addToApplies(item);
+            result = Facade.addToApplies(item);
         } catch (Exception e) {
             handleException(e);
 

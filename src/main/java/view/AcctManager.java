@@ -1,6 +1,6 @@
 package view;
 
-import controller.CashierFacade;
+import controller.Facade;
 
 //backing bean
 import java.io.Serializable;
@@ -29,7 +29,7 @@ public class AcctManager implements Serializable {
     @EJB
 
     //globals
-    private CashierFacade cashierFacade;
+    private Facade Facade;
     private Exception transactionFailure;
     private boolean success = false;
     private boolean adminsuccess = false;
@@ -102,7 +102,7 @@ public class AcctManager implements Serializable {
         try {
             //startConversation();
             //transactionFailure = null;
-            result = cashierFacade.login(account, password);
+            result = Facade.login(account, password);
             //online = result;
 
             if ("admin".equals(result)) {
@@ -126,7 +126,7 @@ public class AcctManager implements Serializable {
         try {
             startConversation();
             transactionFailure = null;
-            result = cashierFacade.register(account, password, email, firstname, lastname);
+            result = Facade.register(account, password, email, firstname, lastname);
 
         } catch (Exception e) {
             handleException(e);
@@ -138,7 +138,7 @@ public class AcctManager implements Serializable {
     public String checkStatus() {
         try {
 
-            result = cashierFacade.checkStatus();
+            result = Facade.checkStatus();
 
         } catch (Exception e) {
             handleException(e);
@@ -150,7 +150,7 @@ public class AcctManager implements Serializable {
     public String applyList() {
         try {
 
-            resultcart = cashierFacade.applyList();
+            resultcart = Facade.applyList();
 
         } catch (Exception e) {
             handleException(e);
@@ -161,7 +161,7 @@ public class AcctManager implements Serializable {
 
     public String add() {
         try {
-            result = cashierFacade.add(name,timeperiod,dateofregistration,competence);
+            result = Facade.add(name,timeperiod,dateofregistration,competence);
 
         } catch (Exception e) {
             handleException(e);
@@ -173,7 +173,7 @@ public class AcctManager implements Serializable {
     public String logout() {
         try {
 
-            result = cashierFacade.logout();
+            result = Facade.logout();
             online = result;
         } catch (Exception e) {
             handleException(e);
@@ -185,7 +185,7 @@ public class AcctManager implements Serializable {
     public String fillDB() {
         try {
 
-            cashierFacade.fillDB();
+            Facade.fillDB();
 
         } catch (Exception e) {
             handleException(e);

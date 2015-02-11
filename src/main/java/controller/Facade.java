@@ -22,7 +22,7 @@ import model.Jobs;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
-public class CashierFacade {
+public class Facade {
 
     @PersistenceContext(unitName = "com.mycompany_IV1201mavenproject_war_1.0-SNAPSHOTPU")
     private EntityManager em;
