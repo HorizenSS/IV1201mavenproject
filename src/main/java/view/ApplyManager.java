@@ -34,7 +34,7 @@ public class ApplyManager implements Serializable {
     private boolean success = false;
     private boolean adminsuccess = false;
     private boolean tohomepage = false;
-
+    private boolean error = false;
     private String item;
     private String additem;
     private String resultcart;
@@ -124,7 +124,31 @@ public class ApplyManager implements Serializable {
         }
         return jsf22Bugfix();
     }
+    
+        public String checkAuthorization() {
+        try {
+            //startConversation();
+            //transactionFailure = null;
+            result = Facade.checkAuthorization();
+            //online = result;
 
+            if ("Not-Authorized".equals(result)) {
+                error = true;
+                return jsf22Bugfix();
+
+            }
+            if ("Authorized".equals(result)) {
+                success = true;
+                return jsf22Bugfix();
+
+            }
+
+        } catch (Exception e) {
+            handleException(e);
+        }
+        return jsf22Bugfix();
+    }
+    
     public void setstatus(String status) {
         this.status = status;
     }
@@ -153,6 +177,10 @@ public class ApplyManager implements Serializable {
         return tohomepage;
     }
 
+    public boolean geterror(){
+        return error;
+    }
+    
     public String getitem() {
         return item;
     }

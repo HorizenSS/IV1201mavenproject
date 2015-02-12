@@ -7,6 +7,9 @@
     </h:head>
     <h:body>
         <p>Welcome applicant</p>
+        
+        <h1 rendered ="#{applyManager.checkAuthorization()} "/> <!-- inputed data -->
+
         <br>
             <h:form>
                 <h:commandButton value="Back to home page" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->

@@ -34,6 +34,7 @@ public class RecruitManager implements Serializable {
     private boolean success = false;
     private boolean adminsuccess = false;
     private boolean tohomepage = false;
+    private boolean error = false;
     //register and login
 
     private String timeperiod;
@@ -194,5 +195,8 @@ public class RecruitManager implements Serializable {
 
     public boolean gettohomepage() {
         return tohomepage;
+    }
+    public boolean geterror(){
+    return error;
     }
 }

@@ -85,6 +85,8 @@ public class Facade {
 
     public String logout() {
         logout = true;
+        login = false;
+        adminlogin = false;
         return "Logout";
     }
 
@@ -124,10 +126,18 @@ public class Facade {
         em.persist(new Jobs("test job", "test","test","test"));
 
 
-        em.persist(new Applies("", 0)); //ändra sen
+        em.persist(new Applies("", 0)); //Ã¤ndra sen
 
 
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson"));
         return "";
+    }
+    
+    public String checkAuthorization(){
+    
+        if(login == false){
+        return "Not-Authorized";
+        }
+        return "Authorized";
     }
 }
