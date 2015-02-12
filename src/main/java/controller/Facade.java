@@ -124,7 +124,7 @@ public class Facade {
         em.persist(new Jobs("test job", "test","test","test"));
 
 
-        em.persist(new Applies("Tall Gnome", 0)); //ändra sen
+        em.persist(new Applies("", 0)); //ändra sen
 
 
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson"));
