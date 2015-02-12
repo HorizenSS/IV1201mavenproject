@@ -92,8 +92,6 @@ public class Facade {
 
     //----------------------------------------------------------------------------------------
     public String add(String item, String timeperiod, String dateofregistration, String competence) { //Only adds to 1 type of gnome
-
-           //Jobs job = em.find(Jobs.class, item);
        
             if (adminlogin == true) {
                 em.persist(new Jobs(item,timeperiod,dateofregistration,competence));
@@ -126,7 +124,7 @@ public class Facade {
         em.persist(new Jobs("test job", "test","test","test"));
 
 
-        em.persist(new Applies("", 0)); //Ã¤ndra sen
+        em.persist(new Applies("", 0)); //ÃƒÂ¤ndra sen
 
 
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson"));
@@ -140,4 +138,12 @@ public class Facade {
         }
         return "Authorized";
     }
+    /*
+        public String checkAuthorizationAdmin(){
+    
+        if(adminlogin == false){
+        return "Not-Authorized";
+        }
+        return "Authorized";
+    } */
 }
