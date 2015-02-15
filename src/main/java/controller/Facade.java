@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,8 +36,14 @@ public class Facade {
     private static boolean logout = false;
     private static boolean adminlogin;
     private static Accounts currentAccount;
-    public PrintWriter registered;
+    public PrintWriter pw;
 
+    public Facade() throws FileNotFoundException {
+        this.pw = new PrintWriter("registered.txt");
+    }
+
+    
+    
     public String login(String account, String password) {
         Accounts acc = em.find(Accounts.class, account); //gets an entry
         Banned ban = em.find(Banned.class, account);
@@ -55,6 +62,7 @@ public class Facade {
                 adminlogin = false;
                 currentAccount = acc;
                 if ("admin".equals(acc.getaccount())) {
+                    pw.close();                                     //CLOSE PRINTWRITER
                     adminlogin = true;
                 }
                 return acc.getaccount(); //Start thread that starts webshop
@@ -66,30 +74,28 @@ public class Facade {
     }
 
     public String register(String account, String password, String email, String firstname, String lastname) throws IOException {
-       
-        
         Accounts acc = em.find(Accounts.class, account);
+        
         if (acc != null) {
             return (" Account exists!!");
-        }
-
-        em.persist(new Accounts(account, password, email, firstname, lastname));
-       // registered.println(acc.getaccount() + " is registered| ");  //LOGGA REGISTRERADE KONTON
-       // registered.close();    
-        return ("Account created, login to apply!");
+        }      
+        
+        pw.println(account + " is registered.");
+        em.persist(new Accounts(account, password, email, firstname, lastname));    
+        return ("Account; "+ account + " created!");
 
     }
 
     public String addToApplies(String item) {
 
        
-        return "Not implemented";
+        return "Unimplemented";
     }
 
 
     public String apply() {
     
-        return "Method apply(), not implemented";
+        return "Unimplemented";
     }
 
     public String logout() {
@@ -134,9 +140,8 @@ public class Facade {
         em.persist(new Applies("", 0)); 
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson"));
         
-        registered = new PrintWriter("registered.txt");
-        registered.println("test");
-        registered.close();
+
+        
         return "";
     }
     
