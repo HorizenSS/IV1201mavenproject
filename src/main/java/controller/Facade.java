@@ -1,5 +1,10 @@
 package controller;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import model.Accounts;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -30,6 +35,7 @@ public class Facade {
     private static boolean logout = false;
     private static boolean adminlogin;
     private static Accounts currentAccount;
+    public PrintWriter registered;
 
     public String login(String account, String password) {
         Accounts acc = em.find(Accounts.class, account); //gets an entry
@@ -59,14 +65,17 @@ public class Facade {
         return null;
     }
 
-    public String register(String account, String password, String email, String firstname, String lastname) {
-
-        if (em.find(Accounts.class, account) != null) {
+    public String register(String account, String password, String email, String firstname, String lastname) throws IOException {
+       
+        
+        Accounts acc = em.find(Accounts.class, account);
+        if (acc != null) {
             return (" Account exists!!");
-
         }
 
         em.persist(new Accounts(account, password, email, firstname, lastname));
+       // registered.println(acc.getaccount() + " is registered| ");  //LOGGA REGISTRERADE KONTON
+       // registered.close();    
         return ("Account created, login to apply!");
 
     }
@@ -111,7 +120,7 @@ public class Facade {
 
     public String applyList() {
 
-      return "Method applyList(), not implemented";
+      return "Unimplemented";
 
     }
 
@@ -119,31 +128,31 @@ public class Facade {
      //not implemented
     }
 
-    public String fillDB() {
+    public String fillDB() throws FileNotFoundException, IOException {
 
         em.persist(new Jobs("test job", "test","test","test"));
-
-
-        em.persist(new Applies("", 0)); //ÃƒÂ¤ndra sen
-
-
+        em.persist(new Applies("", 0)); 
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson"));
+        
+        registered = new PrintWriter("registered.txt");
+        registered.println("test");
+        registered.close();
         return "";
     }
     
     public String checkAuthorization(){
-    
+        
         if(login == false){
-        return "Not-Authorized";
+        return "NOT-AUTHORIZED";
         }
-        return "Authorized";
+        return "AUTHORIZED";
     }
-    /*
+    
         public String checkAuthorizationAdmin(){
     
         if(adminlogin == false){
-        return "Not-Authorized";
+        return "NOT-AUTHORIZED";
         }
-        return "Authorized";
-    } */
+        return "AUTHORIZED";
+    } 
 }

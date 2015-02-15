@@ -37,7 +37,6 @@ public class ApplyManager implements Serializable {
     private boolean error = false;
     private String item;
     private String additem;
-    private String resultcart;
 
     private static String online = null;
     private static String status = null;
@@ -127,27 +126,24 @@ public class ApplyManager implements Serializable {
     
         public String checkAuthorization() {
         try {
-            //startConversation();
-            //transactionFailure = null;
+
+            startConversation();
+            transactionFailure = null;
             result = Facade.checkAuthorization();
-            //online = result;
 
-            if ("Not-Authorized".equals(result)) {
+            if ("NOT-AUTHORIZED".equals(result)) {
                 error = true;
-                return jsf22Bugfix();
-
             }
-            if ("Authorized".equals(result)) {
+            if ("AUTHORIZED".equals(result)) {
                 success = true;
-                return jsf22Bugfix();
-
             }
-
         } catch (Exception e) {
             handleException(e);
+
         }
         return jsf22Bugfix();
     }
+ 
     
     public void setstatus(String status) {
         this.status = status;

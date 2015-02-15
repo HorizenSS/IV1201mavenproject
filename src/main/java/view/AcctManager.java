@@ -1,6 +1,7 @@
 package view;
 
 import controller.Facade;
+import java.io.PrintWriter;
 
 //backing bean
 import java.io.Serializable;
@@ -45,6 +46,7 @@ public class AcctManager implements Serializable {
     private accountInterface accountI;
     private String dateofregistration;
     private String competence;
+
 
     private static String online = null;
     private static String status = null;

@@ -128,18 +128,17 @@ public class RecruitManager implements Serializable {
         return jsf22Bugfix();
     }
     
-  /*  
+   
       public String checkAuthorizationAdmin() {
         try {
             startConversation();
             transactionFailure = null;
             result = Facade.checkAuthorizationAdmin();
-            online = result;
 
-            if ("Not-Authorized".equals(result)) {
+            if ("NOT-AUTHORIZED".equals(result)) {
                 error = true;
             }
-            if ("Authorized".equals(result)) {
+            if ("AUTHORIZED".equals(result)) {
                 success = true;
             }
 
@@ -148,7 +147,7 @@ public class RecruitManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-*/
+
    //SETTERS AND GETTERS        
     public void setstatus(String status) {
         this.status = status;
