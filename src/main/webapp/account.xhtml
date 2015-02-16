@@ -8,7 +8,6 @@
     <h:body>
         <h1>IV1201 project: Recruitment system</h1>
             <h1 rendered ="#{acctManager.fillDB()} "/> <!-- inputed data -->
-            <h1 rendered ="#{acctManager.applyList()} "/> <!-- inputed data -->
         <br>
             <h:form>
                 <h:commandButton value="SV" action="#{acctManager.toaccountSV()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
@@ -43,7 +42,9 @@
                 <h:outputLabel for="firstname" value="First name: "/>
                 <h:inputText id="firstname" value="#{acctManager.firstname}"/>
                 <h:outputLabel for="lastname" value="Last name: "/>
-                <h:inputText id="lastname" value="#{acctManager.lastname}"/>  
+                <h:inputText id="lastname" value="#{acctManager.lastname}"/>
+                <h:outputLabel for="competence" value="Competence: "/>
+                <h:inputText id="competence" value="#{acctManager.competence}"/> 
             </p>
             <p>
                

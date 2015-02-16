@@ -55,7 +55,7 @@
         <navigation-rule>
         <from-view-id>/account.xhtml</from-view-id>
         <navigation-case>
-            <if>#{accountManager.toaccountSV}</if>
+            <if>#{acctManager.toaccountSV}</if>
             <to-view-id>/accountSV.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
@@ -63,8 +63,40 @@
            <navigation-rule>
         <from-view-id>/accountSV.xhtml</from-view-id>
         <navigation-case>
-            <if>#{accountManager.toaccount}</if>
+            <if>#{acctManager.toaccount}</if>
             <to-view-id>/account.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+              <navigation-rule>
+        <from-view-id>/accountSV.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{acctManager.toapplyconfirmation}</if>
+            <to-view-id>/applyconfirmation.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+                  <navigation-rule>
+        <from-view-id>/account.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{acctManager.toapplyconfirmation}</if>
+            <to-view-id>/applyconfirmation.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+                     <navigation-rule>
+        <from-view-id>/applyconfirmation.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{acctManager.toaccount}</if>
+            <to-view-id>/account.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+                     <navigation-rule>
+        <from-view-id>/applyconfirmation.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{acctManager.toaccountSV}</if>
+            <to-view-id>/accountSV.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

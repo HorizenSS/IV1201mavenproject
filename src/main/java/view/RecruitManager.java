@@ -45,6 +45,7 @@ public class RecruitManager implements Serializable {
     private static String online = null;
     private static String status = null;
     private String result = null;
+    private String resultapply = null;
     @Inject
     private Conversation conversation;
 
@@ -94,6 +95,21 @@ public class RecruitManager implements Serializable {
         return "";
     }
 
+        public String listApplicants() {
+        try {
+            startConversation();
+            transactionFailure = null;            
+            resultapply = Facade.listApplicants();
+
+        } catch (Exception e) {
+            handleException(e);
+
+        }
+        return jsf22Bugfix();
+    }
+    
+    
+    
     public String add() {
         try {
             result = Facade.add(name, timeperiod, dateofregistration, competence);
@@ -109,7 +125,7 @@ public class RecruitManager implements Serializable {
         try {
 
             result = Facade.logout();
-            online = result;
+            tohomepage = true;
         } catch (Exception e) {
             handleException(e);
 
@@ -168,11 +184,21 @@ public class RecruitManager implements Serializable {
     public String getResult() {
         return result;
     }
-
+    public String getresultapply(){
+        return resultapply;
+    }
+    
+    public void setresultapply(String resultapply) {
+        this.resultapply = resultapply;
+    }    
     public void nullResult() {
         result = null;
     }
-
+    
+    public void nullResultapply(){
+        resultapply = null;
+    }
+    
     public boolean getsuccess() {
         return success;
     }

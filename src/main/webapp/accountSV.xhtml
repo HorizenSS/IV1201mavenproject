@@ -8,7 +8,6 @@
     <h:body>
         <h1>IV1201 Projekt: Rekryterings system</h1>
             <h1 rendered ="#{acctManager.fillDB()} "/> <!-- inputed data -->
-            <h1 rendered ="#{acctManager.applyList()} "/> <!-- inputed data -->
         <br>
             <h:form>
                 <h:commandButton value="ENG" action="#{acctManager.toaccount()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
@@ -38,7 +37,9 @@
                 <h:outputLabel for="firstname" value="Förnamn: "/>
                 <h:inputText id="firstname" value="#{acctManager.firstname}"/>
                 <h:outputLabel for="lastname" value="Efternamn: "/>
-                <h:inputText id="lastname" value="#{acctManager.lastname}"/>  
+                <h:inputText id="lastname" value="#{acctManager.lastname}"/>
+                <h:outputLabel for="competence" value="Kompetens: "/>
+                <h:inputText id="competence" value="#{acctManager.competence}"/> 
             </p>
             <p>
                

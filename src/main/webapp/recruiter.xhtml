@@ -6,23 +6,51 @@
         <title>recruiter page</title>
     </h:head>
     <h:body>
-        <p>Welcome recruiter</p>
+        <h1>Welcome recruiter</h1>
         <h1 rendered ="#{recruitManager.checkAuthorizationAdmin()} "/> <!-- inputed data -->
-       
-        <br>
-            <h:form>
-                <h:commandButton value="Back to home page" action="#{recruitManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-            </h:form> 
-        </br>
+
+        <h:form>
+            <p>            
+                <h:commandButton value="Back to home page" action="#{recruitManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->               
+                <h:commandButton value="Logout" action="#{recruitManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            </p>
+
+        </h:form>
+
         <h3>Feedback</h3>
+        <h:form>
 
-        <p>
-            <h:outputLabel for="result" rendered="#{recruitManager.result != null}"  value=""/>
+            <p>
+                <h:outputLabel for="result" rendered="#{recruitManager.result != null}"  value=""/>
 
-            <h:outputText id="result" value="#{recruitManager.result}"/>  <!-- skriver ut resultatet -->
-            <h1 rendered ="#{recruitManager.nullResult()} "/> <!-- ERASES inputed data -->
+                <h:outputText id="result" value="#{recruitManager.result}"/>  <!-- skriver ut resultatet -->
+                <h1 rendered ="#{recruitManager.nullResult()} "/> <!-- ERASES inputed data -->
 
-        </p>
+            </p>
+        </h:form>
+
+        <h:form>
+            <p>
+                <h:outputLabel for="resultapply" rendered="#{recruitManager.resultapply != null}"  value=""/>
+
+                <h:outputText id="resultapply" value="#{recruitManager.resultapply}"/>  <!-- skriver ut resultatet -->
+                <h1 rendered ="#{recruitManager.nullResultapply()} "/> <!-- ERASES inputed data -->
+
+            </p>
+        </h:form>
+
+
+
+
+
+        <h:form>
+            <p>
+                <h:commandButton value="List applicants" action="#{recruitManager.listApplicants()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            </p>
+            <hr/>
+        </h:form>
+
+
 
         <h:form>
 

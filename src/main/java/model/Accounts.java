@@ -26,19 +26,20 @@ public class Accounts implements Serializable {
     private String email;
     private String firstname;
     private String lastname;
-
+    private String competence;
 
     
     public Accounts(){
         
     }
     
-    public Accounts(String account, String password, String email, String firstname, String lastname){
+    public Accounts(String account, String password, String email, String firstname, String lastname, String competence){
         this.account = account;
         this.password = password;
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.competence = competence;
         this.id = account;
     }
  
@@ -58,6 +59,10 @@ public class Accounts implements Serializable {
     }
     public String getlastname(){
         return lastname;
+    }
+    
+    public String getcompetence(){
+        return competence;
     }
 
     @Override

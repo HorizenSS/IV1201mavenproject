@@ -48,7 +48,8 @@ public class AcctManager implements Serializable {
     private String competence;
     private boolean toaccountSV = false;
     private boolean toaccount = false;
-
+    private boolean toapplyconfirmation = false;
+    
     private static String online = null;
     private static String status = null;
     private String result = null;
@@ -129,8 +130,12 @@ public class AcctManager implements Serializable {
         try {
             startConversation();
             transactionFailure = null;
-            result = Facade.register(account, password, email, firstname, lastname);
-
+            result = Facade.register(account, password, email, firstname, lastname,competence);
+            
+            if(result == null){
+            toapplyconfirmation = true;
+            }
+            
         } catch (Exception e) {
             handleException(e);
         }
@@ -150,17 +155,6 @@ public class AcctManager implements Serializable {
         return jsf22Bugfix();
     }
 
-    public String applyList() {
-        try {
-
-            resultcart = Facade.applyList();
-
-        } catch (Exception e) {
-            handleException(e);
-
-        }
-        return jsf22Bugfix();
-    }
 
     public String add() {
         try {
@@ -199,7 +193,6 @@ public class AcctManager implements Serializable {
     
         public String toaccountSV() {
         try {
-
             toaccountSV = true;
         } catch (Exception e) {
             handleException(e);
@@ -210,7 +203,6 @@ public class AcctManager implements Serializable {
         
          public String toaccount() {
         try {
-
             toaccount = true;
         } catch (Exception e) {
             handleException(e);
@@ -301,37 +293,9 @@ public class AcctManager implements Serializable {
     public boolean gettoaccountSV(){
         return toaccountSV;
     }
-
-    public String getname() {
-        return name;
-    }
-
-    public void setname(String name) {
-        this.name = name;
-    }
-
-    public String getresultcart() {
-        return resultcart;
-    }
-
-    public void setresultcart(String resultcart) {
-        this.resultcart = resultcart;
-    }
     
-    public void settimeperiod(String timeperiod){
-    this.timeperiod = timeperiod;
-    }
-
-    public String gettimeperiod(){
-    return timeperiod;
-    }
-    
-    public void setdateofregistration(String dateofregistration){
-    this.dateofregistration = dateofregistration;
-    }
-    
-    public String getdateofregistration(){
-    return dateofregistration;
+     public boolean gettoapplyconfirmation(){
+        return toapplyconfirmation;
     }
     
     public void setcompetence(String competence){

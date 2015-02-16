@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import model.Accounts;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -42,7 +43,6 @@ public class Facade {
         this.pw = new PrintWriter("registered.txt");
     }
 
-    // List<Gnomes> gnomes = em.createQuery("from Gnomes m", Gnomes.class).getResultList();
     
     public String login(String account, String password) {
         Accounts acc = em.find(Accounts.class, account); //gets an entry
@@ -73,16 +73,16 @@ public class Facade {
         return null;
     }
 
-    public String register(String account, String password, String email, String firstname, String lastname) throws IOException {
+    public String register(String account, String password, String email, String firstname, String lastname,String competence) throws IOException {
         Accounts acc = em.find(Accounts.class, account);
         
         if (acc != null) {
-            return (" Account exists!!");
+            return ("Account exists!!");
         }      
         
         pw.println(account + " is registered.");
-        em.persist(new Accounts(account, password, email, firstname, lastname));    
-        return ("Account; "+ account + " created!");
+        em.persist(new Accounts(account, password, email, firstname, lastname,competence));    
+        return null;
 
     }
 
@@ -124,9 +124,11 @@ public class Facade {
 
     }
 
-    public String applyList() {
-
-      return "Unimplemented";
+    public String listApplicants() {
+    
+       List<Accounts> accounts = em.createQuery("from Gnomes m", Accounts.class).getResultList();
+      String a =  accounts.toString();
+      return "adssadasd";
 
     }
 
@@ -138,7 +140,7 @@ public class Facade {
 
         em.persist(new Jobs("test job", "test","test","test"));
         em.persist(new Applies("", 0)); 
-        em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson"));
+        em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson","bla"));
         
 
         
