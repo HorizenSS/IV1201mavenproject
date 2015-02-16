@@ -90,29 +90,6 @@ public class ApplyManager implements Serializable {
         return "";
     }
 
-    public String apply() {
-        try {
-
-            result = Facade.apply();
-
-        } catch (Exception e) {
-            handleException(e);
-
-        }
-        return jsf22Bugfix();
-    }
-
-    public String addToApplies() {
-        try {
-
-            result = Facade.addToApplies(item);
-        } catch (Exception e) {
-            handleException(e);
-
-        }
-        return jsf22Bugfix();
-    }
-
     public String tohomepage() {
         try {
 
@@ -123,8 +100,8 @@ public class ApplyManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-    
-        public String checkAuthorization() {
+
+    public String checkAuthorization() {
         try {
 
             startConversation();
@@ -143,8 +120,18 @@ public class ApplyManager implements Serializable {
         }
         return jsf22Bugfix();
     }
- 
-    
+
+    public String listApplicants() {
+        try {
+
+            result = Facade.listApplicants();
+        } catch (Exception e) {
+            handleException(e);
+
+        }
+        return jsf22Bugfix();
+    }
+
     public void setstatus(String status) {
         this.status = status;
     }
@@ -173,10 +160,10 @@ public class ApplyManager implements Serializable {
         return tohomepage;
     }
 
-    public boolean geterror(){
+    public boolean geterror() {
         return error;
     }
-    
+
     public String getitem() {
         return item;
     }

@@ -11,13 +11,11 @@
 
         <h:form>
             <p>            
-                <h:commandButton value="Back to home page" action="#{recruitManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->               
                 <h:commandButton value="Logout" action="#{recruitManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
 
         </h:form>
 
-        <h3>Feedback</h3>
         <h:form>
 
             <p>
@@ -28,19 +26,6 @@
 
             </p>
         </h:form>
-
-        <h:form>
-            <p>
-                <h:outputLabel for="resultapply" rendered="#{recruitManager.resultapply != null}"  value=""/>
-
-                <h:outputText id="resultapply" value="#{recruitManager.resultapply}"/>  <!-- skriver ut resultatet -->
-                <h1 rendered ="#{recruitManager.nullResultapply()} "/> <!-- ERASES inputed data -->
-
-            </p>
-        </h:form>
-
-
-
 
 
         <h:form>

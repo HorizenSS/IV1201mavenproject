@@ -32,9 +32,9 @@ public class RecruitManager implements Serializable {
     private Facade Facade;
     private Exception transactionFailure;
     private boolean success = false;
-    private boolean adminsuccess = false;
     private boolean tohomepage = false;
     private boolean error = false;
+    
     //register and login
 
     private String timeperiod;
@@ -45,7 +45,6 @@ public class RecruitManager implements Serializable {
     private static String online = null;
     private static String status = null;
     private String result = null;
-    private String resultapply = null;
     @Inject
     private Conversation conversation;
 
@@ -98,9 +97,8 @@ public class RecruitManager implements Serializable {
         public String listApplicants() {
         try {
             startConversation();
-            transactionFailure = null;            
-            resultapply = Facade.listApplicants();
-
+            transactionFailure = null;  
+            success = true;
         } catch (Exception e) {
             handleException(e);
 
@@ -184,27 +182,13 @@ public class RecruitManager implements Serializable {
     public String getResult() {
         return result;
     }
-    public String getresultapply(){
-        return resultapply;
-    }
-    
-    public void setresultapply(String resultapply) {
-        this.resultapply = resultapply;
-    }    
+   
     public void nullResult() {
         result = null;
     }
     
-    public void nullResultapply(){
-        resultapply = null;
-    }
-    
     public boolean getsuccess() {
         return success;
-    }
-
-    public boolean getadminsuccess() {
-        return adminsuccess;
     }
 
     public String getname() {

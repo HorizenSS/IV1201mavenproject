@@ -5,18 +5,14 @@
     <h:head>
         <title>applicant page</title>
     </h:head>
-    <h:body>
-        <p>Welcome applicant</p>
-        
-        <h1 rendered ="#{applyManager.checkAuthorization()} "/> <!-- inputed data -->
-
-        <br>
+    <h:body>        
+            
+            <h1> List of all applicants</h1>
+            <h1 rendered ="#{applyManager.listApplicants()} "/> <!-- inputed data -->
             <h:form>
                 <h:commandButton value="Back to home page" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </h:form> 
-        </br>
-        <h3>Feedback</h3>
-
+        
         <p>
             <h:outputLabel for="result" rendered="#{applyManager.result != null}"  value=""/>
 
@@ -24,76 +20,6 @@
             <h1 rendered ="#{applyManager.nullResult()} "/> <!-- ERASES inputed data -->
 
         </p>
-        <h:form>
-
-            <p>
-                <h:commandButton value="Add" action="#{applyManager.addToApplies()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-            </p>
-            <hr/>
-        </h:form>  
-
-        <h3>List of applications</h3>
-
-        <p>
-
-
-
-        </p>
-
-        <br>
-            <form>
-                <br><input type="checkbox" name="Job applicant1" value="Job applicant1"> Job Applicant 1</input></br>
-
-            </form> 
-            <ul> 
-                <li>Time</li>
-                <li> Date of registration</li>
-                <li> Competence</li>
-                <li> Name</li>
-            </ul>
-
-
-
-
-
-        </br>
-        <br>
-            <form>
-                <br><input type="checkbox" name="Job applicant2" value="Job applicant2"> Job Applicant 2</input></br>
-
-            </form> 
-            <ul> 
-                <li>Time</li>
-                <li> Date of registration</li>
-                <li> Competence</li>
-                <li> Name</li>
-            </ul>
-
-
-
-
-
-        </br>
-
-        <br>
-            <form>
-                <br><input type="checkbox" name="Job applicant3" value="Job applicant3"> Job Applicant 3</input></br>
-
-            </form> 
-            <ul> 
-                <li>Time</li>
-                <li> Date of registration</li>
-                <li> Competence</li>
-                <li> Name</li>
-            </ul>
-
-        </br>
-        <br>
-            <h:form>
-                <h:commandButton value="APPLY" action="#{applyManager.apply()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-            </h:form> 
-        </br>
-
     </h:body>
 </html>
 

@@ -86,17 +86,6 @@ public class Facade {
 
     }
 
-    public String addToApplies(String item) {
-
-       
-        return "Unimplemented";
-    }
-
-
-    public String apply() {
-    
-        return "Unimplemented";
-    }
 
     public String logout() {
         logout = true;
@@ -116,33 +105,22 @@ public class Facade {
         return "Must be logged in as admin";
     }
 
-    public String checkStatus() {
-
-      
-
-        return "Unimplmeneted";
-
-    }
 
     public String listApplicants() {
     
-       List<Accounts> accounts = em.createQuery("from Gnomes m", Accounts.class).getResultList();
+      List<Accounts> accounts = em.createQuery("from Accounts m", Accounts.class).getResultList();
       String a =  accounts.toString();
-      return "adssadasd";
+      return a;
 
     }
 
-    public void clearApplies() {
-     //not implemented
-    }
+ 
 
     public String fillDB() throws FileNotFoundException, IOException {
 
         em.persist(new Jobs("test job", "test","test","test"));
         em.persist(new Applies("", 0)); 
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson","bla"));
-        
-
         
         return "";
     }
