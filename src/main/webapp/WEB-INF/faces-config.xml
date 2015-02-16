@@ -51,4 +51,20 @@
         </navigation-case>
     </navigation-rule>
 
+
+        <navigation-rule>
+        <from-view-id>/account.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{accountManager.toaccountSV}</if>
+            <to-view-id>/accountSV.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+           <navigation-rule>
+        <from-view-id>/accountSV.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{accountManager.toaccount}</if>
+            <to-view-id>/account.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

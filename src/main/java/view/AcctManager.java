@@ -46,7 +46,8 @@ public class AcctManager implements Serializable {
     private accountInterface accountI;
     private String dateofregistration;
     private String competence;
-
+    private boolean toaccountSV = false;
+    private boolean toaccount = false;
 
     private static String online = null;
     private static String status = null;
@@ -195,6 +196,28 @@ public class AcctManager implements Serializable {
         }
         return jsf22Bugfix();
     }
+    
+        public String toaccountSV() {
+        try {
+
+            toaccountSV = true;
+        } catch (Exception e) {
+            handleException(e);
+
+        }
+        return jsf22Bugfix();
+    }
+        
+         public String toaccount() {
+        try {
+
+            toaccount = true;
+        } catch (Exception e) {
+            handleException(e);
+
+        }
+        return jsf22Bugfix();
+    }
 
 
    //SETTERS AND GETTERS        
@@ -266,11 +289,18 @@ public class AcctManager implements Serializable {
     public boolean getsuccess() {
         return success;
     }
-
+    
+    public boolean gettoaccount() {
+        return toaccount;
+    }
+    
     public boolean getadminsuccess() {
         return adminsuccess;
     }
 
+    public boolean gettoaccountSV(){
+        return toaccountSV;
+    }
 
     public String getname() {
         return name;

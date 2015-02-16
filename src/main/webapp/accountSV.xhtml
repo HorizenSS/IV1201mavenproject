@@ -3,19 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
-        <title>home page</title>
+        <title>Hem</title>
     </h:head>
     <h:body>
-        <h1>IV1201 project: Recruitment system</h1>
+        <h1>IV1201 Projekt: Rekryterings system</h1>
             <h1 rendered ="#{acctManager.fillDB()} "/> <!-- inputed data -->
             <h1 rendered ="#{acctManager.applyList()} "/> <!-- inputed data -->
         <br>
             <h:form>
-                <h:commandButton value="SV" action="#{acctManager.toaccountSV()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="ENG" action="#{acctManager.toaccount()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </h:form> 
         </br>
             
-        <h3>Feedback</h3>
+        <h3>Återkoppling, feed-back:</h3>
 
         <p>
             <h:outputLabel for="result" rendered="#{acctManager.result != null}"  value=""/>
@@ -24,30 +24,25 @@
             <h1 rendered ="#{acctManager.nullResult()} "/> <!-- ERASES inputed data -->
 
         </p>
-       
-        <h:form>   
-        <p>
-                <h:commandButton value="Check status" action="#{acctManager.checkStatus()}"/>
-        </p>       
-        </h:form> 
+ 
         <h:form>
 
-            <h4>Register Account</h4>
+            <h4>Registrera Konto</h4>
             <p>
-                <h:outputLabel for="account" value="Account name: "/>
+                <h:outputLabel for="account" value="Konto namn: "/>
                 <h:inputText id="account" value="#{acctManager.account}"/>
-                <h:outputLabel for="password" value="Password: "/>
+                <h:outputLabel for="password" value="Lösenord: "/>
                 <h:inputSecret id="password" value="#{acctManager.password}"/>
-                <h:outputLabel for="email" value="Enter email: "/>
+                <h:outputLabel for="email" value="Epostadress "/>
                 <h:inputText id="email" value="#{acctManager.email}"/>
-                <h:outputLabel for="firstname" value="First name: "/>
+                <h:outputLabel for="firstname" value="Förnamn: "/>
                 <h:inputText id="firstname" value="#{acctManager.firstname}"/>
-                <h:outputLabel for="lastname" value="Last name: "/>
+                <h:outputLabel for="lastname" value="Efternamn: "/>
                 <h:inputText id="lastname" value="#{acctManager.lastname}"/>  
             </p>
             <p>
                
-                <h:commandButton value="Register" action="#{acctManager.register()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="Registrera" action="#{acctManager.register()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>
@@ -55,14 +50,14 @@
     <h:form>
             <h4>Login</h4>
             <p>
-                <h:outputLabel for="account" value="Account name: "/>
+                <h:outputLabel for="account" value="Konto namn: "/>
                 <h:inputText id="account" value="#{acctManager.account}"/>
-                <h:outputLabel for="password" value="Password: "/>
+                <h:outputLabel for="password" value="Lösenord: "/>
                 <h:inputSecret id="password" value="#{acctManager.password}"/>
             </p>
             <p>
-                <h:commandButton value="Login" action="#{acctManager.login()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-                <h:commandButton value="Logout" action="#{acctManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="Logga in" action="#{acctManager.login()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="Logga ut" action="#{acctManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
            
             </p>
             <hr/>

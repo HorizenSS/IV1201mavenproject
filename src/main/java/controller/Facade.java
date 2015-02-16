@@ -42,7 +42,7 @@ public class Facade {
         this.pw = new PrintWriter("registered.txt");
     }
 
-    
+    // List<Gnomes> gnomes = em.createQuery("from Gnomes m", Gnomes.class).getResultList();
     
     public String login(String account, String password) {
         Accounts acc = em.find(Accounts.class, account); //gets an entry
