@@ -38,9 +38,11 @@ public class Facade {
     private static boolean adminlogin;
     private static Accounts currentAccount;
     public PrintWriter pw;
+    public PrintWriter pwlogin;
 
     public Facade() throws FileNotFoundException {
-        this.pw = new PrintWriter("registered.txt");
+        this.pw = new PrintWriter("registeredlog.txt");
+        this.pwlogin = new PrintWriter("loginlog.txt");
     }
 
     
@@ -62,9 +64,11 @@ public class Facade {
                 adminlogin = false;
                 currentAccount = acc;
                 if ("admin".equals(acc.getaccount())) {
-                    pw.close();                                     //CLOSE PRINTWRITER
+                   // pw.close();                                     //CLOSE PRINTWRITER
                     adminlogin = true;
                 }
+                pwlogin.println(acc.getaccount() + " has logged in.");
+                pwlogin.flush();
                 return acc.getaccount(); //Start thread that starts webshop
 
             }
@@ -81,6 +85,7 @@ public class Facade {
         }      
         
         pw.println(account + " is registered.");
+        pw.flush();
         em.persist(new Accounts(account, password, email, firstname, lastname,competence));    
         return null;
 
