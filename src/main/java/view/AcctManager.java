@@ -133,6 +133,17 @@ public class AcctManager implements Serializable {
         try {
             startConversation();
             transactionFailure = null;
+                
+            //Validation
+              while (account.equals("")) {
+                  result = "Enter a username!";
+                  return jsf22Bugfix();
+         }
+               while (2 >= password.length()) {
+                  result = "Password must be atlest 2 characters!";
+                  return jsf22Bugfix();
+         }             
+              
             result = Facade.register(account, password, email, firstname, lastname,competence);
             
             if(result == null){
