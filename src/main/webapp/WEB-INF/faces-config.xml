@@ -3,6 +3,8 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+     <!-- Button: if user logged in redirect to applicant.xhtml -->                                         
     <navigation-rule>
         <from-view-id>/account.xhtml</from-view-id>
         <navigation-case>
@@ -10,7 +12,8 @@
             <to-view-id>/applicant.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
+
+     <!-- Button: if admin logged in redirect to recruiter.xhtml -->                                         
     <navigation-rule>
         <from-view-id>/account.xhtml</from-view-id>
         <navigation-case>
@@ -19,6 +22,7 @@
         </navigation-case>
     </navigation-rule>
   
+     <!-- Button: from applicant.xhtml to homepage -->                                 
     <navigation-rule>
         <from-view-id>/applicant.xhtml</from-view-id>
         <navigation-case>
@@ -26,7 +30,8 @@
             <to-view-id>/account.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
+
+     <!-- Button: from recruiter.xhtml to homepage -->                                 
     <navigation-rule>
         <from-view-id>/recruiter.xhtml</from-view-id>
         <navigation-case>
@@ -34,7 +39,8 @@
             <to-view-id>/account.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>   
-       
+
+    <!-- If an unauthorized user trys to manipulate the applicant.xhtml page -->                                 
     <navigation-rule>
         <from-view-id>/applicant.xhtml</from-view-id>
         <navigation-case>
@@ -42,7 +48,8 @@
             <to-view-id>/error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>    
-    
+
+    <!-- If an unauthorized user trys to manipulate the recruiter.xhtml page -->                          
     <navigation-rule>
         <from-view-id>/recruiter.xhtml</from-view-id>
         <navigation-case>
@@ -51,40 +58,44 @@
         </navigation-case>
     </navigation-rule>
 
+    <!-- From ENG page to SV page -->                      
+    <navigation-rule>
+        <from-view-id>/account.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{acctManager.toaccountSV}</if>
+            <to-view-id>/accountSV.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
-        <navigation-rule>
-        <from-view-id>/account.xhtml</from-view-id>
-        <navigation-case>
-            <if>#{acctManager.toaccountSV}</if>
-            <to-view-id>/accountSV.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-           <navigation-rule>
+    <!-- From SV page to ENG page -->                      
+    <navigation-rule>
         <from-view-id>/accountSV.xhtml</from-view-id>
         <navigation-case>
             <if>#{acctManager.toaccount}</if>
             <to-view-id>/account.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
-              <navigation-rule>
+ 
+    <!-- If applicant made a valid apply -->                     
+    <navigation-rule>
         <from-view-id>/accountSV.xhtml</from-view-id>
         <navigation-case>
             <if>#{acctManager.toapplyconfirmation}</if>
             <to-view-id>/applyconfirmation.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
-                  <navigation-rule>
+ 
+    <!-- If applicant made a valid apply -->              
+    <navigation-rule>
         <from-view-id>/account.xhtml</from-view-id>
         <navigation-case>
             <if>#{acctManager.toapplyconfirmation}</if>
             <to-view-id>/applyconfirmation.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
-                     <navigation-rule>
+ 
+    <!-- From applyconf back to homepage -->       
+    <navigation-rule>
         <from-view-id>/applyconfirmation.xhtml</from-view-id>
         <navigation-case>
             <if>#{acctManager.toaccount}</if>
@@ -92,20 +103,22 @@
         </navigation-case>
     </navigation-rule>
     
-                     <navigation-rule>
+    <!-- From applyconf back to homepage -->       
+    <navigation-rule>
         <from-view-id>/applyconfirmation.xhtml</from-view-id>
         <navigation-case>
             <if>#{acctManager.toaccountSV}</if>
             <to-view-id>/accountSV.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
-                         <navigation-rule>
+  
+    <!-- If admin presses listApplicants function, admin gets redirected to applicant.xhtml. -->      
+    <navigation-rule>
         <from-view-id>/recruiter.xhtml</from-view-id>
         <navigation-case>
             <if>#{recruitManager.success}</if>
             <to-view-id>/applicant.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
+
 </faces-config>

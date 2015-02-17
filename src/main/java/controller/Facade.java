@@ -48,14 +48,6 @@ public class Facade {
     
     public String login(String account, String password) {
         Accounts acc = em.find(Accounts.class, account); //gets an entry
-        Banned ban = em.find(Banned.class, account);
-
-        if (ban != null) {
-            if (account.equals(ban.gettype())) {
-                return "Banned";
-            }
-
-        }
 
         if (acc != null) {
             if (account.equals(acc.getaccount()) && password.equals(acc.getpassword())) { //check if entry contains account and password
@@ -64,7 +56,6 @@ public class Facade {
                 adminlogin = false;
                 currentAccount = acc;
                 if ("admin".equals(acc.getaccount())) {
-                   // pw.close();                                     //CLOSE PRINTWRITER
                     adminlogin = true;
                 }
                 pwlogin.println(acc.getaccount() + " has logged in.");
@@ -86,7 +77,8 @@ public class Facade {
         
         pw.println(account + " is registered.");
         pw.flush();
-        em.persist(new Accounts(account, password, email, firstname, lastname,competence));    
+        em.persist(new Accounts(account, password, email, firstname, lastname,competence));  
+        em.persist(new Applies(firstname,lastname,email,password,competence));
         return null;
 
     }
@@ -113,8 +105,8 @@ public class Facade {
 
     public String listApplicants() {
     
-      List<Accounts> accounts = em.createQuery("from Accounts m", Accounts.class).getResultList();
-      String a =  accounts.toString();
+      List<Applies> applies = em.createQuery("from Applies m", Applies.class).getResultList();
+      String a =  applies.toString();
       return a;
 
     }
@@ -124,7 +116,6 @@ public class Facade {
     public String fillDB() throws FileNotFoundException, IOException {
 
         em.persist(new Jobs("test job", "test","test","test"));
-        em.persist(new Applies("", 0)); 
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson","bla"));
         
         return "";

@@ -42,14 +42,13 @@ public class AcctManager implements Serializable {
     private String lastname;
     private String timeperiod;
     private String name;
-    private String resultcart;
-    private accountInterface accountI;
     private String dateofregistration;
     private String competence;
     private boolean toaccountSV = false;
     private boolean toaccount = false;
     private boolean toapplyconfirmation = false;
-    
+    private boolean error = false;
+
     private static String online = null;
     private static String status = null;
     private String result = null;
@@ -117,7 +116,11 @@ public class AcctManager implements Serializable {
             if (result != null) {
                 success = true;
                 return jsf22Bugfix();
-
+            }
+            
+            if(result == null){
+                result = "WRONG PASSWORD OR ACCOUNT NAME";
+                return jsf22Bugfix();
             }
 
         } catch (Exception e) {
@@ -292,5 +295,7 @@ public class AcctManager implements Serializable {
     public String getcompetence(){
     return competence;
     }
-    
+    public boolean geterror(){
+    return error;
+    }
 }

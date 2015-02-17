@@ -17,33 +17,43 @@ public class Applies implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
-    private String type;
-    private int amount;
+
+    private String name;
+    private String timeperiod;
+    private String dateofregistration;
+    private String competence;
+    private String lastname;
     
     public Applies(){
         
     }
     
-    public Applies(String type, int amount){
-        this.type = type;
-        this.amount = amount;
-        this.id = type;
+    public Applies(String name, String lastname, String timeperiod, String dateofregistration, String competence){
+        this.name = name;
+        this.lastname = lastname;
+        this.timeperiod = timeperiod;
+        this.dateofregistration = dateofregistration;
+        this.competence = competence;
+        this.id = name;
     }
  
     
-    public String gettype(){
-        return type;
+    public String getname(){
+        return name;
+    }
+        public String getlastname(){
+        return lastname;
     }
     
-    
-    public int getamount(){
-    return amount;
+    public String gettimeperiod(){
+    return timeperiod;
     }
-    public int setamount(int amount){
-    this.amount = amount;
-    return amount;
+    public String getdateofregistration(){
+        return dateofregistration;
     }
-
+    public String getcompetence(){
+        return competence;
+    }
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
