@@ -127,7 +127,6 @@ public class ApplyManager implements Serializable {
             result = Facade.listApplicants();
         } catch (Exception e) {
             handleException(e);
-
         }
         return jsf22Bugfix();
     }

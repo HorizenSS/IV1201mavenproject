@@ -39,11 +39,13 @@ public class Facade {
     private static Accounts currentAccount;
     public PrintWriter pw;
     public PrintWriter pwlogin;
+    public PrintWriter pwregistertime;
 
     public Facade() throws FileNotFoundException {
         //LOGGIN
         this.pw = new PrintWriter("registeredlog.txt");
         this.pwlogin = new PrintWriter("loginlog.txt");
+        this.pwregistertime = new PrintWriter("registertime.txt");
     }
 
     
@@ -69,7 +71,8 @@ public class Facade {
         return null;
     }
 
-    public String register(String account, String password, String email, String firstname, String lastname,String competence) throws IOException {
+    public String register(String account, String password, String email, String firstname, String lastname,String competence,long startTime) throws IOException {
+
         Accounts acc = em.find(Accounts.class, account);
         
         if (acc != null) {
@@ -80,6 +83,13 @@ public class Facade {
         pw.flush();
         em.persist(new Accounts(account, password, email, firstname, lastname,competence));  
         em.persist(new Applies(firstname,lastname,email,password,competence));
+        
+        long endTime   = System.currentTimeMillis();
+        long totalTime = endTime - startTime;
+            
+        String totalTimeString = String.valueOf(totalTime);
+        pwregistertime.println("Time to register account: " + account + " = " + totalTimeString +"ms");
+        pwregistertime.flush();
         return null;
 
     }

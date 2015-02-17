@@ -126,21 +126,12 @@ public class AcctManager implements Serializable {
 
     public String register() {
         try {
+            long startTime = System.currentTimeMillis();  //Used to check the non-functional requirement
             startConversation();
             transactionFailure = null;
-                
-            //VALIDATION
-              while (account.equals("")) {
-                  result = "Enter a username!";
-                  return jsf22Bugfix();
-         }
-      /*         while (2 >= password.length()) {
-                  result = "Password must be atlest 2 characters!";
-                  return jsf22Bugfix();
-         }      */       
-              
-            result = Facade.register(account, password, email, firstname, lastname,competence);
-            
+                     
+            result = Facade.register(account, password, email, firstname, lastname,competence,startTime);
+                   
             if(result == null){
             toapplyconfirmation = true;
             }
