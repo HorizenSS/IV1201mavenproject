@@ -8,6 +8,8 @@
     <h:body>        
             
             <h1> List of all applicants</h1>
+            <h1 rendered ="#{applyManager.checkAuthorization()} "/> <!-- inputed data -->
+
             <h1 rendered ="#{applyManager.listApplicants()} "/> <!-- inputed data -->
             <h:form>
                 <h:commandButton value="Back to home page" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
