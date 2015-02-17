@@ -41,6 +41,7 @@ public class Facade {
     public PrintWriter pwlogin;
 
     public Facade() throws FileNotFoundException {
+        //LOGGIN
         this.pw = new PrintWriter("registeredlog.txt");
         this.pwlogin = new PrintWriter("loginlog.txt");
     }
@@ -121,6 +122,7 @@ public class Facade {
         return "";
     }
     
+    //AUTHORIZATION
     public String checkAuthorization(){
         
         if(login == false){

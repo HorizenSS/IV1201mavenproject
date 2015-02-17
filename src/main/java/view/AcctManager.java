@@ -134,7 +134,7 @@ public class AcctManager implements Serializable {
             startConversation();
             transactionFailure = null;
                 
-            //Validation
+            //VALIDATION
               while (account.equals("")) {
                   result = "Enter a username!";
                   return jsf22Bugfix();
