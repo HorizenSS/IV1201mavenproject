@@ -229,6 +229,7 @@ public class AcctManager implements Serializable {
     public void setemail(String email) {
         this.email = email;
     }
+    
     @NotNull(message = "Email field cant be empty")
     public String getemail() { //Must have
         return null;

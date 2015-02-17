@@ -106,14 +106,7 @@ public class ApplyManager implements Serializable {
 
             startConversation();
             transactionFailure = null;
-            result = Facade.checkAuthorization();
 
-            if ("NOT-AUTHORIZED".equals(result)) {
-                error = true;
-            }
-            if ("AUTHORIZED".equals(result)) {
-                success = true;
-            }
         } catch (Exception e) {
             handleException(e);
 
@@ -122,8 +115,15 @@ public class ApplyManager implements Serializable {
     }
 
     public String listApplicants() {
-        try {
+        try {            
+            result = Facade.checkAuthorization();
 
+            if ("NOT-AUTHORIZED".equals(result)) {
+                error = true;
+            }
+            if ("AUTHORIZED".equals(result)) {
+                success = true;
+            }
             result = Facade.listApplicants();
         } catch (Exception e) {
             handleException(e);
