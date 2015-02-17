@@ -1,7 +1,6 @@
 package view;
 
 import controller.Facade;
-import java.io.PrintWriter;
 
 //backing bean
 import java.io.Serializable;
@@ -10,7 +9,7 @@ import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import model.accountInterface;
+import javax.validation.constraints.*;
 
 /**
  * AcctManager manages many requests concerning user accounts as well as
@@ -47,10 +46,7 @@ public class AcctManager implements Serializable {
     private boolean toaccountSV = false;
     private boolean toaccount = false;
     private boolean toapplyconfirmation = false;
-    private boolean error = false;
 
-    private static String online = null;
-    private static String status = null;
     private String result = null;
     @Inject
     private Conversation conversation;
@@ -106,7 +102,6 @@ public class AcctManager implements Serializable {
             //startConversation();
             //transactionFailure = null;
             result = Facade.login(account, password);
-            //online = result;
 
             if ("admin".equals(result)) {
                 adminsuccess = true;
@@ -139,10 +134,10 @@ public class AcctManager implements Serializable {
                   result = "Enter a username!";
                   return jsf22Bugfix();
          }
-               while (2 >= password.length()) {
+      /*         while (2 >= password.length()) {
                   result = "Password must be atlest 2 characters!";
                   return jsf22Bugfix();
-         }             
+         }      */       
               
             result = Facade.register(account, password, email, firstname, lastname,competence);
             
@@ -172,7 +167,6 @@ public class AcctManager implements Serializable {
         try {
 
             result = Facade.logout();
-            online = result;
         } catch (Exception e) {
             handleException(e);
 
@@ -217,7 +211,7 @@ public class AcctManager implements Serializable {
     public void setaccount(String account) {
         this.account = account;
     }
-
+    @NotNull(message = "Account name field cant be empty")
     public String getaccount() { //Must have
         return null;
     }
@@ -225,7 +219,9 @@ public class AcctManager implements Serializable {
     public void setpassword(String password) {
         this.password = password;
     }
-
+    
+    @NotNull(message = "Password field cant be empty")
+    @Size(min = 2, max = 10, message = "Password length must be between 2-10 characters long")
     public String getpassword() { //Must have
         return null;
     }
@@ -233,7 +229,7 @@ public class AcctManager implements Serializable {
     public void setemail(String email) {
         this.email = email;
     }
-
+    @NotNull(message = "Email field cant be empty")
     public String getemail() { //Must have
         return null;
     }
@@ -241,35 +237,18 @@ public class AcctManager implements Serializable {
     public void setfirstname(String firstname) {
         this.firstname = firstname;
     }
-
+    @NotNull(message = "First name field cant be empty")
     public String getfirstname() { //Must have
         return null;
     }
-
+    
     public void setlastname(String lastname) {
         this.lastname = lastname;
     }
-
+    @NotNull(message = "Last name field cant be empty")
     public String getlastname() { //Must have
         return null;
     }
-
-    public void setstatus(String status) {
-        this.status = status;
-    }
-
-    public String getstatus() {
-        return status;
-    }
-
-    public void setonline(String online) {
-        this.online = online;
-    }
-
-    public String getonline() {
-        return online;
-    }
-
 
     public String getResult() {
         return result;
@@ -302,11 +281,9 @@ public class AcctManager implements Serializable {
     public void setcompetence(String competence){
     this.competence = competence;
     }
-    
+    @NotNull(message = "Competence field cant be empty")
     public String getcompetence(){
     return competence;
     }
-    public boolean geterror(){
-    return error;
-    }
+
 }
