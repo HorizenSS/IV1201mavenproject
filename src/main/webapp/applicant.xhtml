@@ -14,6 +14,7 @@
                 <h:commandButton value="Back to home page" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </h:form> 
         
+            
         <p>
             <h:outputLabel for="result" rendered="#{applyManager.result != null}"  value=""/>
 
@@ -21,6 +22,17 @@
             <h1 rendered ="#{applyManager.nullResult()} "/> <!-- ERASES inputed data -->
 
         </p>
+            
+            
+                <h:form>
+                <h4>Decide who to approve</h4>
+                <p>
+                <h:outputLabel for="applicantnr" value="Applicant number: "/>
+                <h:inputText id="applicantnr" value="#{applyManager.applicantnr}"/>
+                </p>
+                <h:commandButton value="Approve" action="#{applyManager.approve()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                </h:form>
+            
     </h:body>
 </html>
 

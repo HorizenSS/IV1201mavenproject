@@ -37,9 +37,10 @@ public class Facade {
     private static boolean logout = false;
     private static boolean adminlogin;
     private static Accounts currentAccount;
-    public PrintWriter pw;
-    public PrintWriter pwlogin;
-    public PrintWriter pwregistertime;
+    public  PrintWriter pw;
+    public  PrintWriter pwlogin;
+    public  PrintWriter pwregistertime;
+    private String[] applied = new String[10];
 
     public Facade() throws FileNotFoundException {
         //LOGGIN
@@ -119,16 +120,27 @@ public class Facade {
       List<Applies> applies = em.createQuery("from Applies m", Applies.class).getResultList();
       
       String a = "";
+      int c = 1;
       for(Applies app : applies){
-      a = a + app.getname() + app.getlastname() + app.gettimeperiod() + app.getdateofregistration() + app.getcompetence() + "\n" + " || ";
+      a = a+ "Apply nr "+ c + " = " + "Account name: " +app.getname() + ", Firstname: " + app.gettimeperiod() +  ", Last name: " + app.getlastname() + ", Email: "
+              + app.getdateofregistration() + ", Kompetens: " + app.getcompetence() + " || ";
+      applied[c] = app.getname();
+      c++;
       }
       return a;
 
     }
 
- 
+    public String approve(int applicantnr){
+        
+        String approvedApplicant = applied[applicantnr];
+        if(approvedApplicant != null){
+        return null;  
+        }
+        return "Applicant number does not exist!";
+    }
 
-    public String fillDB() throws FileNotFoundException, IOException {
+    public String fillDB(){
 
         em.persist(new Jobs("test job", "test","test","test"));
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson","bla"));
@@ -145,11 +157,16 @@ public class Facade {
         return "AUTHORIZED";
     }
     
-        public String checkAuthorizationAdmin(){
+        public static String checkAuthorizationAdmin(){
     
         if(adminlogin == false){
         return "NOT-AUTHORIZED";
         }
         return "AUTHORIZED";
     } 
+        
+        public static String test (String a){
+        return "b";
+        
+        }
 }

@@ -36,6 +36,7 @@ public class ApplyManager implements Serializable {
     private boolean tohomepage = false;
     private boolean error = false;
     private String item;
+    private int applicantnr;
     private String additem;
 
     private static String online = null;
@@ -131,10 +132,32 @@ public class ApplyManager implements Serializable {
         return jsf22Bugfix();
     }
 
+            
+  public String approve() {
+        try {
+            result = Facade.approve(applicantnr);
+            if(result == null){
+            result = applicantnr+ "approved";
+            }
+        } catch (Exception e) {
+            handleException(e);
+
+        }
+        return jsf22Bugfix();
+    }
+  
     public void setstatus(String status) {
         this.status = status;
     }
+   
+    public void setapplicantnr(int applicantnr){
+        this.applicantnr = applicantnr;
+    }
 
+    public int getapplicantnr(){
+    return 0;
+    }
+    
     public String getstatus() {
         return status;
     }

@@ -215,7 +215,7 @@ public class AcctManager implements Serializable {
     }
     
     @NotNull(message = "Password field cant be empty")
-    @Size(min = 2, max = 10, message = "Password length must be between 2-10 characters long")
+    @Size(min = 1, max = 10, message = "Password length must be between 2-10 characters long")
     public String getpassword() { //Must have
         return null;
     }
@@ -244,7 +244,8 @@ public class AcctManager implements Serializable {
     public String getlastname() { //Must have
         return null;
     }
-
+ 
+    
     public String getResult() {
         return result;
     }
