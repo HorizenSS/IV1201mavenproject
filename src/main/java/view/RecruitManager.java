@@ -152,9 +152,6 @@ public class RecruitManager implements Serializable {
             if ("NOT-AUTHORIZED".equals(result)) {
                 error = true;
             }
-            if ("AUTHORIZED".equals(result)) {
-                success = true;
-            }
 
         } catch (Exception e) {
             handleException(e);

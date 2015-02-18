@@ -7,11 +7,22 @@
         <title>home page</title>
     </h:head>
     <h:body>
-        <h1>IV1201 project: Recruitment system</h1>
+        <h1>#{msg.titel}</h1>
             <h1 rendered ="#{acctManager.fillDB()} "/> <!-- inputed data -->
-     
+        
+        <h:form>
+            <h:commandLink action="#{locale.changeLocale}">
+                <f:param name="languageCode" value="sv"/>
+                <h:graphicImage value="/sv.gif"/>
+            </h:commandLink>
+            &nbsp;
+            <h:commandLink action="#{locale.changeLocale}">
+                <f:param name="languageCode" value="en"/>
+                <h:graphicImage value="/en.gif"/>
+            </h:commandLink>
+        </h:form>
             
-        <h3>Feedback</h3>
+        <h3>Feed-back</h3>
 
         <p>
             <h:outputLabel for="result" rendered="#{acctManager.result != null}"  value=""/>
@@ -23,19 +34,19 @@
        
         <h:form>
 
-            <h4>Register Account</h4>
+            <h4>#{msg.registeraccount}</h4>
             <p>
-                <h:outputLabel for="account" value="Account name: "/>
+                <h:outputLabel for="account" value="#{msg.accountName}"/>
                 <h:inputText id="account" value="#{acctManager.account}"/>
-                <h:outputLabel for="password" value="Password: "/>
+                <h:outputLabel for="password" value="#{msg.password}"/>
                 <h:inputSecret id="password" value="#{acctManager.password}"/>
-                <h:outputLabel for="email" value="Enter email: "/>
+                <h:outputLabel for="email" value="#{msg.email}"/>
                 <h:inputText id="email" value="#{acctManager.email}"/>
-                <h:outputLabel for="firstname" value="First name: "/>
+                <h:outputLabel for="firstname" value="#{msg.firstname}"/>
                 <h:inputText id="firstname" value="#{acctManager.firstname}"/>
-                <h:outputLabel for="lastname" value="Last name: "/>
+                <h:outputLabel for="lastname" value="#{msg.lastname}"/>
                 <h:inputText id="lastname" value="#{acctManager.lastname}"/>
-                <h:outputLabel for="competence" value="Competence: "/>
+                <h:outputLabel for="competence" value="#{msg.competence}"/>
                 <h:inputText id="competence" value="#{acctManager.competence}"/> 
             </p>
             <p>
@@ -46,36 +57,21 @@
         </h:form>
 
     <h:form>
-            <h4>Login</h4>
+            <h4>#{msg.login}</h4>
             <p>
-                <h:outputLabel for="account" value="Account name: "/>
+                <h:outputLabel for="account" value="#{msg.accountName}"/>
                 <h:inputText id="account" value="#{acctManager.account}"/>
-                <h:outputLabel for="password" value="Password: "/>
+                <h:outputLabel for="password" value="#{msg.password}"/>
                 <h:inputSecret id="password" value="#{acctManager.password}"/>
             </p>
             <p>
-                <h:commandButton value="Login" action="#{acctManager.login()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-                <h:commandButton value="Logout" action="#{acctManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="#{msg.login}" action="#{acctManager.login()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="#{msg.logout}" action="#{acctManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
            
             </p>
             <hr/>
         </h:form>
         
-             
-       <h:form>
-            <h:commandLink action="#{locale.changeLocale}">
-                <f:param name="languageCode" value="sv"/>
-                <h:graphicImage value="/sv.gif"/>
-            </h:commandLink>
-            &nbsp;
-            <h:commandLink action="#{locale.changeLocale}">
-                <f:param name="languageCode" value="en"/>
-                <h:graphicImage value="/en.gif"/>
-            </h:commandLink>
-        </h:form>
-        
-        <h1>#{messages.enterAddress}</h1>
-
 
 
         
