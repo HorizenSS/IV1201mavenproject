@@ -96,7 +96,10 @@ public class AcctManager implements Serializable {
     private String jsf22Bugfix() {
         return "";
     }
-
+    
+    /** 
+     *Login function, used by all users. Recruiter will be directed to recruiter.xhtml, applicant will be directed to applicant.xhtml.
+     */
     public String login() {
         try {
             //startConversation();
@@ -179,7 +182,7 @@ public class AcctManager implements Serializable {
     
         public String toaccountSV() {
         try {
-            toaccountSV = true;
+          //  toaccountSV = true;
         } catch (Exception e) {
             handleException(e);
 
@@ -271,11 +274,12 @@ public class AcctManager implements Serializable {
     }
     
     public void setcompetence(String competence){
-    this.competence = competence;
+         this.competence = competence;
     }
+    
     @NotNull(message = "Competence field cant be empty")
-    public String getcompetence(){
-    return competence;
+          public String getcompetence(){
+          return competence;
     }
 
 }

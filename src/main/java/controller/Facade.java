@@ -117,7 +117,11 @@ public class Facade {
     public String listApplicants() {
     
       List<Applies> applies = em.createQuery("from Applies m", Applies.class).getResultList();
-      String a =  applies.toString();
+      
+      String a = "";
+      for(Applies app : applies){
+      a = a + app.getname() + app.getlastname() + app.gettimeperiod() + app.getdateofregistration() + app.getcompetence() + "\n" + " || ";
+      }
       return a;
 
     }

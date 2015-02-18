@@ -57,24 +57,6 @@
             <to-view-id>/error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-
-    <!-- From ENG page to SV page -->                      
-    <navigation-rule>
-        <from-view-id>/account.xhtml</from-view-id>
-        <navigation-case>
-            <if>#{acctManager.toaccountSV}</if>
-            <to-view-id>/accountSV.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-
-    <!-- From SV page to ENG page -->                      
-    <navigation-rule>
-        <from-view-id>/accountSV.xhtml</from-view-id>
-        <navigation-case>
-            <if>#{acctManager.toaccount}</if>
-            <to-view-id>/account.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
  
     <!-- If applicant made a valid apply -->                     
     <navigation-rule>
@@ -103,14 +85,7 @@
         </navigation-case>
     </navigation-rule>
     
-    <!-- From applyconf back to homepage -->       
-    <navigation-rule>
-        <from-view-id>/applyconfirmation.xhtml</from-view-id>
-        <navigation-case>
-            <if>#{acctManager.toaccountSV}</if>
-            <to-view-id>/accountSV.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+
   
     <!-- If admin presses listApplicants function, admin gets redirected to applicant.xhtml. -->      
     <navigation-rule>
@@ -120,5 +95,14 @@
             <to-view-id>/applicant.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <!-- Internationalization -->
 
+  <application>
+ 
+      <resource-bundle>
+         <base-name>internationalization.Messages</base-name>
+         <var>messages</var>
+      </resource-bundle>
+   </application>
 </faces-config>
