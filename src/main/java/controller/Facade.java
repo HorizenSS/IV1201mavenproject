@@ -155,7 +155,7 @@ public class Facade {
 
       List<Applies> applies = em.createQuery("from Applies m", Applies.class).getResultList();
       
-     
+      applicantList = "";
       int c = 1;
       for(Applies app : applies){
       applicantList = applicantList + "Apply number "+ c + " = " + "Account name: " +app.getname() + ", Firstname: " + app.gettimeperiod() +  ", Last name: " + app.getlastname() + ", Email: "
