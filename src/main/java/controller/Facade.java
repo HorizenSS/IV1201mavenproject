@@ -66,12 +66,18 @@ public class Facade {
              
     }
 
-    
+    /**
+ * This method is used for the login purpose, if an admin logins the admin will get directed to an admin page.
+ * If a applicant logins they will be directed to the applicant page which displays the current applies
+ * @param  account  the account name of the user who wants to login
+ * @param  password the password of the user who wants to login
+ * @return      the user name or null if something went wrong
+ */
     public String login(String account, String password) {
-        Accounts acc = em.find(Accounts.class, account); //gets an entry
+        Accounts acc = em.find(Accounts.class, account); 
 
         if (acc != null) {
-            if (account.equals(acc.getaccount()) && password.equals(acc.getpassword())) { //check if entry contains account and password
+            if (account.equals(acc.getaccount()) && password.equals(acc.getpassword())) { 
                 login = true;
                 logout = false;
                 adminlogin = false;
@@ -81,7 +87,7 @@ public class Facade {
                 }
                 pwlogin.println(acc.getaccount() + " has logged in.");
                 pwlogin.flush();
-                return acc.getaccount(); //Start thread that starts webshop
+                return acc.getaccount(); 
 
             }
 
@@ -172,6 +178,11 @@ public class Facade {
     }
 
     public String approve(int applicantnr){
+        
+        if(adminlogin == false){
+        return "ONLY ADMINS CAN APPROVE!";
+        }
+        
         String approvedApplicant = applied[applicantnr];
         if(approvedApplicant != null){
         approved.add(approvedApplicant);                                                         //AT THE MOMENT THE FUNCTION RETURNS A APROPRIATE MESSAGE AND ADDS THE APPROVED ACCOUNT NAME TO AN ARRAYLIST
