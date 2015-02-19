@@ -1,12 +1,12 @@
 package controller;
 
-import com.lowagie.text.Chunk;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Rectangle;
-import com.lowagie.text.pdf.PdfWriter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -122,9 +122,15 @@ public class Facade {
         return null;
 
     }
-    
+    /** 
+     * Must call listApplicants because listApplicants is the method that initiates the variable applicantList - 
+     * which will contain the applicants.
+     *
+     * 
+    */
     public void pdf() throws FileNotFoundException, DocumentException{
-           
+        listApplicants();
+        
         this.document = new Document();
         this.rectangle = new Rectangle(pagesize.LETTER);
         document.setPageSize(rectangle);
