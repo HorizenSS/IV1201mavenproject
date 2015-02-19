@@ -52,7 +52,7 @@ public class Facade {
     private PageSize pagesize;
     private Rectangle rectangle;
     
-    private String applicantList ="";
+    private String applicantList = "";
     
     public Facade() throws FileNotFoundException, DocumentException {
         //LOGGIN
@@ -90,17 +90,20 @@ public class Facade {
     }
 
     public String register(String account, String password, String email, String firstname, String lastname,String competence,long startTime) throws IOException {
-
+      
         Accounts acc = em.find(Accounts.class, account);
         
         if (acc != null) {
             return ("Account exists!!");
-        }      
+        }              
+        
+        
         
         pw.println(account + " is registered.");
         pw.flush();
         em.persist(new Accounts(account, password, email, firstname, lastname,competence));  
         em.persist(new Applies(firstname,lastname,email,password,competence));
+       
         
         long endTime   = System.currentTimeMillis();
         long totalTime = endTime - startTime;
@@ -159,7 +162,7 @@ public class Facade {
       int c = 1;
       for(Applies app : applies){
       applicantList = applicantList + "Apply number "+ c + " = " + "Account name: " +app.getname() + ", Firstname: " + app.gettimeperiod() +  ", Last name: " + app.getlastname() + ", Email: "
-              + app.getdateofregistration() + ", Kompetens: " + app.getcompetence() + " || ";
+              + app.getdateofregistration() + ", Kompetens: " + app.getcompetence() + "    || \n ";
       applied[c] = app.getname();
       c++;
       }    
