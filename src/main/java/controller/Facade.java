@@ -1,8 +1,11 @@
 package controller;
 
+import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -46,6 +49,10 @@ public class Facade {
     private Document document;
     private PdfWriter pdfWriter;
     private Paragraph paragraph;
+    private PageSize pagesize;
+    private Rectangle rectangle;
+    
+    private String applicantList ="";
     
     public Facade() throws FileNotFoundException, DocumentException {
         //LOGGIN
@@ -53,17 +60,7 @@ public class Facade {
         this.pwlogin = new PrintWriter("loginlog.txt");
         this.pwregistertime = new PrintWriter("registertime.txt");
               
-        this.document = new Document();
-        this.pdfWriter = 
-            PdfWriter.getInstance(document, new FileOutputStream("applicants.pdf"));
-        this.paragraph = new Paragraph();
-           
-            document.open();      
 
-            
-            paragraph.add("hej");
-            document.add(paragraph);  
-            document.close();
 
             
              
@@ -116,6 +113,23 @@ public class Facade {
         return null;
 
     }
+    
+    public void pdf() throws FileNotFoundException, DocumentException{
+           
+        this.document = new Document();
+        this.rectangle = new Rectangle(pagesize.LETTER);
+        document.setPageSize(rectangle);
+        this.pdfWriter = 
+            PdfWriter.getInstance(document, new FileOutputStream("applicants.pdf"));
+        this.paragraph = new Paragraph();
+            
+
+            document.open();      
+            document.add(new Chunk(""));
+            paragraph.add(applicantList);
+            document.add(paragraph);  
+            document.close();
+    }
 
 
     public String logout() {
@@ -141,16 +155,16 @@ public class Facade {
 
       List<Applies> applies = em.createQuery("from Applies m", Applies.class).getResultList();
       
-      String a = "";
+     
       int c = 1;
       for(Applies app : applies){
-      a = a+ "Apply number "+ c + " = " + "Account name: " +app.getname() + ", Firstname: " + app.gettimeperiod() +  ", Last name: " + app.getlastname() + ", Email: "
+      applicantList = applicantList + "Apply number "+ c + " = " + "Account name: " +app.getname() + ", Firstname: " + app.gettimeperiod() +  ", Last name: " + app.getlastname() + ", Email: "
               + app.getdateofregistration() + ", Kompetens: " + app.getcompetence() + " || ";
       applied[c] = app.getname();
       c++;
       }    
                 
-      return a;
+      return applicantList;
 
     }
 

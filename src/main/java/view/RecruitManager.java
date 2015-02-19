@@ -142,6 +142,16 @@ public class RecruitManager implements Serializable {
         return jsf22Bugfix();
     }
     
+     public String pdf() {
+        try {
+
+            Facade.pdf();
+        } catch (Exception e) {
+            handleException(e);
+
+        }
+        return jsf22Bugfix();
+    }   
    
       public String checkAuthorizationAdmin() {
         try {
