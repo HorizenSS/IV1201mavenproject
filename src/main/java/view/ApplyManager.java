@@ -42,6 +42,8 @@ public class ApplyManager implements Serializable {
     private static String online = null;
     private static String status = null;
     private String result = null;
+    private String resulta = null;
+    private String resultb = null;
     @Inject
     private Conversation conversation;
 
@@ -107,6 +109,11 @@ public class ApplyManager implements Serializable {
 
             startConversation();
             transactionFailure = null;
+            result = Facade.checkAuthorization();
+            
+            if ("NOT-AUTHORIZED".equals(result)) {
+                error = true;
+            }
 
         } catch (Exception e) {
             handleException(e);
@@ -117,15 +124,9 @@ public class ApplyManager implements Serializable {
 
     public String listApplicants() {
         try {            
-            result = Facade.checkAuthorization();
-
-            if ("NOT-AUTHORIZED".equals(result)) {
-                error = true;
-            }
-            if ("AUTHORIZED".equals(result)) {
-                success = true;
-            }
-            result = Facade.listApplicants();
+            
+            resultb = Facade.listApplicants();
+            
         } catch (Exception e) {
             handleException(e);
         }
@@ -135,10 +136,8 @@ public class ApplyManager implements Serializable {
             
   public String approve() {
         try {
-            result = Facade.approve(applicantnr);
-            if(result == null){
-            result = applicantnr+ "approved";
-            }
+            resulta = Facade.approve(applicantnr);
+           
         } catch (Exception e) {
             handleException(e);
 
@@ -162,8 +161,16 @@ public class ApplyManager implements Serializable {
         return status;
     }
 
-    public String getResult() {
+    public String getresulta(){
+        return resulta;
+    }
+    
+    public String getresult() {
         return result;
+    }
+    
+    public String getresultb(){
+        return resultb;
     }
 
     public void nullResult() {

@@ -8,7 +8,7 @@
     </h:head>
     <h:body>
         <h1>#{msg.titel}</h1>
-            <h1 rendered ="#{acctManager.fillDB()} "/> <!-- inputed data -->
+        <h1 rendered ="#{acctManager.fillDB()} "/> <!-- inputed data -->
         
         <h:form>
             <h:commandLink action="#{locale.changeLocale}">
@@ -65,17 +65,15 @@
                 <h:inputSecret id="password" value="#{acctManager.password}"/>
             </p>
             <p>
-                <h:commandButton value="#{msg.login}" action="#{acctManager.login()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-                <h:commandButton value="#{msg.logout}" action="#{acctManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-           
+                <h:commandButton value="#{msg.login}" action="#{acctManager.login()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->           
             </p>
             <hr/>
         </h:form>
-        
-
-
-        
+     <h:form>       
+        <h:commandButton value="#{msg.logout}" action="#{acctManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+    </h:form>       
     </h:body>
+    
 </html>
 
 

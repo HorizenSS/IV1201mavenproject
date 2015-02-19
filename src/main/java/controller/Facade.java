@@ -1,11 +1,13 @@
 package controller;
 
-import java.io.BufferedWriter;
-import java.io.File;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import model.Accounts;
 import javax.ejb.Stateless;
@@ -13,10 +15,9 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.Banned;
 import model.Applies;
 import model.Jobs;
-
+import java.io.FileOutputStream;
 /**
  * A controller. All calls to the model that are executed because of an action
  * taken by the cashier pass through here. EJB Used for data transaction
@@ -41,12 +42,31 @@ public class Facade {
     public  PrintWriter pwlogin;
     public  PrintWriter pwregistertime;
     private String[] applied = new String[10];
-
-    public Facade() throws FileNotFoundException {
+    private ArrayList<String> approved = new ArrayList<String>();
+    private Document document;
+    private PdfWriter pdfWriter;
+    private Paragraph paragraph;
+    
+    public Facade() throws FileNotFoundException, DocumentException {
         //LOGGIN
         this.pw = new PrintWriter("registeredlog.txt");
         this.pwlogin = new PrintWriter("loginlog.txt");
         this.pwregistertime = new PrintWriter("registertime.txt");
+              
+        this.document = new Document();
+        this.pdfWriter = 
+            PdfWriter.getInstance(document, new FileOutputStream("applicants.pdf"));
+        this.paragraph = new Paragraph();
+           
+            document.open();      
+
+            
+            paragraph.add("hej");
+            document.add(paragraph);  
+            document.close();
+
+            
+             
     }
 
     
@@ -91,6 +111,8 @@ public class Facade {
         String totalTimeString = String.valueOf(totalTime);
         pwregistertime.println("Time to register account: " + account + " = " + totalTimeString +"ms");
         pwregistertime.flush();
+        
+        
         return null;
 
     }
@@ -115,27 +137,28 @@ public class Facade {
     }
 
 
-    public String listApplicants() {
-    
+    public String listApplicants() throws DocumentException{
+
       List<Applies> applies = em.createQuery("from Applies m", Applies.class).getResultList();
       
       String a = "";
       int c = 1;
       for(Applies app : applies){
-      a = a+ "Apply nr "+ c + " = " + "Account name: " +app.getname() + ", Firstname: " + app.gettimeperiod() +  ", Last name: " + app.getlastname() + ", Email: "
+      a = a+ "Apply number "+ c + " = " + "Account name: " +app.getname() + ", Firstname: " + app.gettimeperiod() +  ", Last name: " + app.getlastname() + ", Email: "
               + app.getdateofregistration() + ", Kompetens: " + app.getcompetence() + " || ";
       applied[c] = app.getname();
       c++;
-      }
+      }    
+                
       return a;
 
     }
 
     public String approve(int applicantnr){
-        
         String approvedApplicant = applied[applicantnr];
         if(approvedApplicant != null){
-        return null;  
+        approved.add(approvedApplicant);                                                         //AT THE MOMENT THE FUNCTION RETURNS A APROPRIATE MESSAGE AND ADDS THE APPROVED ACCOUNT NAME TO AN ARRAYLIST
+        return "Applicant number: " +applicantnr+", Name: "+approvedApplicant + ", is approved!";  
         }
         return "Applicant number does not exist!";
     }

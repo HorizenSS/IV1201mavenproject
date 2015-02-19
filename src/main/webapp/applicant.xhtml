@@ -6,33 +6,50 @@
         <title>applicant page</title>
     </h:head>
     <h:body>        
-            
-            <h1> List of all applicants</h1>
 
+        <h1> List of all applicants</h1>
+        <h:form>
             <h1 rendered ="#{applyManager.listApplicants()} "/> <!-- inputed data -->
-            <h:form>
-                <h:commandButton value="Back to home page" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-            </h:form> 
-        
-            
-        <p>
-            <h:outputLabel for="result" rendered="#{applyManager.result != null}"  value=""/>
+            <h1 rendered ="#{applyManager.checkAuthorization()} "/> <!-- inputed data -->
 
-            <h:outputText id="result" value="#{applyManager.result}"/>  <!-- skriver ut resultatet -->
+        </h:form>
+
+        <h:form>
+            <h:commandButton value="Back to home page" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+        </h:form> 
+        
+        <p></p>
+        <p></p>
+        
+       <h:form>
+            <h:outputLabel for="resultb" rendered="#{applyManager.resultb != null}"  value=""/>
+
+            <h:outputText id="resultb" value="#{applyManager.resultb}"/>  <!-- skriver ut resultatet -->
             <h1 rendered ="#{applyManager.nullResult()} "/> <!-- ERASES inputed data -->
 
-        </p>
-            
-            
-                <h:form>
+        </h:form> 
+        <p></p>
+        <p></p>
+
+            <h:form>
                 <h4>Decide who to approve</h4>
                 <p>
-                <h:outputLabel for="applicantnr" value="Applicant number: "/>
-                <h:inputText id="applicantnr" value="#{applyManager.applicantnr}"/>
+                    <h:outputLabel for="applicantnr" value="Applicant number: "/>
+                    <h:inputText id="applicantnr" value="#{applyManager.applicantnr}"/>
                 </p>
                 <h:commandButton value="Approve" action="#{applyManager.approve()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-                </h:form>
-            
+            </h:form>
+
+
+
+        <h:form>
+            <h:outputLabel for="resulta" rendered="#{applyManager.resulta != null}"  value=""/>
+
+            <h:outputText id="resulta" value="#{applyManager.resulta}"/>  <!-- skriver ut resultatet -->
+            <h1 rendered ="#{applyManager.nullResult()} "/> <!-- ERASES inputed data -->
+
+        </h:form>       
+
     </h:body>
 </html>
 
