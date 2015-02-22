@@ -166,8 +166,8 @@ public class Facade {
         applicantList = "";
         int c = 1;
         for (Applies app : applies) {
-            applicantList = applicantList + "Apply number " + c + " = " + "Account name: " + app.getname() + ", Firstname: " + app.gettimeperiod() + ", Last name: " + app.getlastname() + ", Email: "
-                    + app.getdateofregistration() + ", Kompetens: " + app.getcompetence() + "    || \n ";
+            applicantList = applicantList + "Apply number " + c + " = " + "Account name: " + app.getname() + ", Firstname: " + app.getfirstname()+ ", Last name: " + app.getlastname() + ", Email: "
+                    + app.getemail()+ ", Kompetens: " + app.getcompetence() + "    || \n ";
             applied[c] = app.getname();
             c++;
         }

@@ -18,9 +18,9 @@ public class Applies implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
-    private String name;
-    private String timeperiod;
-    private String dateofregistration;
+    private String accountname;
+    private String firstname;
+    private String email;
     private String competence;
     private String lastname;
     
@@ -28,28 +28,28 @@ public class Applies implements Serializable {
         
     }
     
-    public Applies(String name, String lastname, String timeperiod, String dateofregistration, String competence){
-        this.name = name;
+    public Applies(String accountname, String lastname, String firstname, String email, String competence){
+        this.accountname = accountname;
         this.lastname = lastname;
-        this.timeperiod = timeperiod;
-        this.dateofregistration = dateofregistration;
+        this.firstname = firstname;
+        this.email = email;
         this.competence = competence;
-        this.id = name;
+        this.id = accountname;
     }
  
     
     public String getname(){
-        return name;
+        return accountname;
     }
         public String getlastname(){
         return lastname;
     }
     
-    public String gettimeperiod(){
-    return timeperiod;
+    public String getfirstname(){
+    return firstname;
     }
-    public String getdateofregistration(){
-        return dateofregistration;
+    public String getemail(){
+        return email;
     }
     public String getcompetence(){
         return competence;
