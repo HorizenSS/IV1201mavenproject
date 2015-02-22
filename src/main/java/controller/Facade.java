@@ -21,6 +21,7 @@ import javax.persistence.PersistenceContext;
 import model.Applies;
 import model.Jobs;
 import java.io.FileOutputStream;
+
 /**
  * A controller. All calls to the model that are executed because of an action
  * taken by the cashier pass through here. EJB Used for data transaction
@@ -41,9 +42,9 @@ public class Facade {
     private static boolean logout = false;
     private static boolean adminlogin;
     private static Accounts currentAccount;
-    public  PrintWriter pw;
-    public  PrintWriter pwlogin;
-    public  PrintWriter pwregistertime;
+    public PrintWriter pw;
+    public PrintWriter pwlogin;
+    public PrintWriter pwregistertime;
     private String[] applied = new String[10];
     private ArrayList<String> approved = new ArrayList<String>();
     private Document document;
@@ -51,33 +52,31 @@ public class Facade {
     private Paragraph paragraph;
     private PageSize pagesize;
     private Rectangle rectangle;
-    
+
     private String applicantList = "";
-    
+
     public Facade() throws FileNotFoundException, DocumentException {
         //LOGGIN
         this.pw = new PrintWriter("registeredlog.txt");
         this.pwlogin = new PrintWriter("loginlog.txt");
         this.pwregistertime = new PrintWriter("registertime.txt");
-              
 
-
-            
-             
     }
 
     /**
- * This method is used for the login purpose, if an admin logins the admin will get directed to an admin page.
- * If a applicant logins they will be directed to the applicant page which displays the current applies
- * @param  account  the account name of the user who wants to login
- * @param  password the password of the user who wants to login
- * @return      the user name or null if something went wrong
- */
+     * This method is used for the login purpose, if an admin logins the admin
+     * will get directed to an admin page. If a applicant logins they will be
+     * directed to the applicant page which displays the current applies
+     *
+     * @param account the account name of the user who wants to login
+     * @param password the password of the user who wants to login
+     * @return the user name or null if something went wrong
+     */
     public String login(String account, String password) {
-        Accounts acc = em.find(Accounts.class, account); 
+        Accounts acc = em.find(Accounts.class, account);
 
         if (acc != null) {
-            if (account.equals(acc.getaccount()) && password.equals(acc.getpassword())) { 
+            if (account.equals(acc.getaccount()) && password.equals(acc.getpassword())) {
                 login = true;
                 logout = false;
                 adminlogin = false;
@@ -87,7 +86,7 @@ public class Facade {
                 }
                 pwlogin.println(acc.getaccount() + " has logged in.");
                 pwlogin.flush();
-                return acc.getaccount(); 
+                return acc.getaccount();
 
             }
 
@@ -95,57 +94,52 @@ public class Facade {
         return null;
     }
 
-    public String register(String account, String password, String email, String firstname, String lastname,String competence,long startTime) throws IOException {
-      
+    public String register(String account, String password, String email, String firstname, String lastname, String competence, long startTime) throws IOException {
+
         Accounts acc = em.find(Accounts.class, account);
-        
+
         if (acc != null) {
             return ("Account exists!!");
-        }              
-        
-        
-        
+        }
+
         pw.println(account + " is registered.");
         pw.flush();
-        em.persist(new Accounts(account, password, email, firstname, lastname,competence));  
-        em.persist(new Applies(firstname,lastname,email,password,competence));
-       
-        
-        long endTime   = System.currentTimeMillis();
+        em.persist(new Accounts(account, password, email, firstname, lastname, competence));
+        em.persist(new Applies(firstname, lastname, email, password, competence));
+
+        long endTime = System.currentTimeMillis();
         long totalTime = endTime - startTime;
-            
+
         String totalTimeString = String.valueOf(totalTime);
-        pwregistertime.println("Time to register account: " + account + " = " + totalTimeString +"ms");
+        pwregistertime.println("Time to register account: " + account + " = " + totalTimeString + "ms");
         pwregistertime.flush();
-        
-        
+
         return null;
 
     }
-    /** 
-     * Must call listApplicants because listApplicants is the method that initiates the variable applicantList - 
-     * which will contain the applicants.
+
+    /**
+     * Must call listApplicants because listApplicants is the method that
+     * initiates the variable applicantList - which will contain the applicants.
      *
-     * 
-    */
-    public void pdf() throws FileNotFoundException, DocumentException{
+     *
+     */
+    public void pdf() throws FileNotFoundException, DocumentException {
         listApplicants();
-        
+
         this.document = new Document();
         this.rectangle = new Rectangle(pagesize.LETTER);
         document.setPageSize(rectangle);
-        this.pdfWriter = 
-            PdfWriter.getInstance(document, new FileOutputStream("applicants.pdf"));
+        this.pdfWriter
+                = PdfWriter.getInstance(document, new FileOutputStream("applicants.pdf"));
         this.paragraph = new Paragraph();
-            
 
-            document.open();      
-            document.add(new Chunk(""));
-            paragraph.add(applicantList);
-            document.add(paragraph);  
-            document.close();
+        document.open();
+        document.add(new Chunk(""));
+        paragraph.add(applicantList);
+        document.add(paragraph);
+        document.close();
     }
-
 
     public String logout() {
         logout = true;
@@ -156,74 +150,73 @@ public class Facade {
 
     //----------------------------------------------------------------------------------------
     public String add(String item, String timeperiod, String dateofregistration, String competence) { //Only adds to 1 type of gnome
-       
-            if (adminlogin == true) {
-                em.persist(new Jobs(item,timeperiod,dateofregistration,competence));
-                return "Job is added";
 
-            }
+        if (adminlogin == true) {
+            em.persist(new Jobs(item, timeperiod, dateofregistration, competence));
+            return "Job is added";
+
+        }
         return "Must be logged in as admin";
     }
 
+    public String listApplicants() throws DocumentException {
 
-    public String listApplicants() throws DocumentException{
+        List<Applies> applies = em.createQuery("from Applies m", Applies.class).getResultList();
 
-      List<Applies> applies = em.createQuery("from Applies m", Applies.class).getResultList();
-      
-      applicantList = "";
-      int c = 1;
-      for(Applies app : applies){
-      applicantList = applicantList + "Apply number "+ c + " = " + "Account name: " +app.getname() + ", Firstname: " + app.gettimeperiod() +  ", Last name: " + app.getlastname() + ", Email: "
-              + app.getdateofregistration() + ", Kompetens: " + app.getcompetence() + "    || \n ";
-      applied[c] = app.getname();
-      c++;
-      }    
-                
-      return applicantList;
+        applicantList = "";
+        int c = 1;
+        for (Applies app : applies) {
+            applicantList = applicantList + "Apply number " + c + " = " + "Account name: " + app.getname() + ", Firstname: " + app.gettimeperiod() + ", Last name: " + app.getlastname() + ", Email: "
+                    + app.getdateofregistration() + ", Kompetens: " + app.getcompetence() + "    || \n ";
+            applied[c] = app.getname();
+            c++;
+        }
+
+        return applicantList;
 
     }
 
-    public String approve(int applicantnr){
-        
-        if(adminlogin == false){
-        return "ONLY ADMINS CAN APPROVE!";
+    public String approve(int applicantnr) {
+
+        if (adminlogin == false) {
+            return "ONLY ADMINS CAN APPROVE!";
         }
-        
+
         String approvedApplicant = applied[applicantnr];
-        if(approvedApplicant != null){
-        approved.add(approvedApplicant);                                                         //AT THE MOMENT THE FUNCTION RETURNS A APROPRIATE MESSAGE AND ADDS THE APPROVED ACCOUNT NAME TO AN ARRAYLIST
-        return "Applicant number: " +applicantnr+", Name: "+approvedApplicant + ", is approved!";  
+        if (approvedApplicant != null) {
+            approved.add(approvedApplicant);                                                         //AT THE MOMENT THE FUNCTION RETURNS A APROPRIATE MESSAGE AND ADDS THE APPROVED ACCOUNT NAME TO AN ARRAYLIST
+            return "Applicant number: " + applicantnr + ", Name: " + approvedApplicant + ", is approved!";
         }
         return "Applicant number does not exist!";
     }
 
-    public String fillDB(){
+    public String fillDB() {
 
-        em.persist(new Jobs("test job", "test","test","test"));
-        em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson","bla"));
-        
+        em.persist(new Jobs("test job", "test", "test", "test"));
+        em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson", "bla"));
+
         return "";
     }
-    
+
     //AUTHORIZATION
-    public String checkAuthorization(){
-        
-        if(login == false){
-        return "NOT-AUTHORIZED";
+    public String checkAuthorization() {
+
+        if (login == false) {
+            return "NOT-AUTHORIZED";
         }
         return "AUTHORIZED";
     }
-    
-        public static String checkAuthorizationAdmin(){
-    
-        if(adminlogin == false){
-        return "NOT-AUTHORIZED";
+
+    public static String checkAuthorizationAdmin() {
+
+        if (adminlogin == false) {
+            return "NOT-AUTHORIZED";
         }
         return "AUTHORIZED";
-    } 
-        
-        public static String test (String a){
+    }
+
+    public static String test(String a) {
         return "b";
-        
-        }
+
+    }
 }

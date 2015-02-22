@@ -2,14 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>home page</title>
     </h:head>
     <h:body>
-        <h1>#{msg.titel}</h1>
-        <h1 rendered ="#{acctManager.fillDB()} "/> <!-- inputed data -->
+
         
+        <ui:composition template="commonHeader.xhtml"> </ui:composition>
+
+        <h1 rendered ="#{acctManager.fillDB()} "/> <!-- inputed data -->
+
         <h:form>
             <h:commandLink action="#{locale.changeLocale}">
                 <f:param name="languageCode" value="sv"/>
@@ -21,17 +25,17 @@
                 <h:graphicImage value="/en.gif"/>
             </h:commandLink>
         </h:form>
-            
+
         <h3>Feed-back</h3>
 
         <p>
             <h:outputLabel for="result" rendered="#{acctManager.result != null}"  value=""/>
-            
+
             <h:outputText id="result" value="#{acctManager.result}"/>  <!-- skriver ut resultatet -->
             <h1 rendered ="#{acctManager.nullResult()} "/> <!-- ERASES inputed data -->
 
         </p>
-       
+
         <h:form>
 
             <h4>#{msg.registeraccount}</h4>
@@ -50,13 +54,13 @@
                 <h:inputText id="competence" value="#{acctManager.competence}"/> 
             </p>
             <p>
-               
+
                 <h:commandButton value="Register" action="#{acctManager.register()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>
 
-    <h:form>
+        <h:form>
             <h4>#{msg.login}</h4>
             <p>
                 <h:outputLabel for="account" value="#{msg.accountName}"/>
@@ -69,11 +73,15 @@
             </p>
             <hr/>
         </h:form>
-     <h:form>       
-        <h:commandButton value="#{msg.logout}" action="#{acctManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-    </h:form>       
+        <h:form>       
+            <h:commandButton value="#{msg.logout}" action="#{acctManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+        </h:form> 
+
+
+        <ui:composition template="commonFooter.xhtml"> </ui:composition>
+
     </h:body>
-    
+
 </html>
 
 
