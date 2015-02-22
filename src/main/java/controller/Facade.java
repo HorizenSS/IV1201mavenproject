@@ -53,7 +53,7 @@ public class Facade {
     private PageSize pagesize;
     private Rectangle rectangle;
 
-    private String applicantList = "";
+    public static String applicantList = "";
 
     public Facade() throws FileNotFoundException, DocumentException {
         //LOGGIN

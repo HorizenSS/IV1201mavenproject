@@ -14,12 +14,13 @@ import javax.ws.rs.PathParam;
  *
  * @author johny_000
  */
-@Path("developers")
-public class DevelopersResource {
+@Path("applications")
+public class ApplicationResource {
     
     @GET
-    public String developers(){
-    return "web service";
+    public String applications(){
+    String a = Facade.applicantList;
+    return a;
 }
     @GET
     @Path("{first}-{last}")
