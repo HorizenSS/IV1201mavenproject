@@ -29,6 +29,6 @@ public class ApplicationResource {
     public String developer(@PathParam("accountname")String accountname, @PathParam("password") String password, @PathParam("email") String email
     , @PathParam("firstname") String firstname, @PathParam("lastname") String lastname, @PathParam("competence") String competence){    
         
-        return "AA";
+        return accountname + password;
 }
 }
