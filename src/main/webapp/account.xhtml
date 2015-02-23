@@ -7,7 +7,7 @@
     <h:head>
         <title>home page</title>
     </h:head>
-    <h:body>
+    <h:body style="background-color:bisque;">
 
         
         <ui:composition template="commonHeader.xhtml"> </ui:composition>
@@ -41,18 +41,22 @@
             <h4>#{msg.registeraccount}</h4>
             <p>
                 <h:outputLabel for="account" value="#{msg.accountName}"/>
-                <h:inputText id="account" value="#{acctManager.account}"/>
+                <h:inputText id="account" value="#{acctManager.account}"/></p>    
+            <p> 
                 <h:outputLabel for="password" value="#{msg.password}"/>
-                <h:inputSecret id="password" value="#{acctManager.password}"/>
+                <h:inputSecret id="password" value="#{acctManager.password}"/></p>
+            <p>    
                 <h:outputLabel for="email" value="#{msg.email}"/>
-                <h:inputText id="email" value="#{acctManager.email}"/>
+                <h:inputText id="email" value="#{acctManager.email}"/></p>
+            <p>    
                 <h:outputLabel for="firstname" value="#{msg.firstname}"/>
-                <h:inputText id="firstname" value="#{acctManager.firstname}"/>
+                <h:inputText id="firstname" value="#{acctManager.firstname}"/></p>
+            <p>     
                 <h:outputLabel for="lastname" value="#{msg.lastname}"/>
-                <h:inputText id="lastname" value="#{acctManager.lastname}"/>
+                <h:inputText id="lastname" value="#{acctManager.lastname}"/></p>
+            <p>    
                 <h:outputLabel for="competence" value="#{msg.competence}"/>
-                <h:inputText id="competence" value="#{acctManager.competence}"/> 
-            </p>
+                <h:inputText id="competence" value="#{acctManager.competence}"/> </p>
             <p>
 
                 <h:commandButton value="Register" action="#{acctManager.register()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
