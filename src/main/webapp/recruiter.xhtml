@@ -9,14 +9,7 @@
     <h:body style="background-color:bisque;">
         <h1>Welcome recruiter</h1>
         <h1 rendered ="#{recruitManager.checkAuthorizationAdmin()} "/> <!-- inputed data -->
-
-        <h:form>
-            <p>            
-                <h:commandButton value="Logout" action="#{recruitManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-            </p>
-
-        </h:form>
-
+       
         <h:form>
 
             <p>
@@ -26,6 +19,13 @@
                 <h1 rendered ="#{recruitManager.nullResult()} "/> <!-- ERASES inputed data -->
 
             </p>
+        </h:form>
+
+        <h:form>
+            <p>            
+                <h:commandButton value="Logout" action="#{recruitManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            </p>
+
         </h:form>
 
 
@@ -43,25 +43,6 @@
             <hr/>
         </h:form>
 
-
-        <h:form>
-
-            <h4>Add a job</h4>
-            <p>
-                <h:outputLabel for="name" value="Name of job: "/>
-                <h:inputText id="name" value="#{recruitManager.name}"/>
-                <h:outputLabel for="timeperiod" value="Time period: "/>
-                <h:inputText id="timeperiod" value="#{recruitManager.timeperiod}"/>
-                <h:outputLabel for="dateofregistration" value="Date of registration: "/>
-                <h:inputText id="dateofregistration" value="#{recruitManager.dateofregistration}"/>
-                <h:outputLabel for="competence" value="Competence: "/>
-                <h:inputText id="competence" value="#{recruitManager.competence}"/>
-            </p>
-            <p>
-                <h:commandButton value="Add" action="#{recruitManager.add()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-            </p>
-            <hr/>
-        </h:form>
         <ui:composition template="commonFooter.xhtml"> </ui:composition>
 
     </h:body>

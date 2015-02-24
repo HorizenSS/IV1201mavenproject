@@ -144,7 +144,17 @@ public class ApplyManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-  
+      public String logout() {
+        try {
+
+            result = Facade.logout();
+            tohomepage = true;
+        } catch (Exception e) {
+            handleException(e);
+
+        }
+        return jsf22Bugfix();
+    }
     public void setstatus(String status) {
         this.status = status;
     }

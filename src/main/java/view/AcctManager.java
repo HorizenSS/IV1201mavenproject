@@ -157,17 +157,6 @@ public class AcctManager implements Serializable {
         return jsf22Bugfix();
     }
 
-    public String logout() {
-        try {
-
-            result = Facade.logout();
-        } catch (Exception e) {
-            handleException(e);
-
-        }
-        return jsf22Bugfix();
-    }
-
     public String fillDB() {
         try {
 
@@ -280,7 +269,7 @@ public class AcctManager implements Serializable {
     
     @NotNull(message = "Competence field cant be empty")
           public String getcompetence(){
-          return competence;
+          return null;
     }
 
 }

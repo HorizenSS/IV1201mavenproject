@@ -9,7 +9,7 @@
     </h:head>
     <h:body style="background-color:bisque;">
 
-        
+
         <ui:composition template="commonHeader.xhtml"> </ui:composition>
 
         <h1 rendered ="#{acctManager.fillDB()} "/> <!-- inputed data -->
@@ -39,48 +39,81 @@
         <h:form>
 
             <h4>#{msg.registeraccount}</h4>
-            <p>
-                <h:outputLabel for="account" value="#{msg.accountName}"/>
-                <h:inputText id="account" value="#{acctManager.account}"/></p>    
-            <p> 
-                <h:outputLabel for="password" value="#{msg.password}"/>
-                <h:inputSecret id="password" value="#{acctManager.password}"/></p>
-            <p>    
-                <h:outputLabel for="email" value="#{msg.email}"/>
-                <h:inputText id="email" value="#{acctManager.email}"/></p>
-            <p>    
-                <h:outputLabel for="firstname" value="#{msg.firstname}"/>
-                <h:inputText id="firstname" value="#{acctManager.firstname}"/></p>
-            <p>     
-                <h:outputLabel for="lastname" value="#{msg.lastname}"/>
-                <h:inputText id="lastname" value="#{acctManager.lastname}"/></p>
-            <p>    
-                <h:outputLabel for="competence" value="#{msg.competence}"/>
-                <h:inputText id="competence" value="#{acctManager.competence}"/> </p>
+
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <td><h:outputLabel for="account" value="#{msg.accountName}"/></td>
+                        <td>                <h:inputText id="account" value="#{acctManager.account}"/>   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>                <h:outputLabel for="password" value="#{msg.password}"/>
+                        </td>
+                        <td>                <h:inputSecret id="password" value="#{acctManager.password}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>                <h:outputLabel for="email" value="#{msg.email}"/>
+                        </td>
+                        <td>                <h:inputText id="email" value="#{acctManager.email}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>                <h:outputLabel for="firstname" value="#{msg.firstname}"/>
+                        </td>
+                        <td>                <h:inputText id="firstname" value="#{acctManager.firstname}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>                <h:outputLabel for="lastname" value="#{msg.lastname}"/>
+                        </td>
+                        <td>                <h:inputText id="lastname" value="#{acctManager.lastname}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>                <h:outputLabel for="competence" value="#{msg.competence}"/>
+                        </td>
+                        <td>                <h:inputText id="competence" value="#{acctManager.competence}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
             <p>
 
                 <h:commandButton value="#{msg.registeraccount}" action="#{acctManager.register()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
+
+
             <hr/>
         </h:form>
 
         <h:form>
             <h4>#{msg.login}</h4>
-            <p>
-                <h:outputLabel for="account" value="#{msg.accountName}"/>
-                <h:inputText id="account" value="#{acctManager.account}"/>
-                <h:outputLabel for="password" value="#{msg.password}"/>
-                <h:inputSecret id="password" value="#{acctManager.password}"/>
-            </p>
+
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <td>                <h:outputLabel for="account" value="#{msg.accountName}"/>
+                        </td>
+                        <td>                <h:inputText id="account" value="#{acctManager.account}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>                <h:outputLabel for="password" value="#{msg.password}"/>
+                        </td>
+                        <td>                <h:inputSecret id="password" value="#{acctManager.password}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
             <p>
                 <h:commandButton value="#{msg.login}" action="#{acctManager.login()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->           
             </p>
             <hr/>
         </h:form>
-        <h:form>       
-            <h:commandButton value="#{msg.logout}" action="#{acctManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
-        </h:form> 
-
 
         <ui:composition template="commonFooter.xhtml"> </ui:composition>
 
