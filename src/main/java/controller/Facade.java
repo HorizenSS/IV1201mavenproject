@@ -45,7 +45,10 @@ public class Facade {
     public PrintWriter pw;
     public PrintWriter pwlogin;
     public PrintWriter pwregistertime;
-    private String[] applied = new String[10];
+    /**
+     * Variable applied will contain the name of the applied users
+     */
+    private String[] applied = new String[20];
     private ArrayList<String> approved = new ArrayList<String>();
     private Document document;
     private PdfWriter pdfWriter;
@@ -183,8 +186,11 @@ public class Facade {
         }
 
         String approvedApplicant = applied[applicantnr];
+        Applies apply = em.find(Applies.class, approvedApplicant);
+      
         if (approvedApplicant != null) {
             approved.add(approvedApplicant);                                                         //AT THE MOMENT THE FUNCTION RETURNS A APROPRIATE MESSAGE AND ADDS THE APPROVED ACCOUNT NAME TO AN ARRAYLIST
+            em.remove(apply);
             return "Applicant number: " + applicantnr + ", Name: " + approvedApplicant + ", is approved!";
         }
         return "Applicant number does not exist!";
