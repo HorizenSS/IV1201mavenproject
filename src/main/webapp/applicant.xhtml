@@ -8,7 +8,7 @@
     </h:head>
     <h:body style="background-color:bisque;">        
 
-        <h1> List of all applicants</h1>
+        <h1>#{msg.listapplications}</h1>
         <h:form>
             <h1 rendered ="#{applyManager.listApplicants()} "/> <!-- inputed data -->
             <h1 rendered ="#{applyManager.checkAuthorization()} "/> <!-- inputed data -->
@@ -17,7 +17,7 @@
 
         <h:form>
            
-            <h:commandButton value="Back to home page" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->           
+            <h:commandButton value="#{msg.backtohomepage}" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->           
             <h:commandButton value="#{msg.logout}" action="#{applyManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
         
         </h:form> 
@@ -38,10 +38,10 @@
         <h:form>
             <h4>Decide who to approve</h4>
             <p>
-                <h:outputLabel for="applicantnr" value="Applicant number: "/>
+                <h:outputLabel for="#{msg.applicantnumber}" value="Applicant number: "/>
                 <h:inputText id="applicantnr" value="#{applyManager.applicantnr}"/>
             </p>
-            <h:commandButton value="Approve" action="#{applyManager.approve()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            <h:commandButton value="#{msg.approve}" action="#{applyManager.approve()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
         </h:form>
 
 

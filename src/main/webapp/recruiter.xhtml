@@ -23,7 +23,7 @@
 
         <h:form>
             <p>            
-                <h:commandButton value="Logout" action="#{recruitManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="#{msg.logout}" action="#{recruitManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
 
         </h:form>
@@ -31,7 +31,7 @@
 
         <h:form>
             <p>
-                <h:commandButton value="List applicants" action="#{recruitManager.listApplicants()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="#{msg.listapplications}" action="#{recruitManager.listApplicants()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>
