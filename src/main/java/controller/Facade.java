@@ -57,7 +57,11 @@ public class Facade {
     private Rectangle rectangle;
 
     public static String applicantList = "";
-
+/**
+ * Constructor will create text files when a object of this class is created, these text files are used for logging.
+ * @throws FileNotFoundException
+ * @throws DocumentException 
+ */
     public Facade() throws FileNotFoundException, DocumentException {
         //LOGGIN
         this.pw = new PrintWriter("registeredlog.txt");
@@ -97,7 +101,18 @@ public class Facade {
         }
         return null;
     }
-
+/**
+ * This method is used to register applies, the user can enter personal information that will later be handled by a recruiter.
+ * @param account
+ * @param password
+ * @param email
+ * @param firstname
+ * @param lastname
+ * @param competence
+ * @param startTime
+ * @return
+ * @throws IOException 
+ */
     public String register(String account, String password, String email, String firstname, String lastname, String competence, long startTime) throws IOException {
 
         Accounts acc = em.find(Accounts.class, account);
@@ -127,8 +142,6 @@ public class Facade {
      * We are using the itext api to create pdf documents
      * Must call listApplicants because listApplicants is the method that
      * initiates the variable applicantList - which will contain the applicants.
-     *
-     *
      */
     public void pdf() throws FileNotFoundException, DocumentException {
         listApplicants();
@@ -147,6 +160,10 @@ public class Facade {
         document.close();
     }
 
+    /**
+     * A method that will reset the login and logout variables
+     * @return 
+     */
     public String logout() {
         logout = true;
         login = false;
@@ -154,6 +171,11 @@ public class Facade {
         return "Logout";
     }
 
+    /**
+     * This method fetches data from the Applies table and stores all data in a string so that we can show who has applied.
+     * @return
+     * @throws DocumentException 
+     */
     public String listApplicants() throws DocumentException {
 
         List<Applies> applies = em.createQuery("from Applies m", Applies.class).getResultList();
@@ -170,7 +192,11 @@ public class Facade {
         return applicantList;
 
     }
-
+/**
+ * Method for approving applies, for the moment this method only stores the applicants name in a arraylist
+ * @param applicantnr
+ * @return 
+ */
     public String approve(int applicantnr) {
 
         if (adminlogin == false) {
@@ -187,7 +213,10 @@ public class Facade {
         }
         return "Applicant number does not exist!";
     }
-
+/**
+ * test
+ * @return 
+ */
     public String fillDB() {
 
         em.persist(new Jobs("test job", "test", "test", "test"));
@@ -196,7 +225,10 @@ public class Facade {
         return "";
     }
 
-    //AUTHORIZATION
+/**
+ * Method for checking authorization on the applicant page
+ * @return 
+ */
     public String checkAuthorization() {
 
         if (login == false) {
@@ -204,7 +236,10 @@ public class Facade {
         }
         return "AUTHORIZED";
     }
-
+/**
+ * Method for checking authorization on the recruiter page
+ * @return 
+ */
     public static String checkAuthorizationAdmin() {
 
         if (adminlogin == false) {
@@ -213,6 +248,11 @@ public class Facade {
         return "AUTHORIZED";
     }
 
+    /**
+     * test
+     * @param a
+     * @return 
+     */
     public static String test(String a) {
         return "b";
 
