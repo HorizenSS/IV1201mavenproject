@@ -69,7 +69,8 @@ public class Facade {
     /**
      * This method is used for the login purpose, if an admin logins the admin
      * will get directed to an admin page. If a applicant logins they will be
-     * directed to the applicant page which displays the current applies
+     * directed to the applicant page which displays the current applies.
+     * When the admin is online he/she will be able to approve applies and generate a pdf containing the applicants
      *
      * @param account the account name of the user who wants to login
      * @param password the password of the user who wants to login

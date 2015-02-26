@@ -102,8 +102,8 @@ public class AcctManager implements Serializable {
      */
     public String login() {
         try {
-            //startConversation();
-            //transactionFailure = null;
+            startConversation();
+            transactionFailure = null;
             result = Facade.login(account, password);
 
             if ("admin".equals(result)) {
@@ -113,6 +113,7 @@ public class AcctManager implements Serializable {
             }
             if (result != null) {
                 success = true;
+                stopConversation();
                 return jsf22Bugfix();
             }
             
