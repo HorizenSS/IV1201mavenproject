@@ -145,7 +145,16 @@ public class AcctManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-
+    public String stoptime() {
+        try {
+          
+            Facade.stoptime();
+            
+        } catch (Exception e) {
+            handleException(e);
+        }
+        return jsf22Bugfix();
+    }
 
     public String fillDB() {
         try {

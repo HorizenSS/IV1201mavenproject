@@ -19,7 +19,6 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Applies;
-import model.Jobs;
 import java.io.FileOutputStream;
 
 /**
@@ -42,6 +41,7 @@ public class Facade {
     private static boolean logout = false;
     private static boolean adminlogin;
     private static Accounts currentAccount;
+    private long start;
     public PrintWriter pw;
     public PrintWriter pwlogin;
     public PrintWriter pwregistertime;
@@ -114,24 +114,20 @@ public class Facade {
  * @throws IOException 
  */
     public String register(String account, String password, String email, String firstname, String lastname, String competence, long startTime) throws IOException {
-
+        this.start = startTime;
         Accounts acc = em.find(Accounts.class, account);
 
         if (acc != null) {
             return ("Account exists!!");
         }
 
+        
         pw.println(account + " is registered.");
         pw.flush();
         em.persist(new Accounts(account, password, email, firstname, lastname, competence));
         em.persist(new Applies(firstname, lastname, email, password, competence));
 
-        long endTime = System.currentTimeMillis();
-        long totalTime = endTime - startTime;
-
-        String totalTimeString = String.valueOf(totalTime);
-        pwregistertime.println("Time to register account: " + account + " = " + totalTimeString + "ms");
-        pwregistertime.flush();
+        
 
         return null;
 
@@ -159,6 +155,20 @@ public class Facade {
         document.add(paragraph);
         document.close();
     }
+    
+    public String savetxt(){
+        
+        try {
+        pw.close();
+        pwlogin.close();
+        pwregistertime.close();
+        
+        return "Files saved";
+        } catch (Exception e) {
+            return e.toString();
+        }
+
+    }    
 
     /**
      * A method that will reset the login and logout variables
@@ -213,13 +223,24 @@ public class Facade {
         }
         return "Applicant number does not exist!";
     }
+    
+    public String stoptime(){
+        
+        long endTime = System.currentTimeMillis();
+        long totalTime = endTime - start;
+
+        String totalTimeString = String.valueOf(totalTime);
+        pwregistertime.println("Time to register account" + " = " + totalTimeString + "ms");
+        pwregistertime.flush();
+        return "";
+    }
+    
 /**
  * test
  * @return 
  */
     public String fillDB() {
 
-        em.persist(new Jobs("test job", "test", "test", "test"));
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson", "bla"));
 
         return "";

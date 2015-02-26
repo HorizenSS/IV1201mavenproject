@@ -155,6 +155,19 @@ public class RecruitManager implements Serializable {
         }
         return jsf22Bugfix();
     }
+       
+    public String savetxt() {
+        try {
+            startConversation();
+            transactionFailure = null;
+            result = Facade.savetxt();
+
+
+        } catch (Exception e) {
+            handleException(e);
+        }
+        return jsf22Bugfix();
+    }     
 
    //SETTERS AND GETTERS        
     public void setstatus(String status) {
