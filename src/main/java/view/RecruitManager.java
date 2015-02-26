@@ -105,19 +105,6 @@ public class RecruitManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-    
-    
-    
-    public String add() {
-        try {
-            result = Facade.add(name, timeperiod, dateofregistration, competence);
-
-        } catch (Exception e) {
-            handleException(e);
-
-        }
-        return jsf22Bugfix();
-    }
 
     public String logout() {
         try {

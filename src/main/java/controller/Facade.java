@@ -123,6 +123,8 @@ public class Facade {
     }
 
     /**
+     * This method generates a PDF document containing the applicants.
+     * We are using the itext api to create pdf documents
      * Must call listApplicants because listApplicants is the method that
      * initiates the variable applicantList - which will contain the applicants.
      *
@@ -150,17 +152,6 @@ public class Facade {
         login = false;
         adminlogin = false;
         return "Logout";
-    }
-
-    //----------------------------------------------------------------------------------------
-    public String add(String item, String timeperiod, String dateofregistration, String competence) { //Only adds to 1 type of gnome
-
-        if (adminlogin == true) {
-            em.persist(new Jobs(item, timeperiod, dateofregistration, competence));
-            return "Job is added";
-
-        }
-        return "Must be logged in as admin";
     }
 
     public String listApplicants() throws DocumentException {

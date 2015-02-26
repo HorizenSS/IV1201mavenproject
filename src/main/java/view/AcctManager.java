@@ -147,17 +147,6 @@ public class AcctManager implements Serializable {
     }
 
 
-    public String add() {
-        try {
-            result = Facade.add(name,timeperiod,dateofregistration,competence);
-
-        } catch (Exception e) {
-            handleException(e);
-
-        }
-        return jsf22Bugfix();
-    }
-
     public String fillDB() {
         try {
 
