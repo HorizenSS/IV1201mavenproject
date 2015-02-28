@@ -27,7 +27,6 @@ public class AcctManager implements Serializable {
 
     private static final long serialVersionUID = 16247164405L;
     @EJB
-
     //globals
     private Facade Facade;
     private Exception transactionFailure;
@@ -46,7 +45,7 @@ public class AcctManager implements Serializable {
     private boolean toaccountSV = false;
     private boolean toaccount = false;
     private boolean toapplyconfirmation = false;
-
+    private boolean error = false;
     private String result = null;
     @Inject
     private Conversation conversation;
@@ -65,6 +64,7 @@ public class AcctManager implements Serializable {
 
     private void handleException(Exception e) {
         stopConversation();
+        error = true;
         e.printStackTrace(System.err);
         transactionFailure = e;
     }
@@ -123,6 +123,7 @@ public class AcctManager implements Serializable {
             }
 
         } catch (Exception e) {
+            error = true;
             handleException(e);
         }
         return jsf22Bugfix();
@@ -141,6 +142,7 @@ public class AcctManager implements Serializable {
             }
             
         } catch (Exception e) {
+            error = true;
             handleException(e);
         }
         return jsf22Bugfix();
@@ -244,6 +246,10 @@ public class AcctManager implements Serializable {
 
     public boolean getsuccess() {
         return success;
+    }
+    
+    public boolean geterror(){
+        return error;
     }
     
     public boolean gettoaccount() {

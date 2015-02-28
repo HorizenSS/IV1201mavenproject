@@ -1,6 +1,8 @@
 package view;
 
+import com.itextpdf.text.DocumentException;
 import controller.Facade;
+import java.io.FileNotFoundException;
 
 //backing bean
 import java.io.Serializable;
@@ -62,6 +64,7 @@ public class RecruitManager implements Serializable {
 
     private void handleException(Exception e) {
         stopConversation();
+        error = true;
         e.printStackTrace(System.err);
         transactionFailure = e;
     }
@@ -133,7 +136,7 @@ public class RecruitManager implements Serializable {
         try {
 
             Facade.pdf();
-        } catch (Exception e) {
+        } catch (FileNotFoundException | DocumentException e) {
             handleException(e);
 
         }

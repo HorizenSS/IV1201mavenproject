@@ -23,7 +23,7 @@ import java.io.FileOutputStream;
 
 /**
  * A controller. All calls to the model that are executed because of an action
- * taken by the cashier pass through here. EJB Used for data transaction
+ * taken by the facade pass through here. EJB Used for data transaction
  *
  * @author Kentaro Hayashida
  * @author Johny Premanantham
