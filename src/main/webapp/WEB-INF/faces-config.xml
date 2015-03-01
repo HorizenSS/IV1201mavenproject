@@ -49,14 +49,6 @@
         </navigation-case>
     </navigation-rule>    
 
-    <!-- If an unauthorized user trys to manipulate the recruiter.xhtml page -->                          
-    <navigation-rule>
-        <from-view-id>/recruiter.xhtml</from-view-id>
-        <navigation-case>
-            <if>#{recruitManager.error}</if>
-            <to-view-id>/error.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
  
     <!-- If applicant made a valid apply -->                     
     <navigation-rule>

@@ -7,11 +7,12 @@
         <title>recruiter page</title>
     </h:head>
     <h:body style="background-color:bisque;">
-        <h1>Welcome recruiter</h1>
-        <h1 rendered ="#{recruitManager.checkAuthorizationAdmin()} "/> <!-- inputed data -->
-       
+        <h1 rendered ="#{recruitManager.checkAuthorizationAdmin()} "/>         
         <h:form>
-
+        <h:outputLabel rendered="#{!recruitManager.error}" value = "#{msg.welcomerecruiter}"/>
+        </h:form>
+        
+        <h:form>
             <p>
                 <h:outputLabel for="result" rendered="#{recruitManager.result != null}"  value=""/>
 
@@ -31,20 +32,20 @@
 
         <h:form>
             <p>
-                <h:commandButton value="#{msg.listapplications}" action="#{recruitManager.listApplicants()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="#{msg.listapplications}" action="#{recruitManager.listApplicants()}" rendered="#{!recruitManager.error}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>
 
         <h:form>
             <p>
-                <h:commandButton value="PDF" action="#{recruitManager.pdf()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="PDF" action="#{recruitManager.pdf()}" rendered="#{!recruitManager.error}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>
         <h:form>
             <p>
-                <h:commandButton value="#{msg.savetxt}" action="#{recruitManager.savetxt()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="#{msg.savetxt}" action="#{recruitManager.savetxt()}" rendered="#{!recruitManager.error}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>

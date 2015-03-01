@@ -10,7 +10,7 @@
 
         <h1>#{msg.listapplications}</h1>
         <h:form>
-            <h1 rendered ="#{applyManager.listApplicants()} "/> <!-- inputed data -->
+            <h1 rendered ="#{applyManager.listApplicants()} " /> <!-- inputed data -->
             <h1 rendered ="#{applyManager.checkAuthorization()} "/> <!-- inputed data -->
 
         </h:form>
@@ -18,7 +18,7 @@
         <h:form>
            
             <h:commandButton value="#{msg.backtohomepage}" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->           
-            <h:commandButton value="#{msg.logout}" action="#{applyManager.logout()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            <h:commandButton value="#{msg.logout}" action="#{applyManager.logout()}" rendered="#{!applyManager.error}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
         
         </h:form> 
 
@@ -36,12 +36,11 @@
         <p></p>
 
         <h:form>
-            <h4>Decide who to approve</h4>
             <p>
-                <h:outputLabel for="#{msg.applicantnumber}" value="Applicant number: "/>
-                <h:inputText id="applicantnr" value="#{applyManager.applicantnr}"/>
+                <h:outputLabel for="#{msg.applicantnumber}" value="#{msg.approvetext}" rendered="#{recruitManager.adminlogin}"/>
+                <h:inputText id="applicantnr" value="#{applyManager.applicantnr}" rendered="#{recruitManager.adminlogin}"/>
             </p>
-            <h:commandButton value="#{msg.approve}" action="#{applyManager.approve()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            <h:commandButton value="#{msg.approve}" action="#{applyManager.approve()}" rendered="#{recruitManager.adminlogin}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
         </h:form>
 
 

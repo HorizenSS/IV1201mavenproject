@@ -36,6 +36,7 @@ public class RecruitManager implements Serializable {
     private boolean success = false;
     private boolean tohomepage = false;
     private boolean error = false;
+    private boolean adminlogin = false;
     
     //register and login
 
@@ -150,8 +151,9 @@ public class RecruitManager implements Serializable {
             result = Facade.checkAuthorizationAdmin();
 
             if ("NOT-AUTHORIZED".equals(result)) {
-                error = true;
-            }
+                error = true; //IF true do not show anything on the jsf page
+                tohomepage = true;
+            }else{adminlogin = true;}
 
         } catch (Exception e) {
             handleException(e);
@@ -239,4 +241,8 @@ public class RecruitManager implements Serializable {
     public boolean geterror(){
     return error;
     }
+   
+    public boolean getadminlogin(){
+        return adminlogin;
+    }    
 }

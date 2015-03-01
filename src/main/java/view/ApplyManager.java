@@ -35,6 +35,7 @@ public class ApplyManager implements Serializable {
     private boolean adminsuccess = false;
     private boolean tohomepage = false;
     private boolean error = false;
+    
     private String item;
     private int applicantnr;
     private String additem;
@@ -190,7 +191,7 @@ public class ApplyManager implements Serializable {
     public boolean getsuccess() {
         return success;
     }
-
+    
     public boolean getadminsuccess() {
         return adminsuccess;
     }

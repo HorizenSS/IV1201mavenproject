@@ -123,7 +123,6 @@ public class AcctManager implements Serializable {
             }
 
         } catch (Exception e) {
-            error = true;
             handleException(e);
         }
         return jsf22Bugfix();
@@ -142,7 +141,6 @@ public class AcctManager implements Serializable {
             }
             
         } catch (Exception e) {
-            error = true;
             handleException(e);
         }
         return jsf22Bugfix();
