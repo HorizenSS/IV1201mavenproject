@@ -32,20 +32,20 @@
 
         <h:form>
             <p>
-                <h:commandButton value="#{msg.listapplications}" action="#{recruitManager.listApplicants()}" rendered="#{!recruitManager.error}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="#{msg.listapplications}" action="#{recruitManager.listApplicants()}" rendered="#{recruitManager.adminlogin}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>
 
         <h:form>
             <p>
-                <h:commandButton value="PDF" action="#{recruitManager.pdf()}" rendered="#{!recruitManager.error}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="PDF" action="#{recruitManager.pdf()}" rendered="#{recruitManager.adminlogin}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>
         <h:form>
             <p>
-                <h:commandButton value="#{msg.savetxt}" action="#{recruitManager.savetxt()}" rendered="#{!recruitManager.error}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="#{msg.savetxt}" action="#{recruitManager.savetxt()}" rendered="#{recruitManager.adminlogin}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
             <hr/>
         </h:form>

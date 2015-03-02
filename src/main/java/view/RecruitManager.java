@@ -58,6 +58,7 @@ public class RecruitManager implements Serializable {
     }
 
     private void stopConversation() {
+        Facade.savetxt();  //If the server shutdowns for whatever reason save textfile
         if (!conversation.isTransient()) {
             conversation.end();
         }
@@ -151,7 +152,7 @@ public class RecruitManager implements Serializable {
             result = Facade.checkAuthorizationAdmin();
 
             if ("NOT-AUTHORIZED".equals(result)) {
-                error = true; //IF true do not show anything on the jsf page
+                error = true;
                 tohomepage = true;
             }else{adminlogin = true;}
 

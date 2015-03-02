@@ -156,6 +156,10 @@ public class Facade {
         document.close();
     }
     
+    /**
+     * Save logged information if server shutdowns
+     * @return 
+     */
     public String savetxt(){
         
         try {
