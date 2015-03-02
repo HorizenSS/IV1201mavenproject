@@ -4,12 +4,17 @@ import controller.Facade;
 
 //backing bean
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.*;
+import model.Competence;
 
 /**
  * AcctManager manages many requests concerning user accounts as well as
@@ -47,6 +52,13 @@ public class AcctManager implements Serializable {
     private boolean toapplyconfirmation = false;
     private boolean error = false;
     private String result = null;
+    private List<Competence> c;
+    private Map<String,String> cc = new LinkedHashMap<String,String>();
+
+   
+    
+
+ 
     @Inject
     private Conversation conversation;
 
@@ -155,7 +167,19 @@ public class AcctManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-
+    
+    public String init() {
+        try {
+          
+             c = Facade.init();
+             
+        } catch (Exception e) {
+            handleException(e);
+        }
+        return jsf22Bugfix();
+    }
+    
+    
     public String fillDB() {
         try {
 
@@ -266,13 +290,16 @@ public class AcctManager implements Serializable {
         return toapplyconfirmation;
     }
     
-    public void setcompetence(String competence){
+    public void setCompetence(String competence){
          this.competence = competence;
     }
     
-    @NotNull(message = "Competence field cant be empty")
-          public String getcompetence(){
-          return null;
+    public String getCompetence(){
+          return competence;
     }
 
+    public List<Competence> getC() {
+        return c;
+    }
+    
 }

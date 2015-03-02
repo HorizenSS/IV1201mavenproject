@@ -24,24 +24,23 @@ public class Accounts implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
-  /*  
-    @OneToOne(cascade={CascadeType.PERSIST})
+   
+    @OneToOne(cascade={CascadeType.ALL})
     @JoinColumn(name = "COMPETENCE_ID")
-    private Competence competence_id;*/
+    private Competence competence;
     
     private String account;
     private String password;
     private String email;
     private String firstname;
     private String lastname;
-    private String competence;
 
     
     public Accounts(){
         
     }
     
-    public Accounts(String account, String password, String email, String firstname, String lastname, String competence){
+    public Accounts(String account, String password, String email, String firstname, String lastname, Competence competence){
         this.account = account;
         this.password = password;
         this.email = email;
@@ -69,19 +68,16 @@ public class Accounts implements Serializable {
         return lastname;
     }
     
-    public String getcompetence(){
-        return competence;
-    }
-  /*  
+    
     public void setCompetence(Competence competence_id){
-    this.competence_id = competence_id;
+    this.competence = competence_id;
     }
     
     public Competence getCompetence(){
-    return competence_id;
+    return competence;
     }
     
-*/
+
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

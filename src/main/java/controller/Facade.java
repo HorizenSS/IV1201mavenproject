@@ -116,6 +116,10 @@ public class Facade {
  * @throws IOException 
  */
     public String register(String account, String password, String email, String firstname, String lastname, String competence, long startTime) throws IOException {
+        
+        Competence comp = em.find(Competence.class, competence);
+        if(comp != null){
+      //  Competence c = new Competence(competence); //en kolumn i Accounts refererar till Competence tabellen.
         this.start = startTime;
         Accounts acc = em.find(Accounts.class, account);
 
@@ -126,13 +130,13 @@ public class Facade {
         
         pw.println(account + " is registered.");
         pw.flush();
-        em.persist(new Accounts(account, password, email, firstname, lastname, competence));
+        em.persist(new Accounts(account, password, email, firstname, lastname, comp));
         em.persist(new Applies(firstname, lastname, email, password, competence));
-
         
-
         return null;
-
+        }
+                
+        return("Wrong competence");
     }
 
     /**
@@ -140,8 +144,10 @@ public class Facade {
      * We are using the itext api to create pdf documents
      * Must call listApplicants because listApplicants is the method that
      * initiates the variable applicantList - which will contain the applicants.
+     * @throws java.io.FileNotFoundException
+     * @throws com.itextpdf.text.DocumentException
      */
-    public void pdf() throws FileNotFoundException, DocumentException {
+    public void pdf() throws FileNotFoundException, DocumentException{
         listApplicants();
 
         this.document = new Document();
@@ -269,13 +275,22 @@ public class Facade {
  * @return 
  */
     public String fillDB() {
-
-        em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson", "bla"));
-        em.persist(new Competence("Java"));
-        em.persist(new Competence("C++"));    
+        if(em.find(Accounts.class, "admin")==null){
+        Competence c = new Competence("java");    
+        em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson", c));
+        em.persist(new Competence("c++"));
+        em.persist(new Competence("erlang"));        
+        }
         return "";
     }
 
+    public List<Competence> init() {
+        
+        List<Competence> competence = em.createQuery("from Competence m", Competence.class).getResultList();
+
+        return competence;
+    }    
+    
 /**
  * Method for checking authorization on the applicant page
  * @return 

@@ -8,11 +8,13 @@
         <title>home page</title>
     </h:head>
     <h:body style="background-color:bisque;">
+        <h1 rendered ="#{acctManager.fillDB()} "/>
+        <h1 rendered ="#{acctManager.init()} "/>         
 
 
         <ui:composition template="commonHeader.xhtml"> </ui:composition>
 
-        <h1 rendered ="#{acctManager.fillDB()} "/>
+
 
         <h:form>
             <h:commandLink action="#{locale.changeLocale}">
@@ -74,11 +76,14 @@
                     <tr>
                         <td>                <h:outputLabel for="competence" value="#{msg.competence}"/>
                         </td>
+                        <td>                <h:inputText id="competence" value="#{acctManager.competence}"/>
+                        </td>
+                        <td>
+                            <ui:repeat value = "#{acctManager.c}" var = "bla">
+                                <li><h:outputText value="#{bla.name}"/></li>
+                            </ui:repeat>
 
-                        <td><h:selectOneMenu value="#{acctManager.competence}">
-                                <f:selectItem itemValue="Java" itemLabel="Java" />
-                                <f:selectItem itemValue="C++" itemLabel="C++" />
-                            </h:selectOneMenu></td>
+                        </td>
                     </tr>
                 </tbody>
             </table>
