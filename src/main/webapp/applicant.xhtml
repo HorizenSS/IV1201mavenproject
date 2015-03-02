@@ -17,8 +17,9 @@
 
         <h:form>
            
-            <h:commandButton value="#{msg.backtohomepage}" action="#{applyManager.tohomepage()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->           
-            <h:commandButton value="#{msg.logout}" action="#{applyManager.logout()}" rendered="#{!applyManager.error}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+            <h:commandButton value="#{msg.backtohomepage}" action="#{applyManager.tohomepage()}"/>           
+            <h:commandButton value="#{msg.logout}" action="#{applyManager.logout()}" rendered="#{!applyManager.error}"/>
+            <h:commandButton value="PDF" action="#{applyManager.PDF()}" rendered="#{!applyManager.error}"/>
         
         </h:form> 
 

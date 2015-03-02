@@ -7,6 +7,7 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -155,6 +156,29 @@ public class Facade {
         paragraph.add(applicantList);
         document.add(paragraph);
         document.close();
+        
+        	  try {
+ 
+		if ((new File("C:\\Users\\johny_000\\GlassFish_Server\\glassfish\\domains\\domain1\\config\\applicants.pdf")).exists()) {
+ 
+			Process p = Runtime
+			   .getRuntime()
+			   .exec("rundll32 url.dll,FileProtocolHandler C:\\Users\\johny_000\\GlassFish_Server\\glassfish\\domains\\domain1\\config\\applicants.pdf");
+			p.waitFor();
+ 
+		} else {
+ 
+			System.out.println("File is not exists");
+ 
+		}
+ 
+		System.out.println("Done");
+ 
+  	  } catch (Exception ex) {
+		ex.printStackTrace();
+	  }
+        
+        
     }
     
     /**
@@ -284,4 +308,4 @@ public class Facade {
         return "b";
 
     }
-}
+}   

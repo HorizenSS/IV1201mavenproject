@@ -57,7 +57,6 @@ public class AcctManager implements Serializable {
     }
 
     private void stopConversation() {
-    //    Facade.savetxt();  //If the server shutdowns for whatever reason save textfile     
         if (!conversation.isTransient()) {
             conversation.end();
         }

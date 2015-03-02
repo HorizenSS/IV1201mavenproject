@@ -1,6 +1,8 @@
 package view;
 
+import com.itextpdf.text.DocumentException;
 import controller.Facade;
+import java.io.FileNotFoundException;
 
 //backing bean
 import java.io.Serializable;
@@ -157,6 +159,17 @@ public class ApplyManager implements Serializable {
         }
         return jsf22Bugfix();
     }
+      public String PDF() {
+        try {
+
+             Facade.pdf();
+        } catch (FileNotFoundException | DocumentException e) {
+            handleException(e);
+
+        }
+        return jsf22Bugfix();
+    }      
+      
     public void setstatus(String status) {
         this.status = status;
     }
