@@ -12,7 +12,7 @@
 
         <ui:composition template="commonHeader.xhtml"> </ui:composition>
 
-        <h1 rendered ="#{acctManager.fillDB()} "/> <!-- inputed data -->
+        <h1 rendered ="#{acctManager.fillDB()} "/>
 
         <h:form>
             <h:commandLink action="#{locale.changeLocale}">
@@ -74,8 +74,11 @@
                     <tr>
                         <td>                <h:outputLabel for="competence" value="#{msg.competence}"/>
                         </td>
-                        <td>                <h:inputText id="competence" value="#{acctManager.competence}"/>
-                        </td>
+                        
+                        <td>	<h:selectOneMenu value="#{acctManager.competence}">
+   			<f:selectItem itemValue="Java" itemLabel="Java" />
+   			<f:selectItem itemValue="C++" itemLabel="C++" />
+   		</h:selectOneMenu></td>
                     </tr>
                 </tbody>
             </table>

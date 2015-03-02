@@ -19,7 +19,7 @@ import model.accountInterface;
  * @author Johny Premanantham
  * @author Armin Arya
  * @version 1.0
- * @since 2015-01-03
+ * @since 2015-02-03
  */
 @Named("applyManager")
 @ConversationScoped
@@ -55,7 +55,7 @@ public class ApplyManager implements Serializable {
     }
 
     private void stopConversation() {
-        Facade.savetxt();  //If the server shutdowns for whatever reason save textfile
+         Facade.savetxt();  //If the server shutdowns for whatever reason
         if (!conversation.isTransient()) {
             conversation.end();
         }

@@ -20,6 +20,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Applies;
 import java.io.FileOutputStream;
+import model.Competence;
 
 /**
  * A controller. All calls to the model that are executed because of an action
@@ -246,7 +247,8 @@ public class Facade {
     public String fillDB() {
 
         em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson", "bla"));
-
+        em.persist(new Competence("Java"));
+        em.persist(new Competence("C++"));    
         return "";
     }
 

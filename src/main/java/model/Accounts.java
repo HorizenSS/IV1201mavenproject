@@ -1,10 +1,13 @@
 package model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  * Defines a user account.
@@ -21,6 +24,11 @@ public class Accounts implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+  /*  
+    @OneToOne(cascade={CascadeType.PERSIST})
+    @JoinColumn(name = "COMPETENCE_ID")
+    private Competence competence_id;*/
+    
     private String account;
     private String password;
     private String email;
@@ -64,7 +72,16 @@ public class Accounts implements Serializable {
     public String getcompetence(){
         return competence;
     }
-
+  /*  
+    public void setCompetence(Competence competence_id){
+    this.competence_id = competence_id;
+    }
+    
+    public Competence getCompetence(){
+    return competence_id;
+    }
+    
+*/
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
