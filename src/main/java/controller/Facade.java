@@ -6,7 +6,10 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.log.SysoLogger;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,6 +24,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Applies;
 import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.Date;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import model.Competence;
 
 /**
@@ -136,7 +145,7 @@ public class Facade {
         return null;
         }
                 
-        return("Wrong competence");
+        return("ce");
     }
 
     /**
@@ -147,7 +156,30 @@ public class Facade {
      * @throws java.io.FileNotFoundException
      * @throws com.itextpdf.text.DocumentException
      */
-    public void pdf() throws FileNotFoundException, DocumentException{
+    public void pdf() throws FileNotFoundException, DocumentException, IOException{
+       listApplicants();
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+     
+    Document a = new Document();
+    try{
+        response.setContentType("application/pdf");
+        PdfWriter.getInstance(a, response.getOutputStream());
+        a.open();
+        a.addTitle("Applicant PDF");
+        a.add(new Chunk(""));
+        a.add(new Paragraph(applicantList));
+        a.add(new Paragraph(new Date().toString()));
+    }catch(IOException | DocumentException e){
+        System.err.println(e);
+    }
+    fc.responseComplete();
+    a.close();
+    
+ 
+       
+        
+   /*
         listApplicants();
 
         this.document = new Document();
@@ -162,27 +194,28 @@ public class Facade {
         paragraph.add(applicantList);
         document.add(paragraph);
         document.close();
+       
+      
+        String filename = "applicants.pdf";
+
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+
+        response.reset();
+        response.setContentType("text/comma-separated-values");
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
+
+        OutputStream output = response.getOutputStream();
+
+       
+       output.write(document.toString().getBytes());
+       output.flush();
+       output.close();
+
+       fc.responseComplete();
         
-        	  try {
- 
-		if ((new File("C:\\Users\\johny_000\\GlassFish_Server\\glassfish\\domains\\domain1\\config\\applicants.pdf")).exists()) {
- 
-			Process p = Runtime
-			   .getRuntime()
-			   .exec("rundll32 url.dll,FileProtocolHandler C:\\Users\\johny_000\\GlassFish_Server\\glassfish\\domains\\domain1\\config\\applicants.pdf");
-			p.waitFor();
- 
-		} else {
- 
-			System.out.println("File is not exists");
- 
-		}
- 
-		System.out.println("Done");
- 
-  	  } catch (Exception ex) {
-		ex.printStackTrace();
-	  }
+        */
+           
         
         
     }

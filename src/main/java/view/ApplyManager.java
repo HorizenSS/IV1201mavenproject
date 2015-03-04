@@ -3,6 +3,7 @@ package view;
 import com.itextpdf.text.DocumentException;
 import controller.Facade;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 //backing bean
 import java.io.Serializable;
@@ -159,7 +160,7 @@ public class ApplyManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-      public String PDF() {
+      public String PDF() throws IOException {
         try {
 
              Facade.pdf();

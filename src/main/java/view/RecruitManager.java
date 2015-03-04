@@ -3,6 +3,7 @@ package view;
 import com.itextpdf.text.DocumentException;
 import controller.Facade;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 //backing bean
 import java.io.Serializable;
@@ -134,7 +135,7 @@ public class RecruitManager implements Serializable {
         return jsf22Bugfix();
     }
     
-     public String pdf() {
+     public String pdf() throws IOException {
         try {
 
             Facade.pdf();

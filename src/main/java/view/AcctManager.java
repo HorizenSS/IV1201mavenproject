@@ -52,6 +52,9 @@ public class AcctManager implements Serializable {
     private boolean toapplyconfirmation = false;
     private boolean error = false;
     private String result = null;
+    private boolean showcompetence = false;
+
+
     private List<Competence> c;
     private Map<String,String> cc = new LinkedHashMap<String,String>();
 
@@ -147,10 +150,13 @@ public class AcctManager implements Serializable {
             transactionFailure = null;
                      
             result = Facade.register(account, password, email, firstname, lastname,competence,startTime);
-                   
+             
+            
             if(result == null){
             toapplyconfirmation = true;
+            return jsf22Bugfix();
             }
+           
             
         } catch (Exception e) {
             handleException(e);
@@ -300,6 +306,10 @@ public class AcctManager implements Serializable {
 
     public List<Competence> getC() {
         return c;
+    }
+    
+        public boolean getShowcompetence() {
+        return showcompetence;
     }
     
 }
