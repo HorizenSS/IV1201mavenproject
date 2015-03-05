@@ -216,7 +216,9 @@ public class ApplyManager implements Serializable {
     }
 
     public boolean geterror() {
-        return error;
+        boolean b = error;
+        error = false;
+        return b;
     }
 
     public String getitem() {

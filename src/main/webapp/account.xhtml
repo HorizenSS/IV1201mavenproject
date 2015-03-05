@@ -76,12 +76,18 @@
                     <tr>
                         <td>                <h:outputLabel for="competence" value="#{msg.competence}"/>
                         </td>
-                        <td>                <h:inputText id="competence" value="#{acctManager.competence}"/>
+                        <td>                
+                            <h:selectOneMenu id = "competence" value="#{acctManager.competence}">
+                                <f:selectItems value="#{acctManager.com}" var="bla" itemLabel="#{bla.name}" itemValue="#{bla.name}"> 
+                                    
+                                </f:selectItems>
+                            
+                                
+                            </h:selectOneMenu>
                         </td>
                         <td>
-                            <ui:repeat value = "#{acctManager.c}" var = "bla">
-                                <li><h:outputText value="#{bla.name}"/></li>
-                            </ui:repeat>
+                            
+                            
 
                         </td>
                     </tr>

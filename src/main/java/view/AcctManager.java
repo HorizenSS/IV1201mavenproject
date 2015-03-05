@@ -54,7 +54,6 @@ public class AcctManager implements Serializable {
     private String result = null;
     private boolean showcompetence = false;
 
-
     private List<Competence> c;
     private Map<String,String> cc = new LinkedHashMap<String,String>();
 
@@ -176,7 +175,6 @@ public class AcctManager implements Serializable {
     
     public String init() {
         try {
-          
              c = Facade.init();
              
         } catch (Exception e) {
@@ -217,7 +215,24 @@ public class AcctManager implements Serializable {
         }
         return jsf22Bugfix();
     }
+      
+         public Competence[] getCom() {
+         Competence[] a = null;
 
+        try {
+        c = Facade.init();    
+        a = new Competence[c.size()];
+           int i = 0;
+           for(Competence com : c){
+               a[i] = com;
+               i++;
+             }
+        } catch (Exception e) {
+            handleException(e);
+
+        }
+        return a;
+    }
 
    //SETTERS AND GETTERS        
     public void setaccount(String account) {
@@ -273,11 +288,15 @@ public class AcctManager implements Serializable {
     }
 
     public boolean getsuccess() {
-        return success;
+        boolean b = success;
+        success = false;
+        return b;
     }
     
     public boolean geterror(){
-        return error;
+        boolean b = error;
+        error = false;
+        return b;
     }
     
     public boolean gettoaccount() {
@@ -285,7 +304,9 @@ public class AcctManager implements Serializable {
     }
     
     public boolean getadminsuccess() {
-        return adminsuccess;
+        boolean b = adminsuccess;
+        adminsuccess = false;
+        return b;
     }
 
     public boolean gettoaccountSV(){
@@ -304,9 +325,6 @@ public class AcctManager implements Serializable {
           return competence;
     }
 
-    public List<Competence> getC() {
-        return c;
-    }
     
         public boolean getShowcompetence() {
         return showcompetence;
