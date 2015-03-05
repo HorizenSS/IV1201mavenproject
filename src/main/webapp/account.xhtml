@@ -6,6 +6,33 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>home page</title>
+         <script language="javascript">
+              
+                
+                
+                function checkData() {
+
+                    var validation = true;
+                    var email = document.getElementById("reg:email");
+                    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    
+                   
+                    if (email.value == "") {
+                        alert("You must enter a email");
+                        validation = false;
+                    }
+                    else if (!emailReg.test(email.value)){
+                        alert("Invalid email, try again");
+                        validation = false;
+                    }
+
+
+                            return validation;
+                }
+            </script>
+        
+        
+        
     </h:head>
     <h:body style="background-color:bisque;">
         <h1 rendered ="#{acctManager.fillDB()} "/>
@@ -38,7 +65,7 @@
 
         </p>
         <p><h:outputLabel for="showcompetence" rendered="#{acctManager.showcompetence}"  value="aa"/> </p>
-        <h:form>
+        <h:form id="reg">
 
             <h4>#{msg.registeraccount}</h4>
 
@@ -96,7 +123,7 @@
 
             <p>
 
-                <h:commandButton value="#{msg.registeraccount}" action="#{acctManager.register()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
+                <h:commandButton value="#{msg.registeraccount}" onclick="return checkData()" action="#{acctManager.register()}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
             </p>
 
 

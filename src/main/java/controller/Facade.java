@@ -21,6 +21,7 @@ import javax.persistence.PersistenceContext;
 import model.Applies;
 import java.util.Date;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletResponse;
 import model.Competence;
 
@@ -106,7 +107,7 @@ public class Facade {
             }
 
         }
-        return null;
+        throw new EntityNotFoundException("Login error");
     }
 
     /**
@@ -126,25 +127,25 @@ public class Facade {
     public String register(String account, String password, String email, String firstname, String lastname, String competence, long startTime) throws IOException {
 
         Competence comp = em.find(Competence.class, competence);
-        if (comp != null) {
+        
             //  Competence c = new Competence(competence); //en kolumn i Accounts refererar till Competence tabellen.
             this.start = startTime;
             Accounts acc = em.find(Accounts.class, account);
 
             if (acc != null) {
-                return ("Account exists!!");
+            throw new EntityNotFoundException("Register error");
             }
 
             pw.println(account + " is registered.");
             pw.flush();
             em.persist(new Accounts(account, password, email, firstname, lastname, comp));
-            em.persist(new Applies(firstname, lastname, email, password, competence));
+            em.persist(new Applies(account, lastname, firstname, email, competence));
 
             return null;
         }
 
-        return ("ce");
-    }
+
+
 
     /**
      * This method generates a PDF document containing the applicants. We are

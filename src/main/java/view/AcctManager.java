@@ -46,7 +46,6 @@ public class AcctManager implements Serializable {
     private String name;
     private String dateofregistration;
     private String competence;
-    private boolean toaccountSV = false;
     private boolean toaccount = false;
     private boolean toapplyconfirmation = false;
     private boolean error = false;
@@ -54,11 +53,8 @@ public class AcctManager implements Serializable {
     private boolean showcompetence = false;
 
     private List<Competence> c;
-    private Map<String,String> cc = new LinkedHashMap<String,String>();
-
    
-    
-
+ 
  
     @Inject
     private Conversation conversation;
@@ -306,10 +302,6 @@ public class AcctManager implements Serializable {
         boolean b = adminsuccess;
         adminsuccess = false;
         return b;
-    }
-
-    public boolean gettoaccountSV(){
-        return toaccountSV;
     }
     
      public boolean gettoapplyconfirmation(){
