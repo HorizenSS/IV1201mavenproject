@@ -10,6 +10,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Accounts;
@@ -38,6 +39,7 @@ import model.Competence;
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class Facade {
+
 
     @PersistenceContext(unitName = "com.mycompany_IV1201mavenproject_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -124,25 +126,24 @@ public class Facade {
      * @return
      * @throws IOException
      */
-    public String register(String account, String password, String email, String firstname, String lastname, String competence, long startTime) throws IOException {
-
-        Competence comp = em.find(Competence.class, competence);
-        
-            //  Competence c = new Competence(competence); //en kolumn i Accounts refererar till Competence tabellen.
-            this.start = startTime;
+    public String register(String account, String password, String email, String firstname, String lastname, String competence, long startTime) throws IOException, Exception {
+           
+             this.start = startTime;
+           
             Accounts acc = em.find(Accounts.class, account);
-
-            if (acc != null) {
-            throw new EntityNotFoundException("Register error");
-            }
-
+            if(acc == null){
+            Competence comp = em.find(Competence.class, competence);
+        
             pw.println(account + " is registered.");
             pw.flush();
             em.persist(new Accounts(account, password, email, firstname, lastname, comp));
             em.persist(new Applies(account, lastname, firstname, email, competence));
 
-            return null;
-        }
+            return null;            
+            }else{
+            throw new Exception("Register error, account exists. Kontot existerar."); 
+            }
+  }
 
 
 
@@ -182,17 +183,20 @@ public class Facade {
      * Save logged information if server shutdowns
      *
      * @return
+     * @throws java.lang.Exception
      */
-    public String savetxt() {
+    public String savetxt() throws Exception {
 
         try {
+            
             pw.close();
             pwlogin.close();
             pwregistertime.close();
 
             return "Files saved";
+            
         } catch (Exception e) {
-            return e.toString();
+            throw new Exception("Problem with saving text files");
         }
 
     }
@@ -206,7 +210,7 @@ public class Facade {
         logout = true;
         login = false;
         adminlogin = false;
-        return "Logout";
+        return "";
     }
 
     /**
@@ -240,11 +244,8 @@ public class Facade {
      * @param applicantnr
      * @return
      */
-    public String approve(int applicantnr) {
+    public String approve(int applicantnr) throws Exception {
 
-        if (adminlogin == false) {
-            return "ONLY ADMINS CAN APPROVE!";
-        }
 
         String approvedApplicant = applied[applicantnr];
         Applies apply = em.find(Applies.class, approvedApplicant);
@@ -252,10 +253,12 @@ public class Facade {
         if (approvedApplicant != null) {
             approved.add(approvedApplicant);                                                         //AT THE MOMENT THE FUNCTION RETURNS A APROPRIATE MESSAGE AND ADDS THE APPROVED ACCOUNT NAME TO AN ARRAYLIST
             em.remove(apply);
-            return "Applicant number: " + applicantnr + ", Name: " + approvedApplicant + ", is approved!";
+            
+            return approvedApplicant+": ";
+        }else{
+    throw new Exception("Does not exist. Existerar inte");
         }
-        return "Applicant number does not exist!";
-    }
+     }
 
     public String stoptime() {
 
@@ -269,7 +272,8 @@ public class Facade {
     }
 
     /**
-     * test
+     * First method that gets called when the application initiates.
+     * The method persist some data in the tables.
      *
      * @return
      */
@@ -279,10 +283,16 @@ public class Facade {
             em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson", c));
             em.persist(new Competence("c++"));
             em.persist(new Competence("erlang"));
+            em.persist(new Competence("python"));
+            
         }
         return "";
     }
-
+/**
+ * Second method that gets called. 
+ * Will retrieve a all competence that exist in the table and store them in a List.
+ * @return 
+ */
     public List<Competence> init() {
 
         List<Competence> competence = em.createQuery("from Competence m", Competence.class).getResultList();

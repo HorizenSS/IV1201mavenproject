@@ -64,7 +64,6 @@
             <h1 rendered ="#{acctManager.nullResult()} "/> <!-- ERASES inputed data -->
 
         </p>
-        <p><h:outputLabel for="showcompetence" rendered="#{acctManager.showcompetence}"  value="aa"/> </p>
         <h:form id="reg">
 
             <h4>#{msg.registeraccount}</h4>
@@ -105,7 +104,7 @@
                         </td>
                         <td>                
                             <h:selectOneMenu id = "competence" value="#{acctManager.competence}">
-                                <f:selectItems value="#{acctManager.com}" var="bla" itemLabel="#{bla.name}" itemValue="#{bla.name}"> 
+                                <f:selectItems value="#{acctManager.com}" var="bla" itemLabel="#{bla.name}" itemValue="#{bla.name}"> <!-- Selects from an array(com) -->
                                     
                                 </f:selectItems>
                             

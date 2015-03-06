@@ -127,7 +127,7 @@ public class AcctManager implements Serializable {
             }
             
             if(result == null){
-                result = "WRONG PASSWORD OR ACCOUNT NAME";
+                result = "WRONG";
                 return jsf22Bugfix();
             }
 
@@ -216,9 +216,9 @@ public class AcctManager implements Serializable {
 
         try {
         c = Facade.init();    
-        a = new Competence[c.size()];
+        a = new Competence[c.size()];//create array size of how many competence that exists in the List c.
            int i = 0;
-           for(Competence com : c){
+           for(Competence com : c){//put all competence in the array
                a[i] = com;
                i++;
              }
@@ -305,7 +305,9 @@ public class AcctManager implements Serializable {
     }
     
      public boolean gettoapplyconfirmation(){
-        return toapplyconfirmation;
+        boolean b = toapplyconfirmation;
+        toapplyconfirmation = false;
+        return b;
     }
     
     public void setCompetence(String competence){

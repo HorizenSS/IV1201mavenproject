@@ -8,18 +8,19 @@
     </h:head>
     <h:body style="background-color:bisque;">        
 
-        <h1>#{msg.listapplications}</h1>
         <h:form>
-            <h1 rendered ="#{applyManager.listApplicants()} " /> <!-- inputed data -->
+            <h1 rendered="#{!applyManager.error}" value="#{msg.listapplications}"/>
             <h1 rendered ="#{applyManager.checkAuthorization()} "/> <!-- inputed data -->
+            <h1 rendered ="#{applyManager.listApplicants()} " /> <!-- inputed data -->
+
 
         </h:form>
 
         <h:form>
-           
+
             <h:commandButton value="#{msg.backtohomepage}" action="#{applyManager.tohomepage()}"/>           
             <h:commandButton value="#{msg.logout}" action="#{applyManager.logout()}" rendered="#{!applyManager.error}"/>
-        
+
         </h:form> 
 
         <p></p>
@@ -28,7 +29,7 @@
         <h:form>
             <h:outputLabel for="resultb" rendered="#{applyManager.resultb != null}"  value=""/>
 
-            <h:outputText id="resultb" value="#{applyManager.resultb}"/>  <!-- skriver ut resultatet -->
+            <h:outputText id="resultb" value="#{applyManager.resultb}"  rendered="#{!applyManager.error}"/>  <!-- skriver ut resultatet -->
             <h1 rendered ="#{applyManager.nullResult()} "/> <!-- ERASES inputed data -->
 
         </h:form> 
@@ -46,11 +47,12 @@
 
 
         <h:form>
+            <p>
             <h:outputLabel for="resulta" rendered="#{applyManager.resulta != null}"  value=""/>
-
-            <h:outputText id="resulta" value="#{applyManager.resulta}"/>  <!-- skriver ut resultatet -->
+            <h:outputText id="resulta" value="#{applyManager.resulta}"/> 
+            <h:outputText id="resultc" value="#{msg.whenapproved}" rendered="#{applyManager.approvedsuccess}"/>  <!-- skriver ut resultatet -->
+            </p>
             <h1 rendered ="#{applyManager.nullResult()} "/> <!-- ERASES inputed data -->
-
         </h:form>       
         <ui:composition template="commonFooter.xhtml"> </ui:composition>
 

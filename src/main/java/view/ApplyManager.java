@@ -38,7 +38,7 @@ public class ApplyManager implements Serializable {
     private boolean adminsuccess = false;
     private boolean tohomepage = false;
     private boolean error = false;
-    
+    private boolean approvedsuccess;
     private String item;
     private int applicantnr;
     private String additem;
@@ -48,6 +48,7 @@ public class ApplyManager implements Serializable {
     private String result = null;
     private String resulta = null;
     private String resultb = null;
+    private String resultc = null;
     @Inject
     private Conversation conversation;
 
@@ -57,15 +58,16 @@ public class ApplyManager implements Serializable {
         }
     }
 
-    private void stopConversation() {
+    private void stopConversation() throws Exception {
          Facade.savetxt();  //If the server shutdowns for whatever reason
         if (!conversation.isTransient()) {
             conversation.end();
         }
     }
 
-    private void handleException(Exception e) {
+    private void handleException(Exception e) throws Exception {
         stopConversation();
+        error = true;
         e.printStackTrace(System.err);
         transactionFailure = e;
     }
@@ -80,6 +82,7 @@ public class ApplyManager implements Serializable {
 
     /**
      * Returns the latest thrown exception.
+     * @return 
      */
     public Exception getException() {
         return transactionFailure;
@@ -98,7 +101,7 @@ public class ApplyManager implements Serializable {
         return "";
     }
 
-    public String tohomepage() {
+    public String tohomepage() throws Exception {
         try {
 
             tohomepage = true;
@@ -109,7 +112,7 @@ public class ApplyManager implements Serializable {
         return jsf22Bugfix();
     }
 
-    public String checkAuthorization() {
+    public String checkAuthorization() throws Exception {
         try {
 
             startConversation();
@@ -127,11 +130,11 @@ public class ApplyManager implements Serializable {
         return jsf22Bugfix();
     }
 
-    public String listApplicants() {
+    public String listApplicants() throws Exception {
         try {            
             
             resultb = Facade.listApplicants();
-            
+            if(error == true){resultb = null;}
         } catch (Exception e) {
             handleException(e);
         }
@@ -139,17 +142,19 @@ public class ApplyManager implements Serializable {
     }
 
             
-  public String approve() {
+  public String approve() throws Exception {
         try {
             resulta = Facade.approve(applicantnr);
-           
+           if(resulta != null){
+           approvedsuccess = true;
+           }
         } catch (Exception e) {
             handleException(e);
 
         }
         return jsf22Bugfix();
     }
-      public String logout() {
+      public String logout() throws Exception {
         try {
 
             result = Facade.logout();
@@ -160,7 +165,7 @@ public class ApplyManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-      public String PDF() throws IOException {
+      public String PDF() throws IOException, Exception {
         try {
 
              Facade.pdf();
@@ -235,6 +240,18 @@ public class ApplyManager implements Serializable {
 
     public void setadditem(String additem) {
         this.additem = additem;
+    }
+
+    public boolean isApprovedsuccess() {
+        return approvedsuccess;
+    }
+
+    public String getResultc() {
+        return resultc;
+    }
+
+    public void setResultc(String resultc) {
+        this.resultc = resultc;
     }
 
 }
