@@ -25,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletResponse;
 import model.Competence;
+import model.Person;
 
 /**
  * A controller. All calls to the model that are executed because of an action
@@ -92,19 +93,20 @@ public class Facade {
      */
     public String login(String account, String password) {
         Accounts acc = em.find(Accounts.class, account);
-
+        Person person = em.find(Person.class, account);
+        String name = person.getName();
         if (acc != null) {
-            if (account.equals(acc.getaccount()) && password.equals(acc.getpassword())) {
+            if (account.equals(name) && password.equals(acc.getpassword())) {
                 login = true;
                 logout = false;
                 adminlogin = false;
                 currentAccount = acc;
-                if ("admin".equals(acc.getaccount())) {
+                if ("admin".equals(name)) {
                     adminlogin = true;
                 }
-                pwlogin.println(acc.getaccount() + " has logged in.");
+                pwlogin.println(name + " has logged in.");
                 pwlogin.flush();
-                return acc.getaccount();
+                return name;
 
             }
 
@@ -133,10 +135,10 @@ public class Facade {
             Accounts acc = em.find(Accounts.class, account);
             if(acc == null){
             Competence comp = em.find(Competence.class, competence);
-        
+            
             pw.println(account + " is registered.");
             pw.flush();
-            em.persist(new Accounts(account, password, email, firstname, lastname, comp));
+            em.persist(new Accounts(new Person(account), password, email,firstname, lastname, comp,false));
             em.persist(new Applies(account, lastname, firstname, email, competence));
 
             return null;            
@@ -144,8 +146,6 @@ public class Facade {
             throw new Exception("Register error, account exists. Kontot existerar."); 
             }
   }
-
-
 
 
     /**
@@ -241,24 +241,25 @@ public class Facade {
      * Method for approving applies, for the moment this method only stores the
      * applicants name in a arraylist
      *
-     * @param applicantnr
+     * @param applicant
      * @return
+     * @throws java.lang.Exception
      */
-    public String approve(int applicantnr) throws Exception {
+    public String approve(String applicant) throws Exception {
 
-
-        String approvedApplicant = applied[applicantnr];
-        Applies apply = em.find(Applies.class, approvedApplicant);
-
-        if (approvedApplicant != null) {
-            approved.add(approvedApplicant);                                                         //AT THE MOMENT THE FUNCTION RETURNS A APROPRIATE MESSAGE AND ADDS THE APPROVED ACCOUNT NAME TO AN ARRAYLIST
-            em.remove(apply);
-            
-            return approvedApplicant+": ";
-        }else{
-    throw new Exception("Does not exist. Existerar inte");
+        Accounts acc = em.find(Accounts.class, applicant);
+        if(acc != null){
+        acc.setApproved(true);
+        return acc.getfirstname()+" ";
         }
+        throw new Exception("Approved failed");
      }
+    
+    public List<Person> approvearray(){
+        List<Person> person = em.createQuery("from Person m", Person.class).getResultList();
+
+        return person;
+    }
 
     public String stoptime() {
 
@@ -280,7 +281,7 @@ public class Facade {
     public String fillDB() {
         if (em.find(Accounts.class, "admin") == null) {
             Competence c = new Competence("java");
-            em.persist(new Accounts("admin", "admin", "admin@admin.se", "sven", "svensson", c));
+            em.persist(new Accounts(new Person("admin"), "admin", "admin@admin.se","admin", "svensson", c,true));
             em.persist(new Competence("c++"));
             em.persist(new Competence("erlang"));
             em.persist(new Competence("python"));

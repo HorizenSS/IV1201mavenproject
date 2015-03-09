@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>applicant page</title>
     </h:head>
@@ -12,6 +13,7 @@
             <h1 rendered="#{!applyManager.error}" value="#{msg.listapplications}"/>
             <h1 rendered ="#{applyManager.checkAuthorization()} "/> <!-- inputed data -->
             <h1 rendered ="#{applyManager.listApplicants()} " /> <!-- inputed data -->
+            <h1 rendered ="#{applyManager.approvearray()} " /> <!-- inputed data -->
 
 
         </h:form>
@@ -37,10 +39,16 @@
         <p></p>
 
         <h:form>
-            <p>
+            <h3>
                 <h:outputLabel for="#{msg.applicantnumber}" value="#{msg.approvetext}" rendered="#{recruitManager.adminlogin}"/>
-                <h:inputText id="applicantnr" value="#{applyManager.applicantnr}" rendered="#{recruitManager.adminlogin}"/>
-            </p>
+            </h3>
+            <h:selectOneMenu id = "test" value="#{applyManager.test}" rendered="#{recruitManager.adminlogin}">
+                <f:selectItems value="#{applyManager.com}" var="bla" itemLabel="#{bla.name}" itemValue="#{bla.name}" > <!-- Selects from an array(com) -->
+
+                </f:selectItems>
+
+
+            </h:selectOneMenu>
             <h:commandButton value="#{msg.approve}" action="#{applyManager.approve()}" rendered="#{recruitManager.adminlogin}"/> <!-- Updates page, everytime page is updated it will chkec results. -->
         </h:form>
 
@@ -48,12 +56,16 @@
 
         <h:form>
             <p>
-            <h:outputLabel for="resulta" rendered="#{applyManager.resulta != null}"  value=""/>
-            <h:outputText id="resulta" value="#{applyManager.resulta}"/> 
-            <h:outputText id="resultc" value="#{msg.whenapproved}" rendered="#{applyManager.approvedsuccess}"/>  <!-- skriver ut resultatet -->
+                <h:outputLabel for="resulta" rendered="#{applyManager.resulta != null}"  value=""/>
+                <h:outputText id="resulta" value="#{applyManager.resulta}" rendered="#{recruitManager.adminlogin}"/> 
+                <h:outputText id="resultc" value="#{msg.whenapproved}" rendered="#{applyManager.approvedsuccess}"/>  <!-- skriver ut resultatet -->
             </p>
             <h1 rendered ="#{applyManager.nullResult()} "/> <!-- ERASES inputed data -->
         </h:form>       
+
+
+
+        
         <ui:composition template="commonFooter.xhtml"> </ui:composition>
 
     </h:body>

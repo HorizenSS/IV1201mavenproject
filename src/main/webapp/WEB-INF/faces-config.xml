@@ -50,14 +50,7 @@
     </navigation-rule>    
 
  
-    <!-- If applicant made a valid apply -->                     
-    <navigation-rule>
-        <from-view-id>/accountSV.xhtml</from-view-id>
-        <navigation-case>
-            <if>#{acctManager.toapplyconfirmation}</if>
-            <to-view-id>/applyconfirmation.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+
  
     <!-- If applicant made a valid apply -->              
     <navigation-rule>

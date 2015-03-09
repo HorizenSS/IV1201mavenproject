@@ -7,12 +7,13 @@ import java.io.IOException;
 
 //backing bean
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import model.accountInterface;
+import model.Person;
 
 /**
  * ApplyManager manages many requests concerning user accounts as well as
@@ -42,13 +43,15 @@ public class ApplyManager implements Serializable {
     private String item;
     private int applicantnr;
     private String additem;
-
-    private static String online = null;
+    private String test;
     private static String status = null;
     private String result = null;
     private String resulta = null;
     private String resultb = null;
     private String resultc = null;
+    private List<Person> c;
+    
+    
     @Inject
     private Conversation conversation;
 
@@ -144,7 +147,7 @@ public class ApplyManager implements Serializable {
             
   public String approve() throws Exception {
         try {
-            resulta = Facade.approve(applicantnr);
+            resulta = Facade.approve(test);
            if(resulta != null){
            approvedsuccess = true;
            }
@@ -154,6 +157,19 @@ public class ApplyManager implements Serializable {
         }
         return jsf22Bugfix();
     }
+  
+    public String approvearray() throws Exception {
+        try {
+            
+            c = Facade.approvearray();
+           
+        } catch (Exception e) {
+            handleException(e);
+
+        }
+        return jsf22Bugfix();
+    }
+  
       public String logout() throws Exception {
         try {
 
@@ -175,6 +191,25 @@ public class ApplyManager implements Serializable {
         }
         return jsf22Bugfix();
     }      
+      
+      public Person[] getCom() throws Exception {
+         Person[] a = null;
+
+        try {
+        c = Facade.approvearray();    
+        a = new Person[c.size()];//create array size of how many competence that exists in the List c.
+           int i = 0;
+           for(Person com : c){//put all competence in the array
+               a[i] = com;
+               i++;
+             }
+        } catch (Exception e) {
+            handleException(e);
+
+        }
+        return a;
+    }     
+      
       
     public void setstatus(String status) {
         this.status = status;
@@ -213,11 +248,15 @@ public class ApplyManager implements Serializable {
     }
     
     public boolean getadminsuccess() {
-        return adminsuccess;
+        boolean b = adminsuccess;
+        adminsuccess = false;
+        return b;
     }
 
     public boolean gettohomepage() {
-        return tohomepage;
+        boolean b = tohomepage;
+        tohomepage = false;
+        return b;
     }
 
     public boolean geterror() {
@@ -243,6 +282,7 @@ public class ApplyManager implements Serializable {
     }
 
     public boolean isApprovedsuccess() {
+
         return approvedsuccess;
     }
 
@@ -253,5 +293,15 @@ public class ApplyManager implements Serializable {
     public void setResultc(String resultc) {
         this.resultc = resultc;
     }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
+    }
+
+
 
 }

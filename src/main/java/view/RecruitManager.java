@@ -175,7 +175,18 @@ public class RecruitManager implements Serializable {
         }
         return jsf22Bugfix();
     }     
+    public String reset() {
+        try {
+            startConversation();
+            transactionFailure = null;
+            adminlogin = false;
 
+
+        } catch (Exception e) {
+            handleException(e);
+        }
+        return jsf22Bugfix();
+    }  
    //SETTERS AND GETTERS        
     public void setstatus(String status) {
         this.status = status;

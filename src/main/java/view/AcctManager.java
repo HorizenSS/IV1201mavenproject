@@ -54,7 +54,7 @@ public class AcctManager implements Serializable {
 
     private List<Competence> c;
    
- 
+    private String [] test;
  
     @Inject
     private Conversation conversation;
@@ -108,6 +108,7 @@ public class AcctManager implements Serializable {
     
     /** 
      *Login function, used by all users. Recruiter will be directed to recruiter.xhtml, applicant will be directed to applicant.xhtml.
+     * @return 
      */
     public String login() {
         try {
@@ -140,8 +141,8 @@ public class AcctManager implements Serializable {
     public String register() {
         try {
             long startTime = System.currentTimeMillis();  //Used to check the non-functional requirement
-            startConversation();
-            transactionFailure = null;
+           // startConversation();
+            //transactionFailure = null;
                      
             result = Facade.register(account, password, email, firstname, lastname,competence,startTime);
              
@@ -295,7 +296,9 @@ public class AcctManager implements Serializable {
     }
     
     public boolean gettoaccount() {
-        return toaccount;
+        boolean b = toaccount;
+        toaccount = false;
+        return b;
     }
     
     public boolean getadminsuccess() {

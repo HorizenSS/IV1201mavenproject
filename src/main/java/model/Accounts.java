@@ -29,29 +29,34 @@ public class Accounts implements Serializable {
     @JoinColumn(name = "COMPETENCE_ID")
     private Competence competence;
     
-    private String account;
+    @OneToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name = "PERSON_ID")    
+    private Person account;
+    
+    private String firstname;
     private String password;
     private String email;
-    private String firstname;
     private String lastname;
+    private boolean approved;
 
     
     public Accounts(){
         
     }
     
-    public Accounts(String account, String password, String email, String firstname, String lastname, Competence competence){
+    public Accounts(Person account, String password, String email, String firstname, String lastname, Competence competence, boolean approved){
         this.account = account;
         this.password = password;
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.competence = competence;
-        this.id = account;
+        this.approved = approved;
+        this.id = firstname;
     }
  
     
-    public String getaccount(){
+    public Person getAccount(){
         return account;
     }
     
@@ -61,9 +66,12 @@ public class Accounts implements Serializable {
      public String getemail(){
         return email;
     }
- public String getfirstname(){
+     public String getfirstname(){
         return firstname;
     }
+    public void setAccount(Person person_id){
+    this.account = person_id;
+    }     
     public String getlastname(){
         return lastname;
     }
@@ -94,6 +102,14 @@ public class Accounts implements Serializable {
     @Override
     public String toString() {
         return "bank.model.Accounts[ id=" + id + " ]";
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
     
 }
