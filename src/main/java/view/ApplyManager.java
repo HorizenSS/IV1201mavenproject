@@ -200,8 +200,10 @@ public class ApplyManager implements Serializable {
         a = new Person[c.size()];//create array size of how many competence that exists in the List c.
            int i = 0;
            for(Person com : c){//put all competence in the array
+               
                a[i] = com;
                i++;
+               
              }
         } catch (Exception e) {
             handleException(e);

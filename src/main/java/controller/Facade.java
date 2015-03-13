@@ -10,7 +10,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Accounts;
@@ -256,8 +255,10 @@ public class Facade {
      }
     
     public List<Person> approvearray(){
+        
         List<Person> person = em.createQuery("from Person m", Person.class).getResultList();
-
+        Person pers = em.find(Person.class, "admin"); 
+        person.remove(pers);
         return person;
     }
 
